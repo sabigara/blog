@@ -5,8 +5,8 @@ const siteMetadata = {
   description: 'Just my journal and a bit of technical writings.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteUrl: 'https://rubiq.vercel.app',
+  siteRepo: 'https://github.com/sabigara/blog',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter-card.png',
