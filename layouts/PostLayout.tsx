@@ -111,7 +111,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                   </div>
                 )}
                 {(next || prev) && (
-                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
+                  <div className="flex justify-between gap-2 py-4 xl:block xl:space-y-8 xl:py-8">
                     {prev && (
                       <div>
                         <h2 className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
