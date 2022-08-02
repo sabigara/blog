@@ -7,17 +7,20 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { Toc } from 'types/Toc'
+import { isZennContents } from '@/lib/slug'
 
 const DEFAULT_LAYOUT = 'PostLayout'
 
 export async function getStaticPaths() {
   const posts = getFiles('blog')
   return {
-    paths: posts.map((p) => ({
-      params: {
-        slug: formatSlug(p).split('/'),
-      },
-    })),
+    paths: posts
+      .filter((p) => !isZennContents(p))
+      .map((p) => ({
+        params: {
+          slug: formatSlug(p).split('/'),
+        },
+      })),
     fallback: false,
   }
 }

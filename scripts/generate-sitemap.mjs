@@ -1,21 +1,21 @@
-const fs = require('fs')
-const globby = require('globby')
-const matter = require('gray-matter')
-const prettier = require('prettier')
-const siteMetadata = require('../data/siteMetadata')
-
+import fs from 'fs'
+import { globby } from 'globby'
+import matter from 'gray-matter'
+import prettier from 'prettier'
 ;(async () => {
+  const siteMetadata = (await import('../data/siteMetadata.js')).default
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
   const pages = await globby([
     'pages/*.js',
     'pages/*.tsx',
-    'data/blog/**/*.mdx',
-    'data/blog/**/*.md',
+    'data/blog/*.mdx', // exclude subdirectories which are external posts.
+    'data/blog/*.md',
     'public/tags/**/*.xml',
     '!pages/_*.js',
     '!pages/_*.tsx',
     '!pages/api',
   ])
+  console.log(siteMetadata)
 
   const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
