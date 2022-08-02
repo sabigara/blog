@@ -14,7 +14,6 @@ const root = process.cwd()
 
 export async function getStaticPaths() {
   const tags = await getAllTags('blog')
-  delete tags['zenn']
 
   return {
     paths: Object.keys(tags).map((tag) => ({

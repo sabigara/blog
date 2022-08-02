@@ -11,7 +11,6 @@ export type PostFrontMatter = {
   canonicalUrl?: string
   slug: string
   fileName?: string
-  provider?: 'zenn' | 'local'
 }
 
 export type ZennPostFrontMatter = {

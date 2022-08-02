@@ -8,7 +8,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
 export const getStaticProps: GetStaticProps<{ tags: Record<string, number> }> = async () => {
   const tags = await getAllTags('blog')
-  delete tags['zenn']
 
   return { props: { tags } }
 }

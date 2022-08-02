@@ -13,7 +13,7 @@ export default function remarkZennFrontmatter() {
       }
       const localFm = {
         date: zennFm.published_at,
-        tags: ['zenn', ...zennFm.topics],
+        tags: zennFm.topics,
         title: zennFm.title,
         draft: !zennFm.published,
       }
