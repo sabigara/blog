@@ -15,7 +15,6 @@ import prettier from 'prettier'
     '!pages/_*.tsx',
     '!pages/api',
   ])
-  console.log(siteMetadata)
 
   const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
