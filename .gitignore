@@ -37,4 +37,4 @@ yarn-error.log*
 
 tsconfig.tsbuildinfo
 
-data/blog/zenn/
+data/blog/zenn/*.md
