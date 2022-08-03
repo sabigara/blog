@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
+import clsx from 'clsx'
 import Link from 'next/link'
 import { AnchorHTMLAttributes, DetailedHTMLProps } from 'react'
 
@@ -9,6 +10,7 @@ type Props = {
 const CustomLink = ({
   href,
   noExternalIcon = false,
+  className,
   ...rest
 }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> & Props) => {
   const isInternalLink = href && href.startsWith('/')
@@ -17,7 +19,7 @@ const CustomLink = ({
   if (isInternalLink) {
     return (
       <Link href={href}>
-        <a {...rest} />
+        <a className={clsx('no-underline transition-colors', className)} {...rest} />
       </Link>
     )
   }
@@ -32,7 +34,7 @@ const CustomLink = ({
       rel="noopener noreferrer"
       href={href}
       data-no-external-icon={noExternalIcon}
-      className="no-underline"
+      className={clsx('no-underline transition-colors', className)}
       {...rest}
     />
   )

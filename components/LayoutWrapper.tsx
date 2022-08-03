@@ -33,20 +33,19 @@ const LayoutWrapper = ({ children }: Props) => {
               </div>
             </Link>
           </div>
-          <div className="flex items-center text-base leading-5">
-            <div className="hidden sm:block">
+          <div className="flex items-center gap-2 text-base leading-5">
+            <div className="flex gap-2">
               {headerNavLinks.map((link) => (
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+                  className="rounded-md px-3 py-2 font-semibold text-gray-900 transition-colors hover:bg-slate-100 dark:text-gray-100 dark:hover:bg-gray-800"
                 >
                   {link.title}
                 </Link>
               ))}
             </div>
             <ThemeSwitch />
-            <MobileNav />
           </div>
         </header>
         <main className="mb-auto">{children}</main>

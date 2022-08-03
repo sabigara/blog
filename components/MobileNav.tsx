@@ -4,7 +4,6 @@ import headerNavLinks from '@/data/headerNavLinks'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
-
   const onToggleNav = () => {
     setNavShow((status) => {
       if (status) {

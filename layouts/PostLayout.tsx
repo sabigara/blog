@@ -11,7 +11,6 @@ import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import { slugToUrl } from '@/lib/slug'
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
-  weekday: 'long',
   year: 'numeric',
   month: 'long',
   day: 'numeric',
@@ -110,35 +109,11 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                     </div>
                   </div>
                 )}
-                {(next || prev) && (
-                  <div className="flex justify-between gap-2 py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && (
-                      <div>
-                        <h2 className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
-                          Previous
-                        </h2>
-                        <div className="mt-1 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={slugToUrl(prev.slug)}>{prev.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                    {next && (
-                      <div>
-                        <h2 className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
-                          Next
-                        </h2>
-                        <div className="mt-1 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={slugToUrl(next.slug)}>{next.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
               </div>
               <div className="pt-4 xl:pt-8">
                 <Link
                   href="/blog"
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  className="font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                 >
                   &larr; Back to the blog
                 </Link>

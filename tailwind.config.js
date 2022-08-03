@@ -55,11 +55,13 @@ module.exports = {
               color: theme('colors.gray.900'),
             },
             pre: {
-              backgroundColor: theme('colors.gray.800'),
+              backgroundColor: theme('colors.slate.900'),
+              borderRadius: '0.75rem',
+              padding: '1.25rem',
             },
             code: {
-              color: theme('colors.pink.500'),
-              backgroundColor: theme('colors.gray.100'),
+              color: theme('colors.slate.800'),
+              backgroundColor: theme('colors.slate.100'),
               paddingLeft: '4px',
               paddingRight: '4px',
               paddingTop: '2px',
@@ -123,10 +125,11 @@ module.exports = {
               color: theme('colors.gray.100'),
             },
             pre: {
-              backgroundColor: theme('colors.gray.800'),
+              backgroundColor: theme('colors.slate.800'),
             },
             code: {
-              backgroundColor: theme('colors.gray.800'),
+              backgroundColor: theme('colors.slate.800'),
+              color: theme('colors.gray.300'),
             },
             details: {
               backgroundColor: theme('colors.gray.800'),
