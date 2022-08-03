@@ -34,12 +34,12 @@ const LayoutWrapper = ({ children }: Props) => {
             </Link>
           </div>
           <div className="flex items-center gap-2 text-base leading-5">
-            <div className="flex gap-2">
+            <div className="flex md:gap-2">
               {headerNavLinks.map((link) => (
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="rounded-md px-3 py-2 font-semibold text-gray-900 transition-colors hover:bg-slate-100 dark:text-gray-100 dark:hover:bg-gray-800"
+                  className="rounded-md px-2 py-2 font-semibold text-gray-900 transition-colors hover:bg-slate-100 dark:text-gray-100 dark:hover:bg-gray-800 md:px-3"
                 >
                   {link.title}
                 </Link>
