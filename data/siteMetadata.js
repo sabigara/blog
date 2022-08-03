@@ -18,7 +18,7 @@ const siteMetadata = {
   linkedin: '',
   locale: 'ja-JP',
   analytics: {
-    plausibleDataDomain: '',
+    googleAnalyticsId: 'G-60SCDRDB1F',
   },
   newsletter: {
     provider: '',
