@@ -1,16 +1,16 @@
-import Link from '@/components/Link'
-import { PageSEO } from '@/components/SEO'
-import siteMetadata from '@/data/siteMetadata'
-import { getAllFilesFrontMatter } from '@/lib/mdx'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { PostFrontMatter } from 'types/PostFrontMatter'
-import NewsletterForm from '@/components/NewsletterForm'
-import ListLayout from '@/layouts/ListLayout'
+import Link from "@/components/Link"
+import { PageSEO } from "@/components/SEO"
+import siteMetadata from "@/data/siteMetadata"
+import { getAllFilesFrontMatter } from "@/lib/mdx"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
+import { PostFrontMatter } from "types/PostFrontMatter"
+import NewsletterForm from "@/components/NewsletterForm"
+import ListLayout from "@/layouts/ListLayout"
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 10
 
 export const getStaticProps: GetStaticProps<{ posts: PostFrontMatter[] }> = async () => {
-  const posts = await getAllFilesFrontMatter('blog')
+  const posts = await getAllFilesFrontMatter("blog")
 
   return { props: { posts } }
 }
@@ -31,7 +31,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
           </Link>
         </div>
       )}
-      {siteMetadata.newsletter.provider !== '' && (
+      {siteMetadata.newsletter.provider !== "" && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
         </div>
