@@ -126,7 +126,7 @@ export const BlogSEO = ({
   const featuredImages = imagesArr.map((img) => {
     return {
       '@type': 'ImageObject',
-      url: `${siteMetadata.siteUrl}${img}`,
+      url: img.startsWith('http') ? img : `${siteMetadata.siteUrl}${img}`,
     }
   })
 

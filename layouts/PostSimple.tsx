@@ -3,6 +3,7 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
+import { composeOgImageUrl } from '@/lib/og'
 import { slugToUrl } from '@/lib/slug'
 import formatDate from '@/lib/utils/formatDate'
 import { ReactNode } from 'react'
@@ -20,7 +21,11 @@ export default function PostLayout({ frontMatter, next, prev, children }: Props)
 
   return (
     <SectionContainer>
-      <BlogSEO url={`${siteMetadata.siteUrl}/blog/${slug}`} {...frontMatter} />
+      <BlogSEO
+        url={`${siteMetadata.siteUrl}/blog/${slug}`}
+        images={[composeOgImageUrl(frontMatter)]}
+        {...frontMatter}
+      />
       <article>
         <div>
           <header>

@@ -8,7 +8,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { ReactNode } from 'react'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
-import { slugToUrl } from '@/lib/slug'
+import { composeOgImageUrl } from '@/lib/og'
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   year: 'numeric',
@@ -19,12 +19,10 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 interface Props {
   frontMatter: PostFrontMatter
   authorDetails: AuthorFrontMatter[]
-  next?: { slug: string; title: string }
-  prev?: { slug: string; title: string }
   children: ReactNode
 }
 
-export default function PostLayout({ frontMatter, authorDetails, next, prev, children }: Props) {
+export default function PostLayout({ frontMatter, authorDetails, children }: Props) {
   const { slug, date, title, tags } = frontMatter
 
   return (
@@ -32,6 +30,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
       <BlogSEO
         url={`${siteMetadata.siteUrl}/blog/${slug}`}
         authorDetails={authorDetails}
+        images={[composeOgImageUrl(frontMatter)]}
         {...frontMatter}
       />
       <article>

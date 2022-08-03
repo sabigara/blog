@@ -9,7 +9,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/sabigara/blog',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/og-image.png',
   email: 'lemonburst1958@gmail.com',
   github: 'https://github.com/sabigara',
   twitter: 'https://twitter.com/_sabigara',
@@ -26,6 +26,7 @@ const siteMetadata = {
   comment: {
     provider: '',
   },
+  ogImageUrl: 'https://article-og-rubik.vercel.app',
 }
 
 module.exports = siteMetadata
