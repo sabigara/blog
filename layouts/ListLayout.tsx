@@ -1,11 +1,11 @@
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
-import { ComponentProps, useState } from 'react'
-import Pagination from '@/components/Pagination'
-import formatDate from '@/lib/utils/formatDate'
-import { PostFrontMatter } from 'types/PostFrontMatter'
-import { isZennContents, slugToUrl } from '@/lib/slug'
-import ProviderTag from '@/components/ProviderTag'
+import Link from "@/components/Link"
+import Tag from "@/components/Tag"
+import { ComponentProps, useState } from "react"
+import Pagination from "@/components/Pagination"
+import formatDate from "@/lib/utils/formatDate"
+import { PostFrontMatter } from "types/PostFrontMatter"
+import { isZennContents, slugToUrl } from "@/lib/slug"
+import ProviderTag from "@/components/ProviderTag"
 interface Props {
   posts: PostFrontMatter[]
   title: string
@@ -14,9 +14,9 @@ interface Props {
 }
 
 export default function ListLayout({ posts, title, initialDisplayPosts = [], pagination }: Props) {
-  const [searchValue, setSearchValue] = useState('')
+  const [searchValue, setSearchValue] = useState("")
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent = frontMatter.title + frontMatter.summary + frontMatter.tags.join(' ')
+    const searchContent = frontMatter.title + frontMatter.summary + frontMatter.tags.join(" ")
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
@@ -56,7 +56,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
           </div>
         </div>
         <ul>
-          {!filteredBlogPosts.length && 'No posts found.'}
+          {!filteredBlogPosts.length && "No posts found."}
           {displayPosts.map((frontMatter) => {
             const { slug, date, title, summary, tags } = frontMatter
             return (
@@ -72,8 +72,8 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                     <div className="flex flex-col gap-3">
                       <h3 className="text-xl font-bold leading-8 tracking-tight">
                         <ProviderTag
-                          text={isZennContents(slug) ? 'Zenn' : 'Blog'}
-                          provider={isZennContents(slug) ? 'zenn' : 'blog'}
+                          text={isZennContents(slug) ? "Zenn" : "Blog"}
+                          provider={isZennContents(slug) ? "zenn" : "blog"}
                           className="align-middle leading-8"
                         />
                         <Link

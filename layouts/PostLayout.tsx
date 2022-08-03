@@ -1,19 +1,19 @@
-import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
-import { BlogSEO } from '@/components/SEO'
-import Image from '@/components/Image'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
-import { ReactNode } from 'react'
-import { PostFrontMatter } from 'types/PostFrontMatter'
-import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
-import { composeOgImageUrl } from '@/lib/og'
+import Link from "@/components/Link"
+import PageTitle from "@/components/PageTitle"
+import SectionContainer from "@/components/SectionContainer"
+import { BlogSEO } from "@/components/SEO"
+import Image from "@/components/Image"
+import Tag from "@/components/Tag"
+import siteMetadata from "@/data/siteMetadata"
+import { ReactNode } from "react"
+import { PostFrontMatter } from "types/PostFrontMatter"
+import { AuthorFrontMatter } from "types/AuthorFrontMatter"
+import { composeOgImageUrl } from "@/lib/og"
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 }
 
 interface Props {
@@ -54,7 +54,7 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
           </header>
           <div
             className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
-            style={{ gridTemplateRows: 'auto 1fr' }}
+            style={{ gridTemplateRows: "auto 1fr" }}
           >
             <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
               <dt className="sr-only">Authors</dt>
@@ -81,7 +81,7 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
                               href={author.twitter}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
-                              {author.twitter.replace('https://twitter.com/', '@')}
+                              {author.twitter.replace("https://twitter.com/", "@")}
                             </Link>
                           )}
                         </dd>

@@ -1,14 +1,14 @@
-const { replace } = ''
+const { replace } = ""
 
 // escape
 const ca = /[&<>'"]/g
 
 const esca = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  "'": '&#39;',
-  '"': '&quot;',
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  "'": "&#39;",
+  '"': "&quot;",
 }
 const pe = (m: keyof typeof esca) => esca[m]
 

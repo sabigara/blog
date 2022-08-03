@@ -22,9 +22,9 @@ export type ZennPostFrontMatter = {
 
 export function isZennPostFrontMatter(frontmatter: any): frontmatter is ZennPostFrontMatter {
   return (
-    'title' in frontmatter &&
-    'topics' in frontmatter &&
-    'published' in frontmatter &&
-    'published_at' in frontmatter
+    "title" in frontmatter &&
+    "topics" in frontmatter &&
+    "published" in frontmatter &&
+    "published_at" in frontmatter
   )
 }

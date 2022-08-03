@@ -1,5 +1,5 @@
-import siteMetadata from '@/data/siteMetadata'
-import { PageSEO } from '@/components/SEO'
+import siteMetadata from "@/data/siteMetadata"
+import { PageSEO } from "@/components/SEO"
 
 export default function Privacy() {
   return (

@@ -1,17 +1,17 @@
-import { Octokit } from '@octokit/rest'
-import fetch from 'node-fetch'
+import { Octokit } from "@octokit/rest"
+import fetch from "node-fetch"
 
-const owner = 'sabigara'
-const repo = 'zenn-contents'
+const owner = "sabigara"
+const repo = "zenn-contents"
 const octokit = new Octokit()
 
 export async function getZennContents(): Promise<{ fileName: string; text: string }[]> {
   const resp = await octokit.repos.getContent({
     owner,
     repo,
-    path: 'articles',
+    path: "articles",
   })
-  if (!Array.isArray(resp.data)) throw new Error('zenn posts is not an array')
+  if (!Array.isArray(resp.data)) throw new Error("zenn posts is not an array")
 
   const files = await Promise.all(
     resp.data.map(async (file) => {

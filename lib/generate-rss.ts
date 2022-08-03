@@ -1,22 +1,22 @@
-import { escape } from '@/lib/utils/htmlEscaper'
+import { escape } from "@/lib/utils/htmlEscaper"
 
-import siteMetadata from '@/data/siteMetadata'
-import { PostFrontMatter } from 'types/PostFrontMatter'
-import { isZennContents } from '@/lib/slug'
+import siteMetadata from "@/data/siteMetadata"
+import { PostFrontMatter } from "types/PostFrontMatter"
+import { isZennContents } from "@/lib/slug"
 
 const generateRssItem = (post: PostFrontMatter) => `
   <item>
     <guid>${siteMetadata.siteUrl}/blog/${post.slug}</guid>
     <title>${escape(post.title)}</title>
     <link>${siteMetadata.siteUrl}/blog/${post.slug}</link>
-    ${post.summary ? `<description>${escape(post.summary)}</description>` : ''}
+    ${post.summary ? `<description>${escape(post.summary)}</description>` : ""}
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <author>${siteMetadata.email} (${siteMetadata.author})</author>
-    ${post.tags ? post.tags.map((t) => `<category>${t}</category>`).join('') : ''}
+    ${post.tags ? post.tags.map((t) => `<category>${t}</category>`).join("") : ""}
   </item>
 `
 
-const generateRss = (posts: PostFrontMatter[], page = 'feed.xml') => `
+const generateRss = (posts: PostFrontMatter[], page = "feed.xml") => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>${escape(siteMetadata.title)}</title>
@@ -30,7 +30,7 @@ const generateRss = (posts: PostFrontMatter[], page = 'feed.xml') => `
       ${posts
         .filter((p) => !isZennContents(p.slug))
         .map(generateRssItem)
-        .join('')}
+        .join("")}
     </channel>
   </rss>
 `

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import GA from './GoogleAnalytics'
-import Plausible from './Plausible'
-import SimpleAnalytics from './SimpleAnalytics'
-import Umami from './Umami'
-import siteMetadata from '@/data/siteMetadata'
+import GA from "./GoogleAnalytics"
+import Plausible from "./Plausible"
+import SimpleAnalytics from "./SimpleAnalytics"
+import Umami from "./Umami"
+import siteMetadata from "@/data/siteMetadata"
 
 declare global {
   interface Window {
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === "production"
 
 const Analytics = () => {
   return (
