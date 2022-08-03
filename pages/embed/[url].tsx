@@ -35,10 +35,10 @@ export default function EmbeddedPage({ siteMetadata }: Props) {
       href={siteMetadata.url}
       target="_blank"
       rel="noopener noreferrer nofollow"
-      className="group grid h-32 w-full grid-cols-6 grid-rows-6 overflow-clip rounded-lg border-[1px]"
+      className="grid h-32 w-full grid-cols-6 grid-rows-6 overflow-clip rounded-lg border-[1px] hover:bg-slate-50"
     >
       <div
-        className="col-span-4 row-span-6 grid grid-rows-3 p-4 transition-colors group-hover:bg-slate-50"
+        className="col-span-4 row-span-6 grid grid-rows-3 p-4 transition-colors"
         style={{ placeItems: "center normal" }}
       >
         <h1 className="truncate font-bold">{siteMetadata.title || siteMetadata.ogp.title}</h1>
