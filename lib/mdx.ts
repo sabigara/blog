@@ -17,7 +17,6 @@ import remarkTocHeadings from "./remark-toc-headings"
 import remarkImgToJsx from "./remark-img-to-jsx"
 // Rehype packages
 import rehypeSlug from "rehype-slug"
-import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeKatex from "rehype-katex"
 import rehypeCitation from "rehype-citation"
 import rehypePrismPlus from "rehype-prism-plus"
@@ -79,7 +78,6 @@ export async function getFileBySlug(type: "authors" | "blog", slug: string | str
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         rehypeSlug,
-        rehypeAutolinkHeadings,
         rehypeKatex,
         [rehypeCitation, { path: path.join(root, "data") }],
         [rehypePrismPlus, { ignoreMissing: true }],

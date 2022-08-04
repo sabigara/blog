@@ -123,8 +123,6 @@ export const BlogSEO = ({
       ? [images]
       : images
 
-  console.log(images)
-
   const featuredImages = imagesArr.map((img) => {
     return {
       "@type": "ImageObject",
