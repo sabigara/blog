@@ -11,9 +11,7 @@ export async function getServerSideProps(
   const siteMetadata = await getSiteMetadata(url)
 
   ctx.res.setHeader("X-Frame-Options", "SAMEORIGIN")
-  if (process.env.NODE_ENV === "production") {
-    ctx.res.setHeader("Cache-Control", `public, max-age=${60 * 60 * 24 * 30}`)
-  }
+  ctx.res.setHeader("Cache-Control", `public, max-age=${60 * 60 * 24 * 30}`)
 
   return {
     props: {
@@ -38,12 +36,12 @@ export default function EmbeddedPage({ siteMetadata }: Props) {
       rel="noopener noreferrer nofollow"
       className="grid h-32 w-full grid-cols-6 grid-rows-6 overflow-clip rounded-lg border-[1px] transition-colors hover:bg-slate-50 dark:border-gray-600 dark:hover:bg-gray-800"
     >
-      <div className="items-start col-span-4 row-span-6 p-4 justify-center grid place-content-center gap-1 overflow-hidden">
+      <div className="col-span-4 row-span-6 grid place-content-center items-start justify-center gap-1 overflow-hidden p-4">
         <h1 className="font-bold line-clamp-2">{siteMetadata.title || siteMetadata.ogp.title}</h1>
         <p className="truncate text-sm text-gray-500">
           {siteMetadata.description || siteMetadata.ogp.description}
         </p>
-        <p className="truncate flex items-center gap-2 text-sm">
+        <p className="flex items-center gap-2 truncate text-sm">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={faviconUrl(siteMetadata.url)} alt="ファビコン" width="16" height="16" />
           {domain}
