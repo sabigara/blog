@@ -33,9 +33,9 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
         images={[composeOgImageUrl(frontMatter)]}
         {...frontMatter}
       />
-      <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
+      <article className="mx-auto max-w-3xl">
+        <div>
+          <header className="pt-6">
             <div className="space-y-1 text-center">
               <dl className="space-y-10">
                 <div>
@@ -53,13 +53,13 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
             </div>
           </header>
           <div
-            className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
+            className="relative divide-y divide-gray-200 pb-8 dark:divide-gray-700"
             style={{ gridTemplateRows: "auto 1fr" }}
           >
-            <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+            <dl className="sticky pt-6 pb-10">
               <dt className="sr-only">Authors</dt>
               <dd>
-                <ul className="flex justify-center space-x-8 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
+                <ul className="flex justify-center space-x-8 sm:space-x-12">
                   {authorDetails.map((author) => (
                     <li className="flex items-center space-x-2" key={author.name}>
                       {author.avatar && (

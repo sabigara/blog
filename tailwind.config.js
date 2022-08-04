@@ -46,6 +46,9 @@ module.exports = {
               fontWeight: "700",
               letterSpacing: theme("letterSpacing.tight"),
               color: theme("colors.gray.900"),
+              borderBottomWidth: "2px",
+              borderColor: theme("colors.slate.200"),
+              paddingBottom: "0.25rem",
             },
             h3: {
               fontWeight: "600",
@@ -90,10 +93,12 @@ module.exports = {
             "ul li::marker": {
               backgroundColor: theme("colors.gray.500"),
             },
-            strong: { color: theme("colors.gray.600") },
             blockquote: {
               color: theme("colors.gray.900"),
               borderLeftColor: theme("colors.gray.200"),
+              fontStyle: "normal",
+              fontWeight: "normal",
+              quotes: "none",
             },
           },
         },

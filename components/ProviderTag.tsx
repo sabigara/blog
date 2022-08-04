@@ -1,21 +1,23 @@
+import { faviconUrl } from "@/lib/site-metadata/faviconUrl"
 import clsx from "clsx"
 
 interface Props {
-  text: string
-  provider: "zenn" | "blog"
+  provider: "zenn.dev" | "rubiq.vercel.app"
   className?: string
 }
 
-const ProviderTag = ({ text, provider, className }: Props) => {
+const ProviderTag = ({ provider, className }: Props) => {
+  const url = `https://${provider}`
   return (
     <div
       className={clsx([
-        "mr-3 inline rounded-md border  px-3 py-1 text-sm font-semibold text-white transition-colors ",
-        provider === "zenn" ? "border-blue-400 bg-blue-500" : "border-orange-400 bg-orange-500",
+        "flex items-center gap-2 text-xs font-semibold text-slate-800 transition-colors ",
         className,
       ])}
     >
-      {text.split(" ").join("-")}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={faviconUrl(url)} alt="ファビコン" width="16" height="16" className="inline" />
+      <span>{provider}</span>
     </div>
   )
 }

@@ -62,20 +62,21 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
             return (
               <li key={slug} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-6 xl:items-baseline xl:space-y-0">
-                  <dl>
-                    <dt className="sr-only">Published on</dt>
-                    <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                      <time dateTime={date}>{formatDate(date)}</time>
-                    </dd>
-                  </dl>
+                  <div className="flex flex-row items-start gap-2 md:flex-col">
+                    <dl>
+                      <dt className="sr-only">Published on</dt>
+                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                        <time dateTime={date}>{formatDate(date)}</time>
+                      </dd>
+                    </dl>
+                    <ProviderTag
+                      provider={isZennContents(slug) ? "zenn.dev" : "rubiq.vercel.app"}
+                      className="w-fit"
+                    />
+                  </div>
                   <div className="space-y-3 xl:col-span-5">
                     <div className="flex flex-col gap-3">
                       <h3 className="text-xl font-bold leading-8 tracking-tight">
-                        <ProviderTag
-                          text={isZennContents(slug) ? "Zenn" : "Blog"}
-                          provider={isZennContents(slug) ? "zenn" : "blog"}
-                          className="align-middle leading-8"
-                        />
                         <Link
                           href={slugToUrl(slug)}
                           className="align-middle text-gray-900 dark:text-gray-100"
