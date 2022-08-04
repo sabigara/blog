@@ -5,7 +5,7 @@ export function composeOgImageUrl(frontmatter: PostFrontMatter) {
   const { title } = frontmatter
   return (
     siteMetadata.ogImageUrl +
-    `/${encodeURIComponent(title)}?logo=${encodeURIComponent(
+    `/${encodeURIComponent(title)}.png?logo=${encodeURIComponent(
       siteMetadata.siteUrl + "/" + siteMetadata.siteLogo
     )}&service=${encodeURIComponent(siteMetadata.title)}`
   )
