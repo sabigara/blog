@@ -62,7 +62,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
             return (
               <li key={slug} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-6 xl:items-baseline xl:space-y-0">
-                  <div className="flex flex-row items-start gap-2 md:flex-col">
+                  <div className="flex flex-row gap-2 md:flex-col md:items-start">
                     <dl>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
