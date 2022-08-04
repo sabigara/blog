@@ -1,5 +1,5 @@
 ---
-title: Twitter上のマンガスレッドを一気読みできる「ツイヨミ」をリリース
+title: Twitter上のマンガスレッドを一気読みできる「ツイヨミ」をリリースした
 date: "2022-08-04"
 tags: ["個人開発", "twitter"]
 draft: false
