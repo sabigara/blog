@@ -28,10 +28,10 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
   return (
     <SectionContainer>
       <BlogSEO
+        {...frontMatter}
         url={`${siteMetadata.siteUrl}/blog/${slug}`}
         authorDetails={authorDetails}
         images={[composeOgImageUrl(frontMatter)]}
-        {...frontMatter}
       />
       <article className="mx-auto max-w-3xl">
         <div>

@@ -22,9 +22,9 @@ export default function PostLayout({ frontMatter, next, prev, children }: Props)
   return (
     <SectionContainer>
       <BlogSEO
+        {...frontMatter}
         url={`${siteMetadata.siteUrl}/blog/${slug}`}
         images={[composeOgImageUrl(frontMatter)]}
-        {...frontMatter}
       />
       <article>
         <div>
