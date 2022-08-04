@@ -1,4 +1,5 @@
-import { getSiteMetadata, SiteMetadata } from "@/lib/site-metadata"
+import { faviconUrl } from "@/lib/site-metadata/faviconUrl"
+import { getSiteMetadata, SiteMetadata } from "@/lib/site-metadata/getSiteMetadata"
 import { undefinedFieldsToNull } from "@/lib/utils/object"
 import { extractDomain } from "@/lib/utils/url"
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
@@ -37,22 +38,14 @@ export default function EmbeddedPage({ siteMetadata }: Props) {
       rel="noopener noreferrer nofollow"
       className="grid h-32 w-full grid-cols-6 grid-rows-6 overflow-clip rounded-lg border-[1px] transition-colors hover:bg-slate-50 dark:border-gray-600 dark:hover:bg-gray-800"
     >
-      <div
-        className="col-span-4 row-span-6 grid grid-rows-3 p-4"
-        style={{ placeItems: "center normal" }}
-      >
-        <h1 className="truncate font-bold">{siteMetadata.title || siteMetadata.ogp.title}</h1>
+      <div className="items-start col-span-4 row-span-6 p-4 justify-center grid place-content-center gap-1 overflow-hidden">
+        <h1 className="font-bold line-clamp-2">{siteMetadata.title || siteMetadata.ogp.title}</h1>
         <p className="truncate text-sm text-gray-500">
           {siteMetadata.description || siteMetadata.ogp.description}
         </p>
-        <p className="flex items-center gap-2 truncate text-sm">
+        <p className="truncate flex items-center gap-2 text-sm">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`https://www.google.com/s2/favicons?sz=14&domain_url=${domain}`}
-            alt="ファビコン"
-            width="16"
-            height="16"
-          />
+          <img src={faviconUrl(siteMetadata.url)} alt="ファビコン" width="16" height="16" />
           {domain}
         </p>
       </div>
