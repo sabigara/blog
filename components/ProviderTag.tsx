@@ -16,7 +16,15 @@ const ProviderTag = ({ provider, className }: Props) => {
       ])}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={faviconUrl(url)} alt="ファビコン" width="16" height="16" className="inline" />
+      <img
+        src={
+          provider === "rubiq.vercel.app" ? "/static/favicons/favicon-32x32.png" : faviconUrl(url)
+        }
+        alt="ファビコン"
+        width="16"
+        height="16"
+        className="inline"
+      />
       <span>{provider}</span>
     </div>
   )
