@@ -7,7 +7,6 @@ module.exports = {
   useTabs: false,
   trailingComma: "es5",
   bracketSpacing: true,
-  plugins: [require("prettier-plugin-tailwindcss")],
   overrides: [
     {
       files: ["*.md", "README"],
