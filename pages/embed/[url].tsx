@@ -45,11 +45,13 @@ export default function EmbeddedPage({ siteMetadata }: Props) {
         <p className="truncate text-sm text-gray-500">
           {siteMetadata.description || siteMetadata.ogp.description}
         </p>
-        <p className="flex gap-2 truncate text-sm">
+        <p className="flex items-center gap-2 truncate text-sm">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`https://www.google.com/s2/favicons?sz=14&domain_url=${domain}`}
             alt="ファビコン"
+            width="16"
+            height="16"
           />
           {domain}
         </p>
