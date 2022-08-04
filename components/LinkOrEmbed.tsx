@@ -27,6 +27,7 @@ export default function ArticleLink({
       <iframe
         src={`/embed/${encodeURIComponent(href)}`}
         title={`${href}への埋め込みリンク`}
+        loading="lazy"
         className="h-32 w-full"
       />
       <a target="_blank" rel="noopener noreferrer" href={href} className="hidden">
