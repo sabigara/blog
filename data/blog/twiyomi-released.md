@@ -15,9 +15,9 @@ https://twiyomi.vercel.app
 
 ツイートのURLを入力するだけで、Twitterスレッドに貼られている画像をWebマンガのように読むことができる。
 
-![スクリーンショット1](/static/images/blog/Screenshot%202022-08-04%2016.46.36.png)
+![スクリーンショット1](/static/images/blog/twiyomi-screenshot-1.png)
 
-![スクリーンショット2](/static/images/blog/Screenshot%202022-08-04%2016.45.36.png)
+![スクリーンショット2](/static/images/blog/twiyomi-screenshot-2.png)
 
 ## 作った理由
 
