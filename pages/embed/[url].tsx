@@ -8,26 +8,38 @@ export async function getServerSideProps(
   ctx: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> {
   const url = ctx.params.url as string
-  const siteMetadata = await getSiteMetadata(url)
 
   ctx.res.setHeader("X-Frame-Options", "SAMEORIGIN")
-  ctx.res.setHeader("Cache-Control", `public, max-age=${60 * 60 * 24 * 30}`)
+
+  let siteMetadata: SiteMetadata | null = null
+  try {
+    console.debug("fetching siteMetadata for", url)
+    siteMetadata = await getSiteMetadata(url)
+    ctx.res.setHeader("Cache-Control", `public, max-age=${60 * 60 * 24 * 30}`)
+  } catch (e) {
+    console.error(e)
+    ctx.res.setHeader("Cache-Control", `public, max-age=${60 * 60 * 1}`)
+  }
 
   return {
     props: {
-      siteMetadata: {
-        ogp: undefinedFieldsToNull(siteMetadata.ogp),
-        ...undefinedFieldsToNull(siteMetadata),
-      },
+      siteMetadata: siteMetadata
+        ? {
+            ogp: undefinedFieldsToNull(siteMetadata.ogp),
+            ...undefinedFieldsToNull(siteMetadata),
+          }
+        : siteMetadata,
     },
   }
 }
 
 type Props = {
-  siteMetadata: SiteMetadata
+  siteMetadata: SiteMetadata | null
 }
 
 export default function EmbeddedPage({ siteMetadata }: Props) {
+  if (!siteMetadata) return null
+
   const domain = extractDomain(siteMetadata.url)
   return (
     <a
