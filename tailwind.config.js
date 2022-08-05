@@ -94,7 +94,7 @@ module.exports = {
               backgroundColor: theme("colors.gray.500"),
             },
             blockquote: {
-              color: theme("colors.gray.900"),
+              color: theme("colors.gray.600"),
               borderLeftColor: theme("colors.gray.200"),
               fontStyle: "normal",
               fontWeight: "normal",
