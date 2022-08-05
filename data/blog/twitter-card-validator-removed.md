@@ -13,7 +13,7 @@ canonicalUrl:
 
 不具合っぽいし数日で治るかなと思ったが、２週間経っても修正されない。おかしいと思ってよく調べてみると、プレビュー機能はすでに公開停止されているらしい。
 
-https://twittercommunity.com/t/card-validator-preview-removal/175006
+[Twitter Developers Forum](https://twittercommunity.com/t/card-validator-preview-removal/175006)
 
 > We’ve recently removed the preview functionality from the Card Validator. Previews are still available in the Tweet Composer and the Card Validator remains accessible for other debugging purposes
 
