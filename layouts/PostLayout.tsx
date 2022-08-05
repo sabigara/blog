@@ -8,6 +8,7 @@ import siteMetadata from "@/data/siteMetadata"
 import { ReactNode } from "react"
 import { PostFrontMatter } from "types/PostFrontMatter"
 import { AuthorFrontMatter } from "types/AuthorFrontMatter"
+import SocialButtons from "@/components/SocialButtons"
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   year: "numeric",
@@ -23,12 +24,13 @@ interface Props {
 
 export default function PostLayout({ frontMatter, authorDetails, children }: Props) {
   const { slug, date, title, tags } = frontMatter
+  const url = `${siteMetadata.siteUrl}/blog/${slug}`
 
   return (
     <SectionContainer>
       <BlogSEO
         {...frontMatter}
-        url={`${siteMetadata.siteUrl}/blog/${slug}`}
+        url={url}
         authorDetails={authorDetails}
         images={[siteMetadata.composeOgImageUrl(title)]}
       />
@@ -51,10 +53,7 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
               </div>
             </div>
           </header>
-          <div
-            className="relative divide-y divide-gray-200 pb-8 dark:divide-gray-700"
-            style={{ gridTemplateRows: "auto 1fr" }}
-          >
+          <div className="relative pb-8 dark:divide-gray-700">
             <dl className="sticky pt-6 pb-10">
               <dt className="sr-only">Authors</dt>
               <dd>
@@ -90,11 +89,12 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
                 </ul>
               </dd>
             </dl>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+            <div className="border-y pb-6">
               <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
             </div>
+            <SocialButtons url={url} className="mx-auto w-fit gap-3 pt-6" />
             <footer>
-              <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
+              <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:divide-y">
                 {tags && (
                   <div className="py-4 xl:py-8">
                     <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">

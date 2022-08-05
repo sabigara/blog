@@ -48,7 +48,7 @@ module.exports = {
               color: theme("colors.gray.900"),
               borderBottomWidth: "2px",
               borderColor: theme("colors.slate.200"),
-              paddingBottom: "0.25rem",
+              paddingBottom: "0.5rem",
             },
             h3: {
               fontWeight: "600",
