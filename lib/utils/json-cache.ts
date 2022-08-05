@@ -11,7 +11,7 @@ export class JsonCache<T> {
   private load() {
     if (fs.existsSync(this.filePath)) {
       const json = fs.readFileSync(this.filePath, "utf8")
-      this.cache = new Map(JSON.parse(json))
+      this.cache = new Map(Object.entries(JSON.parse(json)))
     }
   }
 
