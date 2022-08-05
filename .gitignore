@@ -36,5 +36,5 @@ yarn-error.log*
 .env.production.local
 
 tsconfig.tsbuildinfo
-
 data/blog/zenn/*.md
+*.cache.json

@@ -13,7 +13,6 @@ export async function getServerSideProps(
 
   let siteMetadata: SiteMetadata | null = null
   try {
-    console.debug("fetching siteMetadata for", url)
     siteMetadata = await getSiteMetadata(url)
     ctx.res.setHeader("Cache-Control", `public, max-age=${60 * 60 * 24 * 30}`)
   } catch (e) {
