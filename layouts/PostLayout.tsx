@@ -8,7 +8,6 @@ import siteMetadata from "@/data/siteMetadata"
 import { ReactNode } from "react"
 import { PostFrontMatter } from "types/PostFrontMatter"
 import { AuthorFrontMatter } from "types/AuthorFrontMatter"
-import { composeOgImageUrl } from "@/lib/og"
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   year: "numeric",
@@ -31,7 +30,7 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
         {...frontMatter}
         url={`${siteMetadata.siteUrl}/blog/${slug}`}
         authorDetails={authorDetails}
-        images={[composeOgImageUrl(frontMatter)]}
+        images={[siteMetadata.composeOgImageUrl(title)]}
       />
       <article className="mx-auto max-w-3xl">
         <div>

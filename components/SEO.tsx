@@ -61,8 +61,8 @@ interface PageSEOProps {
 }
 
 export const PageSEO = ({ title, description }: PageSEOProps) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  const ogImageUrl = siteMetadata.socialBanner
+  const twImageUrl = siteMetadata.socialBanner
   return (
     <CommonSEO
       title={title}
@@ -75,8 +75,8 @@ export const PageSEO = ({ title, description }: PageSEOProps) => {
 }
 
 export const TagSEO = ({ title, description }: PageSEOProps) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  const ogImageUrl = siteMetadata.socialBanner
+  const twImageUrl = siteMetadata.socialBanner
   const router = useRouter()
   return (
     <>
