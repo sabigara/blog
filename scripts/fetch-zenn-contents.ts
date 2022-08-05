@@ -6,17 +6,29 @@ import fs from "fs/promises"
 import path from "path"
 import { format } from "prettier"
 
+const zennDir = path.join("data", "blog", "zenn")
+
 async function main() {
   const contents = await getZennContents()
+  await removeFilesInDir(zennDir)
+
   for (const { fileName, text } of contents) {
     const transformed = await remark()
       .use(remarkFrontmatter)
       .use(remarkZennFrontmatter)
       .process(text)
     await fs.writeFile(
-      path.join("data", "blog", "zenn", fileName),
+      path.join(zennDir, fileName),
       format(transformed.toString(), { parser: "markdown-nocjsp" })
     )
+  }
+}
+
+async function removeFilesInDir(dir: string) {
+  const files = await fs.readdir(dir)
+  for (const file of files) {
+    if (file === ".gitkeep") continue
+    await fs.unlink(path.join(dir, file))
   }
 }
 
