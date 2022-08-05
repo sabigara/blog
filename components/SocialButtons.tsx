@@ -7,15 +7,16 @@ import { IconBaseProps } from "react-icons"
 
 type Props = {
   url?: string
+  text?: string
   className?: string
 }
 
-export default function SocialButtons({ url = siteMetadata.siteUrl, className }: Props) {
+export default function SocialButtons({ url = siteMetadata.siteUrl, text = "", className }: Props) {
   return (
     <aside className={clsx("flex", className)}>
       <ShareButton
         Icon={FaTwitter}
-        href={`https://twitter.com/intent/tweet?url=${url}`}
+        href={`https://twitter.com/intent/tweet?url=${url}&text=${text}`}
         aria-label="Twitterでシェア"
       />
       <ShareButton

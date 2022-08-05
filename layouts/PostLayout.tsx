@@ -92,7 +92,7 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
             <div className="border-y pb-6">
               <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
             </div>
-            <SocialButtons url={url} className="mx-auto w-fit gap-3 pt-6" />
+            <SocialButtons url={url} text={title} className="mx-auto w-fit gap-3 pt-6" />
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:divide-y">
                 {tags && (
