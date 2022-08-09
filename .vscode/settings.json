@@ -2,7 +2,8 @@
   "markdownlint.config": {
     "no-bare-urls": false,
     "single-h1": false,
-    "fenced-code-language": false
+    "fenced-code-language": false,
+    "no-inline-html": false,
   },
   "editor.formatOnSaveMode": "file",
   "editor.formatOnSave": false
