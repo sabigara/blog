@@ -29,8 +29,8 @@ const siteMetadataBase = {
 
 function composeOgImageUrl(articleTitle) {
   return (
-    "https://article-og-rubik.vercel.app" +
-    `/${encodeURIComponent(articleTitle)}.png?logo=${encodeURIComponent(
+    "https://article-og-rubik.vercel.app/article" +
+    `?text=${encodeURIComponent(articleTitle)}&logo=${encodeURIComponent(
       siteMetadataBase.siteUrl + "/" + siteMetadataBase.siteLogo
     )}&service=${encodeURIComponent(siteMetadataBase.title)}`
   )
