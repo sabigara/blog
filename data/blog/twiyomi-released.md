@@ -61,10 +61,6 @@ DBについては後述する。
 
 ### Twitter API
 
-Twitter APIについてはZennでも書いたが、こちらにも軽くコードを載せておく。
-
-https://zenn.dev/sabigara/articles/524d05f1d2a637
-
 ```typescript
 export async function getThreadRecursive(statusId: string, results: TweetV2[] = []) {
   const tweet = await twitter.singleTweet(statusId, {
