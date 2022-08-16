@@ -58,7 +58,16 @@ export default function EmbeddedPage({ siteMetadata }: Props) {
         </p>
         <p className="flex items-center gap-2 truncate text-sm">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={faviconUrl(siteMetadata.url)} alt="ファビコン" width="16" height="16" />
+          <img
+            src={
+              siteMetadata.url.startsWith("https://rubiq.vercel.app")
+                ? "/static/favicons/favicon-32x32.png"
+                : faviconUrl(siteMetadata.url)
+            }
+            alt="ファビコン"
+            width="16"
+            height="16"
+          />
           {domain}
         </p>
       </div>
