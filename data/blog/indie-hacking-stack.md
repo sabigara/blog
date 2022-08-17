@@ -46,9 +46,9 @@ Reactの場合、CSSを書く方法は無限に存在する。
 - [Emotion](https://emotion.sh/docs/introduction)
 - [Tailwind](https://tailwindcss.com)
 
-上記のライブラリは低レイヤーというか、CSSをどこに書いてどうやってバンドルするかを制御するためのものだ。
+上記のライブラリは低レイヤーというか、CSSをどこにどんな形式で書くかを決めるものだ。
 
-今回の記事では「高速に」書くことを趣旨としているので、もっと便利なフレームワークを積極的に使っていきたい。
+今回の記事では「高速に」開発することを趣旨としているので、もっと便利なフレームワークを積極的に使っていきたい。
 
 ### Chakra UI
 
@@ -116,7 +116,6 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react"
-
 ;<Accordion>
   <AccordionItem>
     <h2>
@@ -160,17 +159,17 @@ Nextで使う場合は、`getServerSideProps`, `getStaticProps` やAPIなどの�
 
 ## 認証
 
-### Firebase Auth
-
-最速で認証機能を実装するには最適だと思うが、APIに投げるtokenやログイン状態の管理などはわりと自力で実装する必要がある。
-
-Firestoreを使う場合はSecurity Rulesとの兼ね合いでこれを使うしかない。
-
 ### [NextAuth](https://next-auth.js.org)
 
 各ソーシャルプロバイダーとの接続やセッション管理などを全面的にサポートしてくれるライブラリ。
 
 Firestoreを使わないのであればこちらがオススメ。
+
+### Firebase Auth
+
+最速で認証機能を実装するには最適だと思うが、APIに投げるtokenやログイン状態の管理などはわりと自力で実装する必要がある。
+
+Firestoreを使う場合はSecurity Rulesとの兼ね合いでこれを使うしかない。
 
 ## 実装戦略
 
