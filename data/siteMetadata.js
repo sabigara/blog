@@ -32,7 +32,7 @@ function composeOgImageUrl(articleTitle) {
     "https://article-og-rubik.vercel.app/article" +
     `?text=${encodeURIComponent(articleTitle)}&logo=${encodeURIComponent(
       siteMetadataBase.siteUrl + "/" + siteMetadataBase.siteLogo
-    )}&service=${encodeURIComponent(siteMetadataBase.title)}`
+    )}&service=${encodeURIComponent(siteMetadataBase.title + " Blog")}`
   )
 }
 
