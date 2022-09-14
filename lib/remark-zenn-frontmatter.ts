@@ -8,6 +8,7 @@ export default function remarkZennFrontmatter() {
     visit(tree, "yaml", (node: Parent) => {
       // @ts-ignore
       const zennFm = load(node.value)
+      console.log(zennFm)
       if (!isZennPostFrontMatter(zennFm)) {
         throw new Error("Invalid frontmatter")
       }
