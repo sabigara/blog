@@ -5,7 +5,7 @@ import Image from "./Image"
 import TOCInline from "./TOCInline"
 import Pre from "./Pre"
 import { BlogNewsletterForm } from "./NewsletterForm"
-import ArticleLink from "@/components/LinkOrEmbed"
+import LinkOrEmbed from "@/components/LinkOrEmbed"
 
 const Wrapper: React.ComponentType<{ layout: string }> = ({ layout, ...rest }) => {
   const Layout = require(`../layouts/${layout}`).default
@@ -15,7 +15,7 @@ const Wrapper: React.ComponentType<{ layout: string }> = ({ layout, ...rest }) =
 export const MDXComponents: ComponentMap = {
   Image,
   TOCInline,
-  a: ArticleLink,
+  a: LinkOrEmbed,
   pre: Pre,
   wrapper: Wrapper,
   BlogNewsletterForm,

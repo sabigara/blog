@@ -6,5 +6,4 @@
     "no-inline-html": false,
   },
   "editor.formatOnSaveMode": "file",
-  "editor.formatOnSave": false
 }
