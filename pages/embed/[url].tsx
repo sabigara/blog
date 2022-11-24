@@ -43,10 +43,11 @@ type Props = {
 export default function EmbeddedPage({ siteMetadata }: Props) {
   const router = useRouter()
 
-  if (!siteMetadata) return null
   if (router.isFallback) {
     return <div className="h-32 w-full animate-pulse rounded-lg bg-gray-200" />
   }
+
+  if (!siteMetadata) return null
 
   const domain = extractDomain(siteMetadata.url)
 
