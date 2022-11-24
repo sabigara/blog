@@ -2,22 +2,19 @@ import { faviconUrl } from "@/lib/site-metadata/faviconUrl"
 import { getSiteMetadata, SiteMetadata } from "@/lib/site-metadata/getSiteMetadata"
 import { undefinedFieldsToNull } from "@/lib/utils/object"
 import { extractDomain } from "@/lib/utils/url"
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
+import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next"
+import { useRouter } from "next/router"
 
-export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<Props>> {
+export async function getStaticProps(
+  ctx: GetStaticPropsContext
+): Promise<GetStaticPropsResult<Props>> {
   const url = ctx.params.url as string
-
-  ctx.res.setHeader("X-Frame-Options", "SAMEORIGIN")
 
   let siteMetadata: SiteMetadata | null = null
   try {
     siteMetadata = await getSiteMetadata(url)
-    ctx.res.setHeader("Cache-Control", `public, s-maxage=${60 * 60 * 24 * 30}`)
   } catch (e) {
     console.error(e)
-    ctx.res.setHeader("Cache-Control", `public, s-maxage=${60 * 60 * 1}`)
   }
 
   return {
@@ -32,14 +29,27 @@ export async function getServerSideProps(
   }
 }
 
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  return {
+    paths: [],
+    fallback: true,
+  }
+}
+
 type Props = {
   siteMetadata: SiteMetadata | null
 }
 
 export default function EmbeddedPage({ siteMetadata }: Props) {
+  const router = useRouter()
+
   if (!siteMetadata) return null
+  if (router.isFallback) {
+    return <div className="h-32 w-full animate-pulse rounded-lg bg-gray-200" />
+  }
 
   const domain = extractDomain(siteMetadata.url)
+
   return (
     <a
       href={siteMetadata.url}
