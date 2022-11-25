@@ -29,7 +29,7 @@ export async function getSiteMetadata(url: string): Promise<SiteMetadata> {
   console.debug("fetching siteMetadata for", url)
   const resp = await fetch(url)
   if (!resp.ok) {
-    throw new Error(`Failed to fetch ${url}. Status: ${resp.status}`)
+    throw new Error(`Failed to fetch ${url}. Status: ${resp.status}. Body: ${await resp.text()}`)
   }
   const htmlStr = await resp.text()
   const dom = new JSDOM(htmlStr)
