@@ -1,7 +1,7 @@
 import { remark } from "remark"
 import remarkMdx from "remark-mdx"
 
-import { Toc } from "types/Toc"
+import { Toc } from "types"
 
 import remarkTocHeadings from "./remark-toc-headings"
 

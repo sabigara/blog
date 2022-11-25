@@ -6,7 +6,7 @@ import siteMetadata from "@/data/siteMetadata"
 import { slugToUrl } from "@/lib/slug"
 import formatDate from "@/lib/utils/formatDate"
 import { ReactNode } from "react"
-import { PostFrontMatter } from "types/PostFrontMatter"
+import { PostFrontMatter } from "types"
 
 interface Props {
   frontMatter: PostFrontMatter

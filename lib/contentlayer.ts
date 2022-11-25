@@ -11,5 +11,5 @@ export function extractContentMeta<T extends Content>(content: T): ExtractConten
 }
 
 export function getSortedBlogPosts() {
-  return [...allBlogs].sort((a, b) => new Date(b.date).getDate() - new Date(a.date).getDate())
+  return [...allBlogs].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }

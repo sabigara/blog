@@ -6,8 +6,8 @@ import Image from "@/components/Image"
 import Tag from "@/components/Tag"
 import siteMetadata from "@/data/siteMetadata"
 import { ReactNode } from "react"
-import { PostFrontMatter } from "types/PostFrontMatter"
-import { AuthorFrontMatter } from "types/AuthorFrontMatter"
+import { PostFrontMatter } from "types"
+import { AuthorFrontMatter } from "types"
 import SocialButtons from "@/components/SocialButtons"
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {

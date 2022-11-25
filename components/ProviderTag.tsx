@@ -1,13 +1,15 @@
-import { faviconUrl } from "@/lib/site-metadata/faviconUrl"
 import clsx from "clsx"
 
 interface Props {
-  provider: "zenn.dev" | "rubiq.vercel.app"
+  href: string
   className?: string
 }
 
-const ProviderTag = ({ provider, className }: Props) => {
-  const url = `https://${provider}`
+const ProviderTag = ({ href, className }: Props) => {
+  const isRelative = href.startsWith("/")
+  const src = isRelative
+    ? "/static/favicons/favicon-32x32.png"
+    : `https://www.google.com/s2/favicons?sz=32&domain_url=${href}`
   return (
     <div
       className={clsx([
@@ -16,16 +18,8 @@ const ProviderTag = ({ provider, className }: Props) => {
       ])}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={
-          provider === "rubiq.vercel.app" ? "/static/favicons/favicon-32x32.png" : faviconUrl(url)
-        }
-        alt="ファビコン"
-        width="16"
-        height="16"
-        className="inline"
-      />
-      <span>{provider}</span>
+      <img src={src} alt="ファビコン" width="16" height="16" className="inline" />
+      <span>{isRelative ? "rubiq.vercel.app" : new URL(href).hostname}</span>
     </div>
   )
 }

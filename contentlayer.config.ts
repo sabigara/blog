@@ -17,6 +17,9 @@ export const Author = defineDocumentType(() => ({
     occupation: {
       type: "string",
     },
+    company: {
+      type: "string",
+    },
     email: {
       type: "string",
     },

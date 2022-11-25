@@ -1,12 +1,12 @@
 import { PageSEO } from "@/components/SEO"
 import siteMetadata from "@/data/siteMetadata"
 import ListLayout from "@/layouts/ListLayout"
-import { POSTS_PER_PAGE } from "../../blog"
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next"
-import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
+import { POSTS_PER_PAGE } from ".."
+import { GetStaticPaths, InferGetStaticPropsType } from "next"
+import { getSortedPostListItems } from "@/lib/blog"
 
 export const getStaticPaths: GetStaticPaths<{ page: string }> = async () => {
-  const posts = getSortedBlogPosts()
+  const posts = await getSortedPostListItems()
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
   const paths = Array.from({ length: totalPages }, (_, i) => ({
     params: { page: (i + 1).toString() },
@@ -18,12 +18,12 @@ export const getStaticPaths: GetStaticPaths<{ page: string }> = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps = async (context) => {
   const {
     params: { page },
   } = context
   const pageNumber = parseInt(page as string)
-  const posts = getSortedBlogPosts()
+  const posts = await getSortedPostListItems()
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
     POSTS_PER_PAGE * pageNumber
@@ -35,8 +35,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
-      posts: posts.map(extractContentMeta),
-      initialDisplayPosts: initialDisplayPosts.map(extractContentMeta),
+      posts,
+      initialDisplayPosts,
       pagination,
     },
   }

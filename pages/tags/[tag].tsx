@@ -1,7 +1,8 @@
 import { TagSEO } from "@/components/SEO"
 import siteMetadata from "@/data/siteMetadata"
 import ListLayout from "@/layouts/ListLayout"
-import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
+import { blogPostToListItem } from "@/lib/blog"
+import { getSortedBlogPosts } from "@/lib/contentlayer"
 import generateRss from "@/lib/generate-rss"
 import { getAllTags } from "@/lib/tags"
 import kebabCase from "@/lib/utils/kebabCase"
@@ -38,7 +39,7 @@ export const getStaticProps = async (context) => {
     fs.writeFileSync(path.join(rssPath, "feed.xml"), rss)
   }
 
-  return { props: { posts: filteredPosts.map(extractContentMeta), tag } }
+  return { props: { posts: filteredPosts.map(blogPostToListItem), tag } }
 }
 
 export default function Tag({ posts, tag }: InferGetStaticPropsType<typeof getStaticProps>) {

@@ -1,8 +1,7 @@
 import { escape } from "@/lib/utils/htmlEscaper"
 
 import siteMetadata from "@/data/siteMetadata"
-import { PostFrontMatter } from "types/PostFrontMatter"
-import { isZennContents } from "@/lib/slug"
+import { PostFrontMatter } from "types"
 
 const generateRssItem = (post: PostFrontMatter) => `
   <item>
@@ -27,10 +26,7 @@ const generateRss = (posts: PostFrontMatter[], page = "feed.xml") => `
       <webMaster>${siteMetadata.email} (${siteMetadata.author})</webMaster>
       <lastBuildDate>${new Date(posts[0].date).toUTCString()}</lastBuildDate>
       <atom:link href="${siteMetadata.siteUrl}/${page}" rel="self" type="application/rss+xml"/>
-      ${posts
-        .filter((p) => !isZennContents(p.slug))
-        .map(generateRssItem)
-        .join("")}
+      ${posts.map(generateRssItem).join("")}
     </channel>
   </rss>
 `

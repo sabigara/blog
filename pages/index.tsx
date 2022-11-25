@@ -4,12 +4,12 @@ import siteMetadata from "@/data/siteMetadata"
 import { InferGetStaticPropsType } from "next"
 import NewsletterForm from "@/components/NewsletterForm"
 import ListLayout from "@/layouts/ListLayout"
-import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
+import { getSortedPostListItems } from "@/lib/blog"
 
 const MAX_DISPLAY = 10
 
 export const getStaticProps = async () => {
-  return { props: { posts: getSortedBlogPosts().map(extractContentMeta) } }
+  return { props: { posts: await getSortedPostListItems() } }
 }
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
