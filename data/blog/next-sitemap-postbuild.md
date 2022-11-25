@@ -3,10 +3,7 @@ title: "next-sitemapがビルドしてくれないと思ったらpnpmが原因�
 date: "2022-08-19"
 tags: ["個人開発", "nextjs"]
 draft: false
-summary:
-images: []
 layout: PostLayout
-canonicalUrl:
 ---
 
 https://github.com/iamvishnusankar/next-sitemap

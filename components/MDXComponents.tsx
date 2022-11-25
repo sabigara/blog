@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
-import React, { useMemo } from "react"
-import { ComponentMap, getMDXComponent } from "mdx-bundler/client"
+import React from "react"
+import { useMDXComponent } from "next-contentlayer/hooks"
+import { ComponentMap } from "mdx-bundler/client"
 import Image from "./Image"
 import TOCInline from "./TOCInline"
 import Pre from "./Pre"
@@ -28,7 +29,7 @@ interface Props {
 }
 
 export const MDXLayoutRenderer = ({ layout, mdxSource, ...rest }: Props) => {
-  const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource])
+  const MDXContent = useMDXComponent(mdxSource)
 
-  return <MDXLayout layout={layout} components={MDXComponents} {...rest} />
+  return <MDXContent layout={layout} components={MDXComponents} {...rest} />
 }

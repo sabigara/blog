@@ -1,19 +1,18 @@
 import { TagSEO } from "@/components/SEO"
 import siteMetadata from "@/data/siteMetadata"
 import ListLayout from "@/layouts/ListLayout"
+import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
 import generateRss from "@/lib/generate-rss"
-import { getAllFilesFrontMatter } from "@/lib/mdx"
 import { getAllTags } from "@/lib/tags"
 import kebabCase from "@/lib/utils/kebabCase"
 import fs from "fs"
-import { GetStaticProps, InferGetStaticPropsType } from "next"
+import { InferGetStaticPropsType } from "next"
 import path from "path"
-import { PostFrontMatter } from "types/PostFrontMatter"
 
 const root = process.cwd()
 
 export async function getStaticPaths() {
-  const tags = await getAllTags("blog")
+  const tags = getAllTags()
 
   return {
     paths: Object.keys(tags).map((tag) => ({
@@ -25,12 +24,9 @@ export async function getStaticPaths() {
   }
 }
 
-export const getStaticProps: GetStaticProps<{ posts: PostFrontMatter[]; tag: string }> = async (
-  context
-) => {
+export const getStaticProps = async (context) => {
   const tag = context.params.tag as string
-  const allPosts = await getAllFilesFrontMatter("blog")
-  const filteredPosts = allPosts.filter(
+  const filteredPosts = getSortedBlogPosts().filter(
     (post) => !post.draft && post.tags.map((t) => kebabCase(t)).includes(tag)
   )
 
@@ -42,7 +38,7 @@ export const getStaticProps: GetStaticProps<{ posts: PostFrontMatter[]; tag: str
     fs.writeFileSync(path.join(rssPath, "feed.xml"), rss)
   }
 
-  return { props: { posts: filteredPosts, tag } }
+  return { props: { posts: filteredPosts.map(extractContentMeta), tag } }
 }
 
 export default function Tag({ posts, tag }: InferGetStaticPropsType<typeof getStaticProps>) {

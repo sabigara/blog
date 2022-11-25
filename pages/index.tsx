@@ -1,18 +1,15 @@
 import Link from "@/components/Link"
 import { PageSEO } from "@/components/SEO"
 import siteMetadata from "@/data/siteMetadata"
-import { getAllFilesFrontMatter } from "@/lib/mdx"
-import { GetStaticProps, InferGetStaticPropsType } from "next"
-import { PostFrontMatter } from "types/PostFrontMatter"
+import { InferGetStaticPropsType } from "next"
 import NewsletterForm from "@/components/NewsletterForm"
 import ListLayout from "@/layouts/ListLayout"
+import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
 
 const MAX_DISPLAY = 10
 
-export const getStaticProps: GetStaticProps<{ posts: PostFrontMatter[] }> = async () => {
-  const posts = await getAllFilesFrontMatter("blog")
-
-  return { props: { posts } }
+export const getStaticProps = async () => {
+  return { props: { posts: getSortedBlogPosts().map(extractContentMeta) } }
 }
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {

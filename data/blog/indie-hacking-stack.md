@@ -3,10 +3,7 @@ title: "無料で高速にWeb系個人開発するための技術スタック202
 date: "2022-08-17"
 tags: ["個人開発", "nextjs"]
 draft: false
-summary:
-images: []
 layout: PostLayout
-canonicalUrl:
 ---
 
 個人開発でWebサービスやアプリを10個以上ふらふらと作ってきたが、最近は自分にハマる技術スタックが固まってきたように思うので紹介したい。

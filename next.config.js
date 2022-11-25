@@ -1,6 +1,7 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 })
+const withContentlayer = require("next-contentlayer").withContentlayer
 
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
@@ -50,39 +51,41 @@ const securityHeaders = [
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
-module.exports = withBundleAnalyzer({
-  reactStrictMode: true,
-  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-  eslint: {
-    dirs: ["pages", "components", "lib", "layouts", "scripts"],
-  },
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: securityHeaders,
-      },
-    ]
-  },
-  webpack: (config, { dev, isServer }) => {
-    config.module.rules.push({
-      test: /\.(png|jpe?g|gif|mp4)$/i,
-      use: [
+module.exports = withBundleAnalyzer(
+  withContentlayer({
+    reactStrictMode: true,
+    pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+    eslint: {
+      dirs: ["pages", "components", "lib", "layouts", "scripts"],
+    },
+    async headers() {
+      return [
         {
-          loader: "file-loader",
-          options: {
-            publicPath: "/_next",
-            name: "static/media/[name].[hash].[ext]",
-          },
+          source: "/(.*)",
+          headers: securityHeaders,
         },
-      ],
-    })
+      ]
+    },
+    webpack: (config) => {
+      config.module.rules.push({
+        test: /\.(png|jpe?g|gif|mp4)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              publicPath: "/_next",
+              name: "static/media/[name].[hash].[ext]",
+            },
+          },
+        ],
+      })
 
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    })
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      })
 
-    return config
-  },
-})
+      return config
+    },
+  })
+)

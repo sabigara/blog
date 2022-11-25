@@ -38,3 +38,5 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 data/blog/zenn/*.md
 *.cache.json
+
+.contentlayer/

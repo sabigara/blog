@@ -3,10 +3,8 @@ title: Next.jsとTailwindでブログを作り直した
 date: "2022-08-04"
 tags: ["個人開発", "tailwind", "nextjs"]
 draft: false
-summary:
 images: []
 layout: PostLayout
-canonicalUrl:
 ---
 
 はてなブログや別の自作ブログでも一瞬だけ書いていた時期があるが、今回作り直すことにした。

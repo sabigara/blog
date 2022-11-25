@@ -3,10 +3,7 @@ title: Intl.NumberFormatの円記号がSafariだけ半角になる問題
 date: "2022-08-22"
 tags: ["safari"]
 draft: false
-summary:
-images: []
 layout: PostLayout
-canonicalUrl:
 ---
 
 [`Intl.NumberFormat`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) を使うと、ライブラリを追加することなしに、数値をローカライズされたフォーマットに変換できる。

@@ -6,8 +6,9 @@ import formatDate from "@/lib/utils/formatDate"
 import { PostFrontMatter } from "types/PostFrontMatter"
 import { isZennContents, slugToUrl } from "@/lib/slug"
 import ProviderTag from "@/components/ProviderTag"
+import { ExtractContentMeta } from "@/lib/contentlayer"
 interface Props {
-  posts: PostFrontMatter[]
+  posts: ExtractContentMeta<PostFrontMatter>[]
   title: string
   initialDisplayPosts?: PostFrontMatter[]
   pagination?: ComponentProps<typeof Pagination>
