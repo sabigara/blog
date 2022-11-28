@@ -51,10 +51,7 @@ async function getFeedItemsFromSources(sources: undefined | string[]) {
 }
 
 async function getAllExternalPostMeta(): Promise<PostListItem[]> {
-  const feetItems = await getFeedItemsFromSources([
-    "https://zenn.dev/sabigara/feed",
-    "https://medium.com/@sabigara/feed",
-  ])
+  const feetItems = await getFeedItemsFromSources(["https://zenn.dev/sabigara/feed"])
   return feetItems.map((item) => ({
     title: item.title,
     date: item.isoDate,
