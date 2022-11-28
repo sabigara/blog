@@ -1,0 +1,69 @@
+$infoColor: #3182ce;
+$warnColor: #e6a700;
+$dangerColor: #e53e3e;
+
+.Block {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+  padding: 1rem;
+  @apply rounded-lg border border-l-4 border-gray-200 bg-white;
+
+  &.--info {
+    border-left-color: $infoColor;
+  }
+  &.--warn {
+    border-left-color: $warnColor;
+  }
+  &.--danger {
+    border-left-color: $dangerColor;
+  }
+}
+
+.text {
+  display: grid;
+  row-gap: 0.25rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-weight: var(--camome-font-weight-bold);
+  font-size: var(--camome-font-size-lg);
+
+  &.--info {
+    color: $infoColor;
+  }
+  &.--warn {
+    color: $warnColor;
+  }
+  &.--danger {
+    color: $dangerColor;
+  }
+}
+
+.message {
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.icon {
+  width: 1.75rem;
+  height: 1.75rem;
+
+  &.--info {
+    color: $infoColor;
+  }
+  &.--warn {
+    color: $warnColor;
+  }
+  &.--danger {
+    color: $dangerColor;
+  }
+}
