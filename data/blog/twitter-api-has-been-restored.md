@@ -1,7 +1,7 @@
 ---
 title: Twitter APIへのアクセスが回復した
 date: "2022-08-16"
-tags: ["個人開発", "twitter"]
+tags: ["indiehacking", "twitter"]
 draft: false
 layout: PostLayout
 ---

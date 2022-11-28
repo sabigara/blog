@@ -1,7 +1,7 @@
 ---
 title: "無料で高速にWeb系個人開発するための技術スタック2022（主観）"
 date: "2022-08-17"
-tags: ["個人開発", "nextjs"]
+tags: ["indiehacking", "nextjs"]
 draft: false
 layout: PostLayout
 ---

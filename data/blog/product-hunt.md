@@ -1,7 +1,7 @@
 ---
 title: "Product Huntのデイリー2位を動画エディタで獲得したけど半年で閉鎖した"
 date: "2022-11-24"
-tags: ["個人開発"]
+tags: ["indiehacking"]
 draft: false
 ---
 

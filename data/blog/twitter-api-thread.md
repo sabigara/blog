@@ -1,7 +1,7 @@
 ---
 title: "Twitter API v2 でスレッド内のツイート一覧を取得する"
 date: "2022-08-05"
-tags: ["個人開発", "twitter"]
+tags: ["indiehacking", "twitter"]
 draft: false
 layout: PostLayout
 ---

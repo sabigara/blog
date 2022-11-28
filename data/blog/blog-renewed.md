@@ -1,7 +1,7 @@
 ---
 title: Next.jsとTailwindでブログを作り直した
 date: "2022-08-04"
-tags: ["個人開発", "tailwind", "nextjs"]
+tags: ["indiehacking", "tailwind", "nextjs"]
 draft: false
 images: []
 layout: PostLayout

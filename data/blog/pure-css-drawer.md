@@ -1,7 +1,7 @@
 ---
 title: "CSSのみ（JavaScriptなし）でハンバーガーメニューを実装する"
 date: "2022-09-01"
-tags: ["個人開発", "css", "ui"]
+tags: ["indiehacking", "css", "ui"]
 draft: false
 layout: PostLayout
 ---

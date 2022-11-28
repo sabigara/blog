@@ -1,7 +1,7 @@
 ---
 title: Twitter APIへのアクセスをいきなり遮断された
 date: "2022-08-09"
-tags: ["個人開発", "twitter"]
+tags: ["indiehacking", "twitter"]
 draft: false
 layout: PostLayout
 ---

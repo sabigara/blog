@@ -1,7 +1,7 @@
 ---
 title: "個人開発者としては「話を聞いてくれる人」を集めたい"
 date: "2022-11-25"
-tags: ["個人開発"]
+tags: ["indiehacking"]
 draft: false
 ---
 

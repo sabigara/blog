@@ -1,7 +1,7 @@
 ---
 title: "next-sitemapがビルドしてくれないと思ったらpnpmが原因だった"
 date: "2022-08-19"
-tags: ["個人開発", "nextjs"]
+tags: ["indiehacking", "nextjs"]
 draft: false
 layout: PostLayout
 ---
