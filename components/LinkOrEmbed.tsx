@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import clsx from "clsx"
 import { AnchorHTMLAttributes, DetailedHTMLProps } from "react"
 import Link from "@/components/Link"
 
 export default function LinkOrEmbed({
   href,
   children,
-  className,
   ...rest
 }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
   if (children !== href) {
