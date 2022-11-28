@@ -77,9 +77,14 @@ export function blogPostToListItem(post: Blog): PostListItem {
 }
 
 export async function getSortedPostListItems(): Promise<PostListItem[]> {
-  const internalItems = [...allBlogs].map(blogPostToListItem)
+  const internalItems = [...allBlogs].filter(postIsPublished).map(blogPostToListItem)
   const externalItems = await getAllExternalPostMeta()
   return [...internalItems, ...externalItems].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
+}
+
+export function postIsPublished(post: Blog) {
+  if (process.env.NODE_ENV === "development") return true
+  return "draft" in post && post.draft !== true
 }

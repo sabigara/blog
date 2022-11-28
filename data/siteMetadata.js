@@ -11,11 +11,11 @@ const siteMetadataBase = {
   image: "/static/images/avatar.png",
   email: "lemonburst1958@gmail.com",
   github: "https://github.com/sabigara",
-  twitter: "https://twitter.com/_sabigara",
+  twitter: "https://twitter.com/MatsuraYuma",
   facebook: "",
   youtube: "",
   linkedin: "",
-  locale: "ja-JP",
+  locale: "en-US",
   analytics: {
     googleAnalyticsId: "G-60SCDRDB1F",
   },

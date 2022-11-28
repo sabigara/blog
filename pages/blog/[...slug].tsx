@@ -6,6 +6,7 @@ import { type InferGetStaticPropsType } from "next"
 import { allAuthors } from "contentlayer/generated"
 import { getToc } from "@/lib/get-toc"
 import { getSortedBlogPosts } from "@/lib/contentlayer"
+import { postIsPublished } from "@/lib/blog"
 
 const DEFAULT_LAYOUT = "PostLayout"
 
@@ -55,7 +56,7 @@ export default function BlogPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      {"draft" in post && post.draft !== true ? (
+      {postIsPublished(post) ? (
         <MDXLayoutRenderer
           layout={post.layout || DEFAULT_LAYOUT}
           toc={toc}

@@ -1,19 +1,19 @@
-import fs from 'fs'
-import { globby } from 'globby'
-import matter from 'gray-matter'
-import prettier from 'prettier'
+import fs from "fs"
+import { globby } from "globby"
+import matter from "gray-matter"
+import prettier from "prettier"
 ;(async () => {
-  const siteMetadata = (await import('../data/siteMetadata.js')).default
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
+  const siteMetadata = (await import("../data/siteMetadata.js")).default
+  const prettierConfig = await prettier.resolveConfig("./.prettierrc.js")
   const pages = await globby([
-    'pages/*.js',
-    'pages/*.tsx',
-    'data/blog/*.mdx', // exclude subdirectories which are external posts.
-    'data/blog/*.md',
-    'public/tags/**/*.xml',
-    '!pages/_*.js',
-    '!pages/_*.tsx',
-    '!pages/api',
+    "pages/*.js",
+    "pages/*.tsx",
+    "data/blog/*.mdx", // exclude subdirectories which are external posts.
+    "data/blog/*.md",
+    "public/tags/**/*.xml",
+    "!pages/_*.js",
+    "!pages/_*.tsx",
+    "!pages/api",
   ])
 
   const sitemap = `
@@ -22,8 +22,8 @@ import prettier from 'prettier'
             ${pages
               .map((page) => {
                 // Exclude drafts from the sitemap
-                if (page.search('.md') >= 1 && fs.existsSync(page)) {
-                  const source = fs.readFileSync(page, 'utf8')
+                if (page.search(".md") >= 1 && fs.existsSync(page)) {
+                  const source = fs.readFileSync(page, "utf8")
                   const fm = matter(source)
                   if (fm.data.draft) {
                     return
@@ -33,16 +33,16 @@ import prettier from 'prettier'
                   }
                 }
                 const path = page
-                  .replace('pages/', '/')
-                  .replace('data/blog', '/blog')
-                  .replace('public/', '/')
-                  .replace('.js', '')
-                  .replace('.tsx', '')
-                  .replace('.mdx', '')
-                  .replace('.md', '')
-                  .replace('/feed.xml', '')
-                const route = path === '/index' ? '' : path
-                if (page.search('pages/404.') > -1 || page.search(`pages/blog/[...slug].`) > -1) {
+                  .replace("pages/", "/")
+                  .replace("data/blog", "/blog")
+                  .replace("public/", "/")
+                  .replace(".js", "")
+                  .replace(".tsx", "")
+                  .replace(".mdx", "")
+                  .replace(".md", "")
+                  .replace("/feed.xml", "")
+                const route = path === "/index" ? "" : path
+                if (page.search("pages/404.") > -1 || page.search(`pages/blog/[...slug].`) > -1) {
                   return
                 }
                 return `
@@ -51,15 +51,15 @@ import prettier from 'prettier'
                         </url>
                     `
               })
-              .join('')}
+              .join("")}
         </urlset>
     `
 
   const formatted = prettier.format(sitemap, {
     ...prettierConfig,
-    parser: 'html',
+    parser: "html",
   })
 
   // eslint-disable-next-line no-sync
-  fs.writeFileSync('public/sitemap.xml', formatted)
+  fs.writeFileSync("public/sitemap.xml", formatted)
 })()
