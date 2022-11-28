@@ -6,7 +6,7 @@ draft: false
 layout: PostLayout
 ---
 
-Sometimes you may want to emphasize that a command is destructive or note additional information in your blog or docs like this:
+Sometimes you may want to emphasize that command is destructive or note additional information in your blog or docs like this:
 
 :::info
 This is a info `Admonition`. Markdown syntax _is_ **supported**.
@@ -34,7 +34,7 @@ Laboris dolore aliquip laboris irure.
 :::
 ```
 
-Fortunately, we don't have to write any code as there is [remark-directive](https://github.com/remarkjs/remark-directive) that does exactly we need.
+Fortunately, we don't have to write any code as there is [remark-directive](https://github.com/remarkjs/remark-directive) that does exactly what we need.
 
 ```bash
 yarn add remark-directive
@@ -51,7 +51,7 @@ const remarkPlugins = [remarkDirective, remarkAdmonition]
 
 ### Convert to `mdxJsxFlowElement`
 
-But `remark-directive` doesn't do everything we need for displaying admonitions. To convert the block into a MDX component, define the following plugin:
+But `remark-directive` doesn't do everything we need for displaying admonitions. To convert the block into an MDX component, define the following plugin:
 
 ```ts
 import { visit } from "unist-util-visit"
@@ -201,7 +201,7 @@ $dangerColor: #e53e3e;
 
 ## Pass it as a custom component
 
-Now, register it as a custom component otherwise MDX complains that you've forgot to import!
+Now, register it as a custom component otherwise MDX complains that you've forgotten to import it!
 
 ```tsx
 import { MDXProvider } from "@mdx-js/react"
