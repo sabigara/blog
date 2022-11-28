@@ -77,6 +77,7 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
                           {author.twitter && (
                             <Link
                               href={author.twitter}
+                              noExternalIcon
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
                               {author.twitter.replace("https://twitter.com/", "@")}

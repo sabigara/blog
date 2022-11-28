@@ -133,3 +133,19 @@ pre[class*="language-"] {
 .token.italic {
   font-style: italic;
 }
+
+.remark-code-title {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: white;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  background-color: #212636;
+}
+
+.remark-code-title + * pre {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
