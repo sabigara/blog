@@ -54,25 +54,25 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
             </svg>
           </div>
         </div>
-        <ul>
+        <ul className="">
           {!filteredBlogPosts.length && "No posts found."}
           {displayPosts.map((frontMatter) => {
-            const { url, date, title, summary, tags } = frontMatter
+            const { url, date, title, tags } = frontMatter
             return (
-              <li key={url} className="py-4">
+              <li key={url} className="pb-4 pt-2">
                 <article className="space-y-2 xl:grid xl:grid-cols-6 xl:items-baseline xl:space-y-0">
                   <div className="flex flex-row gap-2 md:flex-col md:items-start">
                     <dl>
                       <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                      <dd className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         <time dateTime={date}>{formatDate(date)}</time>
                       </dd>
                     </dl>
                     <ProviderTag href={url} className="w-fit" />
                   </div>
                   <div className="space-y-3 xl:col-span-5">
-                    <div className="flex flex-col gap-3">
-                      <h3 className="text-xl font-bold leading-8 tracking-tight">
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-lg font-semibold leading-8 tracking-tight">
                         <Link href={url} className="align-middle text-gray-900 dark:text-gray-100">
                           {title}
                         </Link>
@@ -82,9 +82,6 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                           <Tag key={tag} text={tag} />
                         ))}
                       </div>
-                    </div>
-                    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                      {summary}
                     </div>
                   </div>
                 </article>
