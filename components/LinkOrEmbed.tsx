@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import clsx from "clsx"
 import { AnchorHTMLAttributes, DetailedHTMLProps } from "react"
+import Link from "@/components/Link"
 
 export default function LinkOrEmbed({
   href,
@@ -10,15 +11,9 @@ export default function LinkOrEmbed({
 }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
   if (children !== href) {
     return (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href={href}
-        className={clsx("no-underline transition-colors", className)}
-        {...rest}
-      >
+      <Link href={href} {...rest}>
         {children}
-      </a>
+      </Link>
     )
   }
 

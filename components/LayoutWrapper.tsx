@@ -16,8 +16,8 @@ const LayoutWrapper = ({ children }: Props) => {
       <div className="flex h-screen flex-col justify-between">
         <header className="flex items-center justify-between py-10">
           <div>
-            <Link href="/" aria-label={siteMetadata.headerTitle}>
-              <div className="flex items-center justify-between">
+            <Link href="/" aria-label={siteMetadata.headerTitle} className="hover:no-underline">
+              <div className="flex items-center justify-between ">
                 <div className="mr-3">
                   <Logo />
                 </div>
@@ -37,7 +37,7 @@ const LayoutWrapper = ({ children }: Props) => {
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="rounded-md px-2 py-2 font-semibold text-gray-900 transition-colors hover:bg-slate-100 dark:text-gray-100 dark:hover:bg-gray-800 md:px-3"
+                  className="rounded-md px-2 py-2 font-semibold text-gray-900 transition-colors hover:bg-slate-100 hover:no-underline dark:text-gray-100 dark:hover:bg-gray-800 md:px-3"
                 >
                   {link.title}
                 </Link>
