@@ -1,14 +1,14 @@
 import Link from "@/components/Link"
 import PageTitle from "@/components/PageTitle"
-import SectionContainer from "@/components/SectionContainer"
 import { BlogSEO } from "@/components/SEO"
 import Image from "@/components/Image"
 import Tag from "@/components/Tag"
 import siteMetadata from "@/data/siteMetadata"
 import { ReactNode } from "react"
-import { PostFrontMatter } from "types"
+import { PostFrontMatter, Toc } from "types"
 import { AuthorFrontMatter } from "types"
 import SocialButtons from "@/components/SocialButtons"
+import TOCInline from "@/components/TOCInline"
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   year: "numeric",
@@ -19,15 +19,16 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 interface Props {
   frontMatter: PostFrontMatter
   authorDetails: AuthorFrontMatter[]
+  toc?: Toc
   children: ReactNode
 }
 
-export default function PostLayout({ frontMatter, authorDetails, children }: Props) {
+export default function PostLayout({ frontMatter, authorDetails, toc, children }: Props) {
   const { slug, date, title, tags } = frontMatter
   const url = `${siteMetadata.siteUrl}/blog/${slug}`
 
   return (
-    <SectionContainer>
+    <>
       <BlogSEO
         {...frontMatter}
         url={url}
@@ -90,8 +91,9 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
                 </ul>
               </dd>
             </dl>
-            <div className="border-y pb-6">
-              <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
+            <div className="border-y pb-6 pt-8">
+              {toc && <TOCInline toc={toc} fromHeading={2} toHeading={4} />}
+              <div className="prose max-w-none pt-8 pb-8 dark:prose-dark">{children}</div>
             </div>
             <SocialButtons url={url} text={title} className="mx-auto w-fit gap-3 pt-6" />
             <footer>
@@ -121,6 +123,6 @@ export default function PostLayout({ frontMatter, authorDetails, children }: Pro
           </div>
         </div>
       </article>
-    </SectionContainer>
+    </>
   )
 }

@@ -1,4 +1,6 @@
+import clsx from "clsx"
 import { Toc } from "types"
+import styles from "./TOCInline.module.scss"
 
 interface TOCInlineProps {
   toc: Toc
@@ -29,7 +31,6 @@ const TOCInline = ({
   indentDepth = 3,
   fromHeading = 1,
   toHeading = 6,
-  asDisclosure = false,
   exclude = "",
 }: TOCInlineProps) => {
   const re = Array.isArray(exclude)
@@ -42,26 +43,29 @@ const TOCInline = ({
   )
 
   const tocList = (
-    <ul>
+    <ul className="m-0 flex flex-col gap-[0.2rem]">
       {filteredToc.map((heading) => (
-        <li key={heading.value} className={`${heading.depth >= indentDepth && "ml-6"}`}>
-          <a href={heading.url}>{heading.value}</a>
+        <li key={heading.value} className={`${heading.depth >= indentDepth && "ml-5"}`}>
+          <a href={heading.url} className="text-sm text-gray-600 hover:text-black hover:underline">
+            {heading.value}
+          </a>
         </li>
       ))}
     </ul>
   )
 
   return (
-    <>
-      {asDisclosure ? (
-        <details open>
-          <summary className="ml-6 pt-2 pb-2 text-xl font-bold">Table of Contents</summary>
-          <div className="ml-6">{tocList}</div>
-        </details>
-      ) : (
-        tocList
-      )}
-    </>
+    <details open className="select-none overflow-hidden rounded-lg border border-gray-200">
+      <summary
+        className={clsx(
+          styles.summary,
+          "bg-gray-100 py-2 px-3 font-bold transition-colors hover:cursor-pointer"
+        )}
+      >
+        Table of contents
+      </summary>
+      <aside className="border-t p-4">{tocList}</aside>
+    </details>
   )
 }
 
