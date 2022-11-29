@@ -8,17 +8,37 @@ import { getToc } from "@/lib/get-toc"
 import { getSortedBlogPosts } from "@/lib/contentlayer"
 import { postIsPublished } from "@/lib/blog"
 
-const DEFAULT_LAYOUT = "PostLayout"
-
-export async function getStaticPaths() {
-  return {
-    paths: getSortedBlogPosts().map((p) => ({
-      params: {
-        slug: p.slug.split("/"),
-      },
-    })),
-    fallback: false,
-  }
+export default function BlogPage({
+  post,
+  toc,
+  authorDetails,
+  prev,
+  next,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <>
+      {postIsPublished(post) ? (
+        <MDXLayoutRenderer
+          layout={post.layout || "PostLayout"}
+          toc={toc}
+          mdxSource={post.body.code}
+          frontMatter={post}
+          authorDetails={authorDetails}
+          prev={prev}
+          next={next}
+        />
+      ) : (
+        <div className="mt-24 text-center">
+          <PageTitle>
+            Under Construction{" "}
+            <span role="img" aria-label="roadwork sign">
+              🚧
+            </span>
+          </PageTitle>
+        </div>
+      )}
+    </>
+  )
 }
 
 export const getStaticProps = async ({ params }) => {
@@ -47,35 +67,13 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
-export default function BlogPage({
-  post,
-  toc,
-  authorDetails,
-  prev,
-  next,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <>
-      {postIsPublished(post) ? (
-        <MDXLayoutRenderer
-          layout={post.layout || DEFAULT_LAYOUT}
-          toc={toc}
-          mdxSource={post.body.code}
-          frontMatter={post}
-          authorDetails={authorDetails}
-          prev={prev}
-          next={next}
-        />
-      ) : (
-        <div className="mt-24 text-center">
-          <PageTitle>
-            Under Construction{" "}
-            <span role="img" aria-label="roadwork sign">
-              🚧
-            </span>
-          </PageTitle>
-        </div>
-      )}
-    </>
-  )
+export async function getStaticPaths() {
+  return {
+    paths: getSortedBlogPosts().map((p) => ({
+      params: {
+        slug: p.slug.split("/"),
+      },
+    })),
+    fallback: false,
+  }
 }

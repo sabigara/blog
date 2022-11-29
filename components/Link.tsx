@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import clsx from "clsx"
 import Link from "next/link"
-import { AnchorHTMLAttributes, DetailedHTMLProps } from "react"
 import { FiArrowUpRight } from "react-icons/fi"
 
 const baseClassName = "hover:underline"
@@ -16,16 +15,14 @@ const CustomLink = ({
   className,
   children,
   ...rest
-}: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> & Props) => {
+}: Omit<JSX.IntrinsicElements["a"], "ref"> & Props) => {
   const isInternalLink = href && href.startsWith("/")
   const isAnchorLink = href && href.startsWith("#")
 
   if (isInternalLink) {
     return (
-      <Link href={href}>
-        <a className={clsx(baseClassName, className)} {...rest}>
-          {children}
-        </a>
+      <Link href={href} className={clsx(baseClassName, className)} {...rest}>
+        {children}
       </Link>
     )
   }
