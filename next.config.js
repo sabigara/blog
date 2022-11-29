@@ -58,6 +58,9 @@ module.exports = withBundleAnalyzer(
     eslint: {
       dirs: ["pages", "components", "lib", "layouts", "scripts"],
     },
+    images: {
+      domains: ["i1.ytimg.com", "i2.ytimg.com", "i3.ytimg.com", "i4.ytimg.com"],
+    },
     async headers() {
       return [
         {
