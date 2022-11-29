@@ -9,14 +9,15 @@ import { getSortedPostListItems } from "@/lib/blog"
 const MAX_DISPLAY = 10
 
 export const getStaticProps = async () => {
-  return { props: { posts: await getSortedPostListItems() } }
+  const posts = await getSortedPostListItems()
+  return { props: { posts: posts.slice(0, MAX_DISPLAY) } }
 }
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-      <ListLayout posts={posts.slice(0, MAX_DISPLAY)} title="Latest" />
+      <ListLayout posts={posts} title="Latest" />
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link

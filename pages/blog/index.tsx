@@ -8,7 +8,6 @@ export const POSTS_PER_PAGE = 10
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getSortedPostListItems()
-  const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
   const pagination = {
     currentPage: 1,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
@@ -16,8 +15,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      initialDisplayPosts,
-      posts,
+      posts: posts.slice(0, POSTS_PER_PAGE),
       pagination,
     },
   }
@@ -25,18 +23,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Blog({
   posts,
-  initialDisplayPosts,
   pagination,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title={`Blog - ${siteMetadata.title}`} description={siteMetadata.description} />
-      <ListLayout
-        posts={posts}
-        initialDisplayPosts={initialDisplayPosts}
-        pagination={pagination}
-        title="All Posts"
-      />
+      <ListLayout posts={posts} pagination={pagination} title="All Posts" />
     </>
   )
 }

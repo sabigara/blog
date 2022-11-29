@@ -24,10 +24,6 @@ export const getStaticProps = async (context) => {
   } = context
   const pageNumber = parseInt(page as string)
   const posts = await getSortedPostListItems()
-  const initialDisplayPosts = posts.slice(
-    POSTS_PER_PAGE * (pageNumber - 1),
-    POSTS_PER_PAGE * pageNumber
-  )
   const pagination = {
     currentPage: pageNumber,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
@@ -35,8 +31,7 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
-      posts,
-      initialDisplayPosts,
+      posts: posts.slice(POSTS_PER_PAGE * (pageNumber - 1), POSTS_PER_PAGE * pageNumber),
       pagination,
     },
   }
@@ -44,18 +39,12 @@ export const getStaticProps = async (context) => {
 
 export default function PostPage({
   posts,
-  initialDisplayPosts,
   pagination,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-      <ListLayout
-        posts={posts}
-        initialDisplayPosts={initialDisplayPosts}
-        pagination={pagination}
-        title="All Posts"
-      />
+      <ListLayout posts={posts} pagination={pagination} title="All Posts" />
     </>
   )
 }
