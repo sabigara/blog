@@ -38,7 +38,7 @@
     "react-icons": "^4.4.0",
     "reading-time": "1.5.0",
     "rehype": "^12.0.1",
-    "rehype-autolink-headings": "^6.1.0",
+    "rehype-autolink-headings": "^6.1.1",
     "rehype-citation": "^0.4.0",
     "rehype-external-links": "^2.0.1",
     "rehype-katex": "^6.0.2",

@@ -32,7 +32,7 @@ const CustomLink = ({
 
   if (isAnchorLink) {
     return (
-      <a href={href} {...rest}>
+      <a href={href} className={className} {...rest}>
         {children}
       </a>
     )
