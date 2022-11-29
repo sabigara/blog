@@ -1,14 +1,4 @@
-import siteMetadata from "@/data/siteMetadata"
-
-const formatDate = (date: string) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }
-  const now = new Date(date).toLocaleDateString(siteMetadata.locale, options)
-
-  return now
+export default function formatDate(date: Date | string) {
+  const dateObj = typeof date === "string" ? new Date(date) : date
+  return dateObj.toISOString().slice(0, 10)
 }
-
-export default formatDate

@@ -9,12 +9,7 @@ import { PostFrontMatter, Toc } from "types"
 import { AuthorFrontMatter } from "types"
 import SocialButtons from "@/components/SocialButtons"
 import TOCInline from "@/components/TOCInline"
-
-const postDateTemplate: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-}
+import formatDate from "@/lib/utils/formatDate"
 
 interface Props {
   frontMatter: PostFrontMatter
@@ -43,9 +38,7 @@ export default function PostLayout({ frontMatter, authorDetails, toc, children }
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
+                    <time dateTime={date}>{formatDate(new Date(date))}</time>
                   </dd>
                 </div>
               </dl>
