@@ -31,6 +31,7 @@ module.exports = {
           css: {
             color: theme("colors.gray.900"),
             fontSize: "1.1rem",
+            lineHeight: "1.7",
             a: {
               color: theme("colors.primary.600"),
               textDecoration: "none",
