@@ -29,7 +29,8 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme("colors.slate.900"),
+            color: theme("colors.gray.900"),
+            fontSize: "1.1rem",
             a: {
               color: theme("colors.primary.600"),
               textDecoration: "none",
@@ -47,9 +48,9 @@ module.exports = {
               fontWeight: "700",
               letterSpacing: theme("letterSpacing.tight"),
               color: theme("colors.gray.900"),
-              borderBottomWidth: "2px",
-              borderColor: theme("colors.slate.200"),
-              paddingBottom: "0.5rem",
+              borderBottomWidth: "1px",
+              borderColor: theme("colors.slate.300"),
+              paddingBottom: "0.3rem",
             },
             h3: {
               fontWeight: "600",
@@ -87,6 +88,7 @@ module.exports = {
               borderRadius: "0.25rem",
             },
             hr: { borderColor: theme("colors.gray.200") },
+            li: { margin: "0.25rem 0" },
             "ol li::marker": {
               fontWeight: "600",
               color: theme("colors.gray.500"),
