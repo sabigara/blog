@@ -4,6 +4,8 @@
 const defaultTheme = require("tailwindcss/defaultTheme")
 const colors = require("tailwindcss/colors")
 
+const radius = "0.5rem"
+
 /** @type {import("tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   content: ["./pages/**/*.tsx", "./components/**/*.tsx", "./layouts/**/*.tsx", "./lib/**/*.ts"],
@@ -62,7 +64,7 @@ module.exports = {
             },
             pre: {
               backgroundColor: theme("colors.slate.900"),
-              borderRadius: "0.75rem",
+              borderRadius: radius,
               padding: "1.25rem",
             },
             code: {
@@ -86,7 +88,7 @@ module.exports = {
               paddingRight: "4px",
               paddingTop: "2px",
               paddingBottom: "2px",
-              borderRadius: "0.25rem",
+              borderRadius: radius,
             },
             hr: { borderColor: theme("colors.gray.200") },
             li: { margin: "0.25rem 0" },
@@ -103,6 +105,15 @@ module.exports = {
               fontStyle: "normal",
               fontWeight: "normal",
               quotes: "none",
+            },
+            img: {
+              borderRadius: radius,
+            },
+            video: {
+              borderRadius: radius,
+            },
+            iframe: {
+              borderRadius: radius,
             },
           },
         },
