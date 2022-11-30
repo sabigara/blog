@@ -30,16 +30,17 @@ pnpm add contentlayer next-contentlayer sass clsx @heroicons/react remark-gfm re
 
 Follow the Getting Started to integrate Contentlayer into Next.js.
 
-```ts:next.config.mjs
-import { withContentlayer } from "next-contentlayer";
+```ts
+// next.config.mjs
+import { withContentlayer } from "next-contentlayer"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-};
+}
 
-module.exports = withContentlayer(nextConfig);
+module.exports = withContentlayer(nextConfig)
 ```
 
 A cool thing is that **Contentlayer triggers Fast Refresh as you edit Markdown content**, while you need manual reloads with a naive `fs.readFile` approach.
@@ -50,10 +51,11 @@ Then, we’ll define a `Docs` schema. You may feel familiar with this (and code 
 
 We included `remark-gfm` to support [GitHub Flavored Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) and `rehype-prism-plus` for syntax highlight of code blocks.
 
-```ts:contentlayer.config.ts
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import rehypePrismPlus from "rehype-prism-plus";
-import remarkGfm from "remark-gfm";
+```ts
+// contentlayer.config.ts
+import { defineDocumentType, makeSource } from "contentlayer/source-files"
+import rehypePrismPlus from "rehype-prism-plus"
+import remarkGfm from "remark-gfm"
 
 export const Docs = defineDocumentType(() => ({
   name: "Docs",
@@ -78,7 +80,7 @@ export const Docs = defineDocumentType(() => ({
       resolve: (doc) => doc._raw.flattenedPath.replace("docs/", ""),
     },
   },
-}));
+}))
 
 export default makeSource({
   contentDirPath: "content",
@@ -87,18 +89,19 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [[rehypePrismPlus, { ignoreMissing: true }]],
   },
-});
-
+})
 ```
 
 ## Add MDX content
 
 Let’s write MDX content and add it under `content/docs` directory. Make sure to put an image named car.jpg in `/public` directory.
 
-````md:/content/docs/sample.mdx
----
+```md
+## /content/docs/sample.mdx
+
 id: "sample"
 title: "This is the title"
+
 ---
 
 ## Heading level 2
@@ -119,72 +122,67 @@ pariatur.
 
 ![image alt](/car.jpg)
 
-```ts
-function sum(a: number, b: number) {
-  return a + b
-}
+`ts function sum(a: number, b: number) { return a + b } `
 ```
-````
 
-:::info
-Line at the top is the file name. Don’t include it!
-:::
+> Line at the top is the file name. Don’t include it!
 
 ## Create a dynamic route for docs pages
 
 Now, you can easily import all the docs from `contentlayer/generated` with validated and typed metadata. No need to dig into the file structure or handle invalid content. Clean!
 
-```tsx:/pages/docs/[...slug].tsx
-import React from "react";
-import { GetStaticPathsResult, GetStaticPropsContext } from "next";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import { allDocs, type Docs } from "contentlayer/generated";
+```tsx
+// /pages/docs/[...slug].tsx
+import React from "react"
+import { GetStaticPathsResult, GetStaticPropsContext } from "next"
+import { useMDXComponent } from "next-contentlayer/hooks"
+import { allDocs, type Docs } from "contentlayer/generated"
 
 type Props = {
-  doc: Docs;
-};
+  doc: Docs
+}
 
 export default function DocsPage({ doc }: Props) {
-  const MDXContent = useMDXComponent(doc.body.code);
+  const MDXContent = useMDXComponent(doc.body.code)
   return (
     <div>
       <h1>{doc.title}</h1>
       <MDXContent />
     </div>
-  );
+  )
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const slug = params?.slug;
+  const slug = params?.slug
   if (!Array.isArray(slug)) {
     return {
       notFound: true,
-    };
+    }
   }
-  const doc = allDocs.find((post) => post.slug === slug.join("/"));
+  const doc = allDocs.find((post) => post.slug === slug.join("/"))
 
   if (!doc) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
   const props: Props = {
     doc,
-  };
+  }
 
   return {
     props,
-  };
+  }
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const paths = allDocs.map((doc) => ({
     params: { slug: doc.slug.split("/") },
-  }));
+  }))
 
   return {
     paths,
     fallback: false,
-  };
+  }
 }
 ```
 
@@ -197,10 +195,11 @@ Before writing styles, we’d like to add global CSS files.
 - tokens.css — download [here](https://gist.github.com/sabigara/02685ac1a304b1746fe111f91d10ae93)
 - prism.css — download any [here](https://github.com/PrismJS/prism-themes/tree/master/themes).
 
-```tsx:/pages/_app.tsx
-import "../styles/normalize.css"; // Reset browser defaults
-import "../styles/tokens.css"; // Includes CSS variables
-import "../styles/prism.css"; // Syntax highlight
+```tsx
+// /pages/_app.tsx
+import "../styles/normalize.css" // Reset browser defaults
+import "../styles/tokens.css" // Includes CSS variables
+import "../styles/prism.css" // Syntax highlight
 ```
 
 If Prism is working correctly, code blocks (surrounded by triple backticks) look pretty like the below:
@@ -211,20 +210,22 @@ If Prism is working correctly, code blocks (surrounded by triple backticks) look
 
 We’d like to style the article by wrapping `<MDXContent />` with `<Markup />` component. This is not the only way but the simplest solution.
 
-```tsx:/components/Markup/index.tsx
-import React from "react";
-import styles from "./styles.module.scss";
+```tsx
+/// components/Markup/index.tsx
+import React from "react"
+import styles from "./styles.module.scss"
 
 type Props = {
-  children?: React.ReactNode;
-};
+  children?: React.ReactNode
+}
 
 export default function Markup({ children }: Props) {
-  return <div className={styles.container}>{children}</div>;
+  return <div className={styles.container}>{children}</div>
 }
 ```
 
-```scss:/components/Markup/styles.module.scss
+```scss
+// /components/Markup/styles.module.scss
 .container {
   :where(h2, h3, h4) {
     margin-top: 2.25rem;
@@ -329,7 +330,8 @@ export default function Markup({ children }: Props) {
 }
 ```
 
-```tsx:/pages/docs/[...slug].tsx
+```tsx
+// /pages/docs/[...slug].tsx
 export default function DocsPage({ doc }: Props) {
   return (
       {...}
@@ -347,18 +349,19 @@ export default function DocsPage({ doc }: Props) {
 
 Then, let’s create a layout for the sidebar navigation.
 
-```tsx:/components/DocsTemplate/index.tsx
-import { useMDXComponent } from "next-contentlayer/hooks";
-import { type Docs } from "contentlayer/generated";
-import Markup from "../Markup";
-import styles from "./styles.module.scss";
+```tsx
+// /components/DocsTemplate/index.tsx
+import { useMDXComponent } from "next-contentlayer/hooks"
+import { type Docs } from "contentlayer/generated"
+import Markup from "../Markup"
+import styles from "./styles.module.scss"
 
 type Props = {
-  doc: Docs;
-};
+  doc: Docs
+}
 
 export default function DocsTemplate({ doc: { title, body } }: Props) {
-  const MDXContent = useMDXComponent(body.code);
+  const MDXContent = useMDXComponent(body.code)
   return (
     <div className={styles.container}>
       <div />
@@ -371,11 +374,12 @@ export default function DocsTemplate({ doc: { title, body } }: Props) {
         </Markup>
       </article>
     </div>
-  );
+  )
 }
 ```
 
-```scss:/components/DocsTemplate/styles.module.scss
+```scss
+// /components/DocsTemplate/styles.module.scss
 .container {
   display: grid;
   grid-template-columns: 18rem 1fr;
@@ -398,9 +402,10 @@ export default function DocsTemplate({ doc: { title, body } }: Props) {
 }
 ```
 
-```tsx:/pages/docs/[...slug].tsx
+```tsx
+// /pages/docs/[...slug].tsx
 export default function DocsPage({ doc }: Props) {
-  return <DocsTemplate doc={doc} />;
+  return <DocsTemplate doc={doc} />
 }
 ```
 
@@ -412,26 +417,28 @@ We want to make navigation accept arbitrary levels of nested categories like `/c
 
 To support this, we define a recursive type (not an official name) as follows:
 
-```ts:/types.ts
+```ts
+// /types.ts
 export type NavItemCategory = {
-  id: string;
-  label: string;
-  open?: boolean;
-  items: NavItem[]; // Self reference
-};
+  id: string
+  label: string
+  open?: boolean
+  items: NavItem[] // Self reference
+}
 
 export type NavItemLink = {
-  id: string;
-  label: string;
-  href: string;
-};
+  id: string
+  label: string
+  href: string
+}
 
-export type NavItem = NavItemCategory | NavItemLink;
+export type NavItem = NavItemCategory | NavItemLink
 ```
 
 And `Sidebar` component handles the passed data in a recursive way:
 
-```tsx:/components/Sidebar/index.tsx
+```tsx
+// /components/Sidebar/index.tsx
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import Link from "next/link";
@@ -507,7 +514,8 @@ function Item({ item }: ItemProps) {
 }
 ```
 
-```scss:/components/Sidebar/styles.module.scss
+```scss
+// /components/Sidebar/styles.module.scss
 $rowGap: 0.25rem;
 
 .container {
@@ -580,7 +588,8 @@ $rowGap: 0.25rem;
 
 ## Test Sidebar with dummy data
 
-```tsx:/components/DocsTemplate/index.tsx
+```tsx
+// /components/DocsTemplate/index.tsx
 export default function DocsTemplate({ doc: { title, body } }: Props) {
   const MDXContent = useMDXComponent(body.code);
   return (
@@ -626,19 +635,23 @@ Seems like it’s working! The category is handled correctly.
 
 ### Add categorized docs
 
-```md:/content/docs/frameworks/react.mdx
----
+```md
+## /content/docs/frameworks/react.mdx
+
 id: "react"
 title: "React"
+
 ---
 
 Article about React.
 ```
 
-```md:/content/docs/frameworks/vue.mdx
----
+```md
+## /content/docs/frameworks/vue.mdx
+
 id: "vue"
 title: "Vue"
+
 ---
 
 Article about Vue.
@@ -648,19 +661,19 @@ Article about Vue.
 
 We'd like to specify the order and categories in `sidebar.js`. For the config file, we define types to remove `href` and make `label` optional (and default to the title) as follows:
 
-```ts:/types.ts
-type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+```ts
+// /types.ts
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
 
-export type DocsSidebarItemConfig =
-  | NavItemCategory
-  | Optional<Omit<NavItemLink, "href">, "label">;
+export type DocsSidebarItemConfig = NavItemCategory | Optional<Omit<NavItemLink, "href">, "label">
 
 export type DocsSidebarConfig = {
-  items: DocsSidebarItemConfig[];
-};
+  items: DocsSidebarItemConfig[]
+}
 ```
 
-```js:/sidebar.js
+```js
+// /sidebar.js
 /** @type {import('./types').DocsSidebarConfig} */
 const sidebar = {
   items: [
@@ -680,43 +693,43 @@ const sidebar = {
       ],
     },
   ],
-};
+}
 
-export default sidebar;
+export default sidebar
 ```
 
-```ts:/lib/docs.ts
-import { allDocs } from "contentlayer/generated";
-import sidebar from "../sidebar";
-import { NavItem, DocsSidebarItemConfig, NavItemLink } from "../types";
+```ts
+// /lib/docs.ts
+import { allDocs } from "contentlayer/generated"
+import sidebar from "../sidebar"
+import { NavItem, DocsSidebarItemConfig, NavItemLink } from "../types"
 
-export function getSidebarItems(
-  items: DocsSidebarItemConfig[] = sidebar.items
-) {
-  const result: NavItem[] = [];
+export function getSidebarItems(items: DocsSidebarItemConfig[] = sidebar.items) {
+  const result: NavItem[] = []
   for (const item of items) {
     if ("items" in item) {
       // Category
       result.push({
         ...item,
         items: getSidebarItems(item.items),
-      });
+      })
     } else {
       // Document link
-      const doc = allDocs.find((d) => d.id === item.id);
-      if (!doc) continue;
+      const doc = allDocs.find((d) => d.id === item.id)
+      if (!doc) continue
       result.push({
         ...item,
         href: "/docs/" + doc.slug,
         label: item.label ?? doc.title,
-      });
+      })
     }
   }
-  return result;
+  return result
 }
 ```
 
-```tsx:/components/DocsTemplate/index.tsx
+```tsx
+// /components/DocsTemplate/index.tsx
 type Props = {
   doc: Docs;
   sidebarItems: NavItem[];
@@ -740,25 +753,26 @@ export default function DocsTemplate({
 
 Call `getSidebarItems()` to get navigation items for the sidebar.
 
-```tsx:/pages/docs/[...slug].tsx
+```tsx
+// /pages/docs/[...slug].tsx
 type Props = {
-  doc: Docs;
-  sidebarItems: NavItem[];
-};
+  doc: Docs
+  sidebarItems: NavItem[]
+}
 
 export default function DocsPage({ doc, sidebarItems }: Props) {
-  return <DocsTemplate doc={doc} sidebarItems={sidebarItems} />;
+  return <DocsTemplate doc={doc} sidebarItems={sidebarItems} />
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   //  {...}
-  const doc = allDocs.find((post) => post.slug === slug.join("/"));
-  const sidebarItems = getSidebarItems();
+  const doc = allDocs.find((post) => post.slug === slug.join("/"))
+  const sidebarItems = getSidebarItems()
   //  {...}
   const props: Props = {
     doc,
     sidebarItems,
-  };
+  }
   //  {...}
 }
 ```
@@ -795,4 +809,4 @@ I built Saazy Template, a Next.js starter for marketing that includes:
 - Integrated forms
 - 16+ reusable components
 
-[Visit the live preview](https://camome.net/preview) or [get it now](https://rubiq.gumroad.com/l/saazy)
+[Visit the live preview](https://camome.net/saazy) or [get it now](https://rubiq.gumroad.com/l/saazy)
