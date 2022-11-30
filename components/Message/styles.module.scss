@@ -2,7 +2,7 @@ $infoColor: #3182ce;
 $warnColor: #e6a700;
 $dangerColor: #e53e3e;
 
-.Block {
+.container {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem;

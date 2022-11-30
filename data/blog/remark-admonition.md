@@ -115,7 +115,7 @@ export default function Message({ status = "info", children, className }: Props)
   const Icon = statusIconMap[status]
   const statusClass = styles[`--${status}`]
   return (
-    <aside className={clsx(styles.Block, statusClass, className)}>
+    <aside className={clsx(styles.container, statusClass, className)}>
       <div>
         <Icon className={clsx(styles.icon, statusClass)} />
       </div>
@@ -132,12 +132,15 @@ $infoColor: #3182ce;
 $warnColor: #e6a700;
 $dangerColor: #e53e3e;
 
-.Block {
+.container {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem;
   padding: 1rem;
-  @apply rounded-lg border border-l-4 border-gray-200 bg-white;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-left-width: 4px;
+  background: white;
 
   &.--info {
     border-left-color: $infoColor;

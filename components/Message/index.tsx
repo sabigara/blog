@@ -24,7 +24,7 @@ export default function Message({ status = "info", children, className }: Props)
   const Icon = statusIconMap[status]
   const statusClass = styles[`--${status}`]
   return (
-    <aside className={clsx(styles.Block, statusClass, className)}>
+    <aside className={clsx(styles.container, statusClass, className)}>
       <div>
         <Icon className={clsx(styles.icon, statusClass)} />
       </div>
