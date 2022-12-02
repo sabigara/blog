@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function PostLayout({ frontMatter, authorDetails, toc, children }: Props) {
-  const { slug, date, title, tags } = frontMatter
+  const { slug, date, title, tags, draft } = frontMatter
   const url = `${siteMetadata.siteUrl}/blog/${slug}`
 
   return (
@@ -30,7 +30,12 @@ export default function PostLayout({ frontMatter, authorDetails, toc, children }
         authorDetails={authorDetails}
         images={[siteMetadata.composeOgImageUrl(title)]}
       />
-      <article className="mx-auto max-w-3xl">
+      <article className="relative mx-auto max-w-3xl">
+        {draft && (
+          <div className="absolute top-4 z-50 inline-block rounded-full border border-gray-200 bg-white px-3 font-medium">
+            Draft
+          </div>
+        )}
         <div>
           <header className="pt-6">
             <div className="space-y-1 text-center">
