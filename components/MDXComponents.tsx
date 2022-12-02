@@ -8,6 +8,7 @@ import Pre from "./Pre"
 import { BlogNewsletterForm } from "./NewsletterForm"
 import LinkOrEmbed from "@/components/LinkOrEmbed"
 import Message from "@/components/Message"
+import BorderRadiusCalculator from "@/components/BorderRadiusCalculator"
 import clsx from "clsx"
 
 const Wrapper: React.ComponentType<{ layout: string }> = ({ layout, ...rest }) => {
@@ -23,6 +24,7 @@ export const MDXComponents: ComponentMap = {
   wrapper: Wrapper,
   BlogNewsletterForm,
   Message: ({ className, ...props }) => <Message {...props} className={clsx(className, "my-6")} />,
+  BorderRadiusCalculator,
 }
 
 interface Props {
