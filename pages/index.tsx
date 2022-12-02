@@ -31,7 +31,7 @@ export default function Home({
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-      <div className="mt-4 flex flex-col gap-10">
+      <div className="flex flex-col gap-10 pb-12 pt-4">
         <Section title="Recent posts">
           <PostList posts={posts} />
           {postTotalCount > MAX_POSTS && (
