@@ -59,7 +59,6 @@ export default function Home({
             All videos
           </Link>
         </Section>
-        <BorderRadiusCalculator />
       </div>
     </>
   )
