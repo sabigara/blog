@@ -17,7 +17,7 @@ const siteMetadataBase = {
   linkedin: "",
   locale: "en-US",
   analytics: {
-    googleAnalyticsId: "G-60SCDRDB1F",
+    cloudflareAnalyticsToken: "97727030f84245d7985ffb295d72de53",
   },
   newsletter: {
     provider: "",
