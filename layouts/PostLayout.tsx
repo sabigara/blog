@@ -4,7 +4,7 @@ import { BlogSEO } from "@/components/SEO"
 import Image from "@/components/Image"
 import Tag from "@/components/Tag"
 import siteMetadata from "@/data/siteMetadata"
-import { ReactNode } from "react"
+import React, { ReactNode } from "react"
 import { PostFrontMatter, Toc } from "types"
 import { AuthorFrontMatter } from "types"
 import SocialButtons from "@/components/SocialButtons"
@@ -88,22 +88,19 @@ export default function PostLayout({ frontMatter, authorDetails, toc, children }
               {toc && <TOCInline toc={toc} fromHeading={2} toHeading={4} />}
               <div className="prose max-w-none pt-8 pb-8">{children}</div>
             </div>
-            <SocialButtons url={url} text={title} className="mx-auto w-fit gap-3 pt-6" />
-            <footer>
-              <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:divide-y">
-                {tags && (
-                  <div className="py-4 xl:py-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Tags
-                    </h2>
-                    <div className="mt-2 flex flex-wrap">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
+            <footer className="flex flex-col gap-4 pt-8">
+              <FooterItem title="Share">
+                <SocialButtons url={url} text={title} className="gap-2" />
+              </FooterItem>
+              {tags.length > 0 && (
+                <FooterItem title="Tags">
+                  <div className="mt-2 flex flex-wrap">
+                    {tags.map((tag) => (
+                      <Tag key={tag} text={tag} />
+                    ))}
                   </div>
-                )}
-              </div>
+                </FooterItem>
+              )}
               <div className="pt-4 xl:pt-8">
                 <Link
                   href="/blog"
@@ -117,5 +114,19 @@ export default function PostLayout({ frontMatter, authorDetails, toc, children }
         </div>
       </article>
     </>
+  )
+}
+
+type FooterItemProps = {
+  title: string
+  children?: React.ReactNode
+}
+
+function FooterItem({ title, children }: FooterItemProps) {
+  return (
+    <div className="flex flex-col gap-1">
+      <h2 className="text-xs tracking-wide text-gray-500 dark:text-gray-400">{title}</h2>
+      <div>{children}</div>
+    </div>
   )
 }
