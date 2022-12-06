@@ -1,0 +1,131 @@
+---
+title: "How to embed live previews of React components in MDX docs"
+date: "2022-12-06"
+tags: ["react", "mdx"]
+draft: false
+---
+
+## Overview
+
+I'd like to share how to embed interactive previews for React component documentation page like [Chakra UI's docs site](https://chakra-ui.com/docs/components/button). _Interactive_ means that you can click the rendered button and the code is editable: if you change the inner text of the button, the preview reflects the change.
+
+By taking the advantage of the extensibility of MDX, we can (kind of) easily accomplish the functionality which looks hard to implement.
+
+Notation is like this:
+
+````mdx
+```tsx live
+;<>
+  <Button variant="solid">Solid</Button>
+  <Button variant="subtle">Solid</Button>
+  <Button variant="ghost">Solid</Button>
+</>
+```
+````
+
+And the rendered page is:
+
+https://www.youtube.com/watch?v=kXtB3jFdwGI
+
+We want a live preview (and a code editor) to be shown if there is a `live` argument, while a normal code block should be shown if no argument passed.
+
+:::warn
+In this article, I assume you already have a statically-generated site powered by a `unified` pipeline. Take a look at Gatsby or Next.js starters if not.
+:::
+
+## Add `remark-mdx-code-meta` plugin
+
+Let's get started from customizing `unified` pipeline to support the `live` argument after the triple backtick (code fence) and the name of language. Install [remark-mdx-code-meta](https://github.com/remcohaszing/remark-mdx-code-meta) to do so.
+
+https://github.com/remcohaszing/remark-mdx-code-meta
+
+```bash
+pnpm add remark-mdx-code-meta
+```
+
+```tsx
+/** @type {import('@mdx-js/mdx').CompileOptions} */
+const mdxOptions = {
+  remarkPlugins: [remarkMdxCodeMeta, ...otherPlugins],
+  rehypePlugins: [...otherPlugins],
+}
+```
+
+This plugin enables the support for ` ```language key=value` notation. The key-value pair is passed to the custom `Pre` component we'll make in the next section.
+
+## Custom `Pre` component
+
+MDX allows us to specify custom components dedicated to each HTML tag by passing an object like `{ image: Image, pre: Pre }`. A code fence is transformed into `<pre><code>Your code here</code></pre>` so we want to pass a custom component to add the live-preview feature.
+
+The following component examines the content of a `pre` tag to decide whether it's a code block because `pre` can be used for other purposes. The role for rendering a preview and highlighted code should be delegated to `CodeBlock` which is implemented next.
+
+```tsx:Pre.tsx
+import React from "react"
+// We'll create this later
+import CodeBlock from "@/components/MdxComponents/CodeBlock"
+
+type Props = {
+  live?: boolean
+  children?: React.ReactNode
+}
+
+export default function Pre({ live, children, ...props }: Props) {
+  if (React.isValidElement(children) && children.type === "code") {
+    return (
+      <div {...props}>
+        <CodeBlock live={live} {...children.props} />
+      </div>
+    )
+  }
+  return <pre {...props}>{children}</pre>
+}
+```
+
+```tsx:MdxComponents.tsx
+export const mdxComponents: MDXComponents = {
+  pre: Pre,
+} as const
+```
+
+## `CodeBlock` component
+
+We depend on [react-live](https://github.com/FormidableLabs/react-live) for preview and editor.
+
+https://github.com/FormidableLabs/react-live
+
+```tsx:CodeBlock.tsx
+import React from "react"
+import { LiveProvider, LiveError, LivePreview, LiveEditor } from "react-live"
+import { type Language } from "prism-react-renderer"
+import theme from "prism-react-renderer/themes/vsDark"
+import Button from "@/components/Button"
+
+export default function CodeBlock({ children, className, live }: Props) {
+  const language = className.replace(/language-/, "") as Language
+  const code = children.replace(/\n$/, "")
+  const codeBlock = <code>Render Non-interactive code here...</code>
+
+  if (live) {
+    return (
+      <LiveProvider code={code} scope={{ Button }}>
+        <LivePreview />
+        <LiveError />
+        <LiveEditor code={code} language={language} theme={theme} />
+      </LiveProvider>
+    )
+  }
+
+  return codeBlock
+}
+```
+
+There is nothing difficult here thanks to the simple API, but some things to consider:
+
+- The newline (`\n`) at the end must be trimmed otherwise a blank line is shown in the editor.
+- Every component you want to render as a preview must be passed to the `scope` prop.
+- For non-live `codeBlock`, you may want to render it by [`prism-react-renderer`](https://github.com/FormidableLabs/prism-react-renderer) which is working also under the `LiveEditor`. I'm not sure what is the best way to share the style and theme between them but do so anyhow.
+- `LivePreview` is not server-rendered so a layout shift occurs, though `LiveEditor` seems to support SSR. You should refer to [Docusaurus Live Codeblock theme](https://github.com/facebook/docusaurus/tree/main/packages/docusaurus-theme-live-codeblock) for more solid implementation including fallback on the server. Also, see the [issue about SSR](https://github.com/facebook/docusaurus/issues/5747)
+
+## Summary
+
+The amount of code is not much but it took me a while for finding the correct way to achieve this feature. I like the docs of [MUI](https://mui.com/joy-ui/react-button) and [Mantine](https://mantine.dev/core/button/) don't cause any layout shift but their implementation is more complex so I give up for now.
