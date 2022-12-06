@@ -66,6 +66,10 @@ module.exports = {
               backgroundColor: theme("colors.slate.900"),
               borderRadius: radius,
               padding: "1.25rem",
+              lineHeight: 1.5,
+              code: {
+                fontSize: "0.9em",
+              },
             },
             code: {
               color: theme("colors.slate.800"),
