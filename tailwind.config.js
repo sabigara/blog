@@ -94,7 +94,9 @@ module.exports = {
               paddingBottom: "2px",
               borderRadius: radius,
             },
-            hr: { borderColor: theme("colors.gray.200") },
+            hr: {
+              borderColor: theme("colors.slate.200"),
+            },
             li: { margin: "0.25rem 0" },
             "ol li::marker": {
               fontWeight: "600",
