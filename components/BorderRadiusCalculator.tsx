@@ -14,7 +14,7 @@ export default function BorderRadiusCalculator() {
       >
         <div className="h-full w-full bg-gray-300" style={{ borderRadius: innerRadius }} />
       </div>
-      <div className="my-4 font-semibold text-gray-700">
+      <div className="my-4 font-medium text-gray-700">
         {outerRadius}px - {padding}px = {innerRadius}px
       </div>
       <Slider title="Outer radius" value={outerRadius} onChange={setOuterRadius} max={100} />
