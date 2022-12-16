@@ -22,7 +22,7 @@ module.exports = {
         14: "3.5rem",
       },
       fontFamily: {
-        sans: ["InterVariable", ...defaultTheme.fontFamily.sans],
+        sans: defaultTheme.fontFamily.sans,
       },
       colors: {
         primary: colors.indigo,
@@ -37,22 +37,23 @@ module.exports = {
             a: {
               color: theme("colors.primary.600"),
               textDecoration: "none",
+              fontWeight: "400",
               "&:hover": {
                 textDecoration: `underline`,
               },
               code: { color: theme("colors.primary.600") },
             },
             h1: {
-              fontWeight: "700",
+              fontWeight: "600",
               letterSpacing: theme("letterSpacing.tight"),
               color: theme("colors.gray.900"),
             },
             h2: {
-              fontWeight: "700",
+              fontWeight: "600",
               letterSpacing: theme("letterSpacing.tight"),
               color: theme("colors.gray.900"),
               borderBottomWidth: "1px",
-              borderColor: theme("colors.slate.300"),
+              borderColor: theme("colors.gray.300"),
               paddingBottom: "0.3rem",
             },
             h3: {
@@ -63,7 +64,7 @@ module.exports = {
               color: theme("colors.gray.900"),
             },
             pre: {
-              backgroundColor: theme("colors.slate.900"),
+              backgroundColor: theme("colors.gray.900"),
               borderRadius: radius,
               padding: "1.25rem",
               lineHeight: 1.5,
@@ -72,13 +73,14 @@ module.exports = {
               },
             },
             code: {
-              color: theme("colors.slate.800"),
-              backgroundColor: theme("colors.slate.100"),
+              color: theme("colors.gray.800"),
+              backgroundColor: theme("colors.gray.100"),
               paddingLeft: "4px",
               paddingRight: "4px",
               paddingTop: "2px",
               paddingBottom: "2px",
               borderRadius: "0.25rem",
+              fontWeight: "400",
             },
             "code::before": {
               content: "none",
@@ -95,15 +97,15 @@ module.exports = {
               borderRadius: radius,
             },
             hr: {
-              borderColor: theme("colors.slate.200"),
+              borderColor: theme("colors.gray.200"),
             },
             li: { margin: "0.25rem 0" },
             "ol li::marker": {
-              fontWeight: "600",
-              color: theme("colors.gray.500"),
+              fontWeight: "400",
+              color: theme("colors.gray.800"),
             },
             "ul li::marker": {
-              backgroundColor: theme("colors.gray.500"),
+              color: theme("colors.gray.800"),
             },
             blockquote: {
               color: theme("colors.gray.600"),

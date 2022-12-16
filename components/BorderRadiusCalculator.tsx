@@ -12,7 +12,7 @@ export default function BorderRadiusCalculator() {
         className="mt-4 h-[200px] w-full bg-blue-500"
         style={{ borderRadius: outerRadius, padding }}
       >
-        <div className="h-full w-full bg-slate-300" style={{ borderRadius: innerRadius }} />
+        <div className="h-full w-full bg-gray-300" style={{ borderRadius: innerRadius }} />
       </div>
       <div className="my-4 font-semibold text-gray-700">
         {outerRadius}px - {padding}px = {innerRadius}px

@@ -47,7 +47,7 @@ function ShareButton({ Icon, href }: ButtonProps) {
       className="rounded-ful group grid h-10 w-10 place-content-center"
       data-no-external-icon
     >
-      <Icon className="h-6 w-6 text-slate-400 transition-colors duration-300 group-hover:text-slate-800" />
+      <Icon className="h-6 w-6 text-gray-400 transition-colors duration-300 group-hover:text-gray-800" />
     </a>
   )
 }

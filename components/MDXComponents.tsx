@@ -22,8 +22,8 @@ export const MDXComponents: ComponentMap = {
   a: LinkOrEmbed,
   pre: Pre,
   wrapper: Wrapper,
+  Message,
   BlogNewsletterForm,
-  Message: ({ className, ...props }) => <Message {...props} className={clsx(className, "my-6")} />,
   BorderRadiusCalculator,
 }
 

@@ -1,0 +1,207 @@
+---
+title: "5 UI components you can build without JavaScript"
+date: "2022-12-16"
+tags: ["css", "html", "accessibility"]
+draft: false
+---
+
+In this post, I'd like to share how to build 5 commonly-used UI components without JavaScript which means only with HTML + CSS.
+
+<Message status="warn">
+  To implement full accessibility, some of the components in this post still require a little amount
+  of JavaScript.
+</Message>
+
+## Why without JavaScript?
+
+### JavaScript is heavy
+
+Loading JavaScript into your website requires additional costs such as more network payload, longer parse/compile time, etc. You can learn more at the following web.dev post:
+
+https://web.dev/optimizing-content-efficiency-javascript-startup-optimization
+
+> JavaScript is more expensive for the browser to process than the equivalently sized image or Web Font — Tom Dale
+
+This post is not mentioning CSS, but non-JS solutions should be lighter as long as it's not too hacky.
+
+### Suitable HTML elements are accessible by default
+
+If you are familiar with JavaScript, making an accordion is not so hard. You can attach a click event handler to divs, which contains titles, to show/hide the dedicated content, and it looks like everything is done.
+
+**However**, such a naive implementation may have several disadvantages in accessibility:
+
+- Users cannot focus on and toggle the `div`s by keyboard (as they are not focusable).
+- The in-browser search may not find the words in collapsed panels, or even if found, the panel is not revealed.
+
+These disabilities will not be introduced by browsers' native `details` and `summary` elements which accomplish collapsible UI like accordion. Keep in mind that **when you build a custom UI component with JavaScript, you are responsible for keeping it accessible**.
+
+<Message status="info">
+  Although JavaScript can be a cause of inaccessible components, it's also used to improve
+  accessibility by correctly adding ARIA roles, states and properties. JavaScript is rather
+  fundamental when you build a modern complicated web app. I recommend relying on component
+  libraries for such cases.
+</Message>
+
+## Toggle switch
+
+<iframe
+  src="https://codesandbox.io/embed/billowing-glade-zvrjb1?fontsize=14&hidenavigation=1&theme=dark&view=split"
+  style={{ width: "100%", height: "500px", border: 0, borderRadius: 4, overflow: "hidden" }}
+  title="billowing-glade-zvrjb1"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+Toggle switch can be built with `input[type="checkbox"]` in the following way:
+
+1. [Visually hide](https://getbootstrap.com/docs/5.0/helpers/visually-hidden/) the input element but keep it focusable.
+2. Overlay the shape by `label` so that it changes the `checked` attribute of the `input`.
+3. Draw the thumb as `label::after` pseudo-element (you may use whatever else).
+4. Use `input:checked` pseudo-class for styling for "on" state.
+   1. Change the `left` of the thumb.
+   2. Change the `background-color`
+   3. Show and hide the label texts.
+5. Use `input:focus-visible ~ label` selector to show the outline, as the `input` itself is not visible.
+
+<Message status="info">
+  In the future when all the major browsers support `:has()` (or you don't care about Firefox in the
+  end of 2022), you can wrap the elements by `label` and remove the `.background`. You'll no longer
+  have to place the `label` next to the `input` to subscribe to its `:checked` state. Check the
+  [solution with has()](https://codesandbox.io/s/pure-css-toggle-switch-with-has-9x7hvv).
+</Message>
+
+## Tooltip
+
+<iframe
+  src="https://codesandbox.io/embed/pure-css-tooltip-2s42mb?fontsize=14&hidenavigation=1&theme=dark&view=split"
+  style={{ width: "100%", height: "500px", border: 0, borderRadius: 4, overflow: "hidden" }}
+  title="Pure CSS Tooltip"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+Implementation of tooltip is fairly straightforward:
+
+1. Wrap the target element by `.tooltip-container` that has `position: relative` style to enable absolute positioning of `.tooltip`.
+2. When `.tooltip-container` has `:hover` or `:focus-within` pseudo-class, make `.tooltip` visible by `opacity` and `visibility` .
+
+<Message status="info">
+  I'm not sure I should use `display: none`, `visibility: hidden` or nothing. According to the [doc
+  of visibility on
+  MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/visibility#accessibility_concerns),
+  `visibility: hidden` removes the element from the accessibility tree. [A demo made by a committer
+  of ARIA Authoring Practices Guide](https://zoebijl.github.io/apg-tooltip/) is using `display`.
+</Message>
+
+<Message status="warn" title="TODO">
+  My tooltip cannot be dismissed by the `ESC` key which is required according to [ARIA Authoring
+  Practices Guide](https://www.w3.org/WAI/ARIA/apg/). Add JavaScript to add an event listener for
+  that.
+</Message>
+
+## Accordion
+
+<iframe
+  src="https://codesandbox.io/embed/pure-css-accordion-ugomb7?fontsize=14&hidenavigation=1&theme=dark&view=split"
+  style={{ width: "100%", height: "500px", border: 0, borderRadius: 4, overflow: "hidden" }}
+  title="Pure CSS Accordion"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+As everything is done by the browser, you almost don't have to care about the behavior but styles.
+
+To remove the default triangle:
+
+```css
+summary {
+  display: block; /* Other than list-item */
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+```
+
+To change styles when expanded:
+
+```css
+details[open] {
+  /* Any styles... */
+}
+```
+
+You may also want to add `summary { user-select: none }` to prevent the selection of content that somehow happens even though you just toggled the button.
+
+<Message status="info">
+  To add an animation to smoothly reveal the content, you may need a little JavaScript. CSS-only
+  animation with `@keyframes` is not triggered every time (on Chrome) and cannot be applied when
+  closed.
+</Message>
+
+## Tabs
+
+<iframe
+  src="https://codesandbox.io/embed/pure-css-tabs-pt8tbf?fontsize=14&hidenavigation=1&theme=dark&view=split"
+  style={{ width: "100%", height: "500px", border: 0, borderRadius: 4, overflow: "hidden" }}
+  title="Pure CSS Tabs"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+This is a bit too complex to build with HTML + CSS so you may prefer relying on JavaScript, but let's give it a try!
+
+We use `input[type="radio"]` for the tab buttons and they are [visually-hidden](https://getbootstrap.com/docs/5.0/helpers/visually-hidden/) the same as the toggle switch. Visual representations of tab buttons are `label`s that are tied with the inputs by `for="<tab-*>"` attributes.
+
+Here is the core of our Tabs component:
+
+```scss
+// Supports up to 4 tabs.
+@for $i from 1 through 4 {
+  [data-tab="tab-#{$i}"] {
+    // Indicate which tab button is active
+    &:checked ~ nav [data-tab-label="tab-#{$i}"] {
+      border-color: #3b82f6;
+    }
+
+    // Activate tab panel
+    &:checked ~ nav ~ [data-tab-panel="tab-#{$i}"] {
+      display: block;
+      width: auto;
+    }
+
+    // Show outline of currently focused tab button
+    &:focus-visible ~ nav [data-tab-label="tab-#{$i}"] {
+      outline: 2px auto #60a5fa;
+    }
+  }
+}
+```
+
+Thanks to the `@for` statement of SASS, the amount of code is reduced (though the compiled output is no different). However, you still need to specify the max number of tabs you want to support.
+
+<Message status="warn" title="TODO">
+Although our implementation follows most of the specs on [APG](https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/), it can be improved by adding the following features by JavaScript:
+
+- Restrict navigation with up/down arrow keys (when `aria-orientation="horizontal"` )
+- Add `aria-selected="true"` and `false` to `tab`
+
+</Message>
+
+## Dialog
+
+<iframe
+  src="https://codesandbox.io/embed/pure-css-dialog-9ko9lc?fontsize=14&hidenavigation=1&theme=dark&view=split"
+  style={{ width: "100%", height: "500px", border: 0, borderRadius: 4, overflow: "hidden" }}
+  title="Pure CSS Dialog"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+As Dialog is built into browsers as `<dialog >` element, you can just use it!
+
+However, **there's currently no way to open a dialog without JavaScript.** (See [related issue](https://github.com/whatwg/html/issues/3567)). So, call `HTMLDialogElement.prototype.showModal()` to open and `close()` to close.
+
+## That's all
+
+Web standard is getting better day by day so we'll even do more with new APIs like the proposed [`popover` attribute](https://github.com/whatwg/html/pull/8221) by [Open UI](https://open-ui.org/) which realizes popover pattern without JavaScript. Keep your eyes on these evolutions and don't stick to JS solutions once released, as they'll be built into the browser so more performant and easier to use!

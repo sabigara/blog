@@ -18,6 +18,10 @@
   @apply my-5;
 }
 
+body {
+  -webkit-font-smoothing: subpixel-antialiased !important;
+}
+
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {

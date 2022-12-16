@@ -30,7 +30,7 @@ export default function PostLayout({ frontMatter, authorDetails, toc, children }
         authorDetails={authorDetails}
         images={[siteMetadata.composeOgImageUrl(title)]}
       />
-      <article className="relative mx-auto max-w-3xl">
+      <article className="relative mx-auto max-w-[730px]">
         {draft && (
           <div className="absolute top-4 z-50 inline-block rounded-full border border-gray-200 bg-white px-3 font-medium">
             Draft

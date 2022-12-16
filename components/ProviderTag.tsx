@@ -13,7 +13,7 @@ const ProviderTag = ({ href, className }: Props) => {
   return (
     <div
       className={clsx([
-        "flex items-center gap-2 text-xs font-semibold text-slate-800 transition-colors ",
+        "flex items-center gap-2 text-xs font-semibold text-gray-800 transition-colors ",
         className,
       ])}
     >

@@ -1,4 +1,4 @@
-import { HiInformationCircle, HiExclamationTriangle } from "react-icons/hi2"
+import { HiOutlineInformationCircle, HiOutlineExclamationTriangle } from "react-icons/hi2"
 import clsx from "clsx"
 import React from "react"
 
@@ -15,22 +15,19 @@ type Props = {
 }
 
 const statusIconMap: { [S in Status]: SvgComponent } = {
-  info: HiInformationCircle,
-  danger: HiExclamationTriangle,
-  warn: HiExclamationTriangle,
+  info: HiOutlineInformationCircle,
+  danger: HiOutlineExclamationTriangle,
+  warn: HiOutlineExclamationTriangle,
 }
 
-export default function Message({ status = "info", children, className }: Props) {
+export default function Message({ status = "info", title, children, className }: Props) {
   const Icon = statusIconMap[status]
   const statusClass = styles[`--${status}`]
   return (
     <aside className={clsx(styles.container, statusClass, className)}>
-      <div>
-        <Icon className={clsx(styles.icon, statusClass)} />
-      </div>
-      <div className={styles.text}>
-        {children && <div className={styles.message}>{children}</div>}
-      </div>
+      <span className={styles.icon}>{<Icon />}</span>
+      {title && <div className={clsx(styles.title)}>{title}</div>}
+      {children && <div className={styles.message}>{children}</div>}
     </aside>
   )
 }

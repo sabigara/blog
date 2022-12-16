@@ -37,7 +37,7 @@ const LayoutWrapper = ({ children }: Props) => {
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="rounded-md px-2 py-2 font-medium text-gray-900 transition-colors hover:bg-slate-100 hover:no-underline dark:text-gray-100 dark:hover:bg-gray-800 md:px-3"
+                  className="rounded-md px-2 py-2 font-medium text-gray-900 transition-colors hover:bg-gray-100 hover:no-underline dark:text-gray-100 dark:hover:bg-gray-800 md:px-3"
                 >
                   {link.title}
                 </Link>
