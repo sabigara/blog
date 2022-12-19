@@ -80,7 +80,6 @@ module.exports = {
               paddingTop: "2px",
               paddingBottom: "2px",
               borderRadius: "0.25rem",
-              fontWeight: "400",
             },
             "code::before": {
               content: "none",
@@ -116,6 +115,7 @@ module.exports = {
             },
             img: {
               borderRadius: radius,
+              margin: "0 auto",
             },
             video: {
               borderRadius: radius,
