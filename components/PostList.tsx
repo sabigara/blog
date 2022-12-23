@@ -28,7 +28,7 @@ export default function PostList({ posts }: Props) {
               </div>
               <div className="space-y-3 xl:col-span-5">
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-lg font-medium leading-8 tracking-tight">
+                  <h3 className="text-lg font-semibold leading-8 tracking-tight">
                     <Link href={url} className="align-middle text-gray-900 dark:text-gray-100">
                       {title}
                     </Link>
