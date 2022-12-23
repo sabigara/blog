@@ -6,5 +6,7 @@
     "no-inline-html": false,
   },
   "editor.formatOnSaveMode": "file",
-  "editor.wordWrap": "wordWrapColumn",
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
 }
