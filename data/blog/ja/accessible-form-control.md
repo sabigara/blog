@@ -7,7 +7,7 @@ draft: false
 
 Webサイト・アプリの開発においてフォームは重要な部分を占めます。ユーザーが実際に触れる部分なのでUXやアクセシビリティの面でもクリティカルな要素であると言えます。使いづらいフォームはすべての人にとって鬱陶しいだけでなく、適切にマークアップされていなければ[支援技術](https://www.atia.org/home/at-resources/what-is-at/)の利用を阻む可能性もあります。
 
-しかしユーザーフレンドリーなフォームの実装は複雑であり、JavaScriptによるバリデーションなども含めると、開発者への負担は大きくなりがちです。この記事では、フォーム要素の適切なマークアップ処理を共通化するReactコンポーネント、 `FormControl` の実装を紹介したいと思います。
+しかしユーザーフレンドリーなフォームの実装は複雑であり、JavaScriptによるバリデーションなども含めると、開発者への負担は大きくなりがちです。この記事では、フォームフィールドの適切なマークアップ処理を共通化するReactコンポーネント、 `FormControl` の実装を紹介したいと思います。
 
 :::info
 この記事の実装の大部分で[MUI - FormControl](https://github.com/mui/material-ui/blob/648e121e65d03beac54e6ccae3ea34fa3159e206/packages/mui-joy/src/FormControl/FormControl.tsx#L63)を参考にしています。
@@ -25,7 +25,7 @@ return (
 )
 ```
 
-HTMLは以下のように出力されます。`id` はコンポーネント内で自動で振られ、 `label` 要素に適切に紐付けられます 。また、 `aria-describedby` などのroleも付与されています。
+HTMLは以下のように出力されます。`id` はコンポーネント内で自動で振られ、 `label` 要素に適切に紐付けられます 。また、 `aria-describedby` などの属性も付与されています。
 
 ```html
 <div class="FormControl">
