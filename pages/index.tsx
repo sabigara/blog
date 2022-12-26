@@ -7,6 +7,7 @@ import PostList from "@/components/PostList"
 import React from "react"
 import { getYoutubeVideos } from "@/lib/youtube"
 import VideoCard from "@/components/VideoCard"
+import CamomeBanner from "@/components/CamomeBanner"
 
 const MAX_POSTS = 5 as const
 const MAX_VIDEOS = 3 as const
@@ -58,6 +59,7 @@ export default function Home({
             All videos
           </Link>
         </Section>
+        <CamomeBanner />
       </div>
     </>
   )

@@ -4,7 +4,7 @@ import CamomePng from "@/public/static/images/camome.png"
 
 export default function CamomeBanner() {
   return (
-    <aside className="grid grid-cols-1 gap-4 rounded-lg border border-gray-100 p-2 shadow-md sm:grid-cols-[30%,_1fr]">
+    <aside className="mx-auto grid max-w-2xl grid-cols-1 gap-4 rounded-lg border border-gray-100 p-2 shadow-md sm:grid-cols-[30%,_1fr]">
       <Image
         src={CamomePng}
         alt="Logo of Camome UI above the grid of components"
@@ -15,7 +15,7 @@ export default function CamomeBanner() {
         <p className="text-gray-400">Versatile UI templates and components made by me.</p>
         <Link
           href="https://camome.net"
-          className="mt-3 inline-flex h-8 w-fit items-center rounded-md bg-blue-500 px-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 hover:no-underline"
+          className="mt-3 inline-flex h-8 w-fit items-center rounded-md bg-blue-50  px-2 text-sm font-semibold text-blue-600 transition-colors hover:bg-blue-100 hover:no-underline"
         >
           See UI kits
         </Link>

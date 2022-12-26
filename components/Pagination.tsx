@@ -10,7 +10,7 @@ export default function Pagination({ totalPages, currentPage }: Props) {
   const nextPage = currentPage + 1 <= totalPages
 
   return (
-    <div className="relative space-y-2 pt-6 pb-8 md:space-y-5">
+    <div className="relative space-y-2 md:space-y-5">
       <nav className="flex items-center justify-between">
         {!prevPage && (
           <button className="cursor-auto text-2xl disabled:opacity-30" disabled={!prevPage}>
@@ -22,7 +22,7 @@ export default function Pagination({ totalPages, currentPage }: Props) {
             <button className="text-2xl">&larr;</button>
           </Link>
         )}
-        <span className="absolute left-1/2 -translate-x-1/2 font-medium text-gray-500">
+        <span className="absolute left-1/2 -translate-x-1/2 text-gray-500">
           Page {currentPage} of {totalPages}
         </span>
         {!nextPage && (
