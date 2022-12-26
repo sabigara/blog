@@ -10,15 +10,25 @@ import { AuthorFrontMatter } from "types"
 import SocialButtons from "@/components/SocialButtons"
 import TOCInline from "@/components/TOCInline"
 import formatDate from "@/lib/utils/formatDate"
+import { Blog } from "contentlayer/generated"
+import { ExtractContentMeta } from "@/lib/contentlayer"
+import { slugToUrl } from "@/lib/slug"
 
 interface Props {
   frontMatter: PostFrontMatter
   authorDetails: AuthorFrontMatter[]
   toc?: Toc
+  relatedPosts: ExtractContentMeta<Blog>[]
   children: ReactNode
 }
 
-export default function PostLayout({ frontMatter, authorDetails, toc, children }: Props) {
+export default function PostLayout({
+  frontMatter,
+  authorDetails,
+  toc,
+  relatedPosts,
+  children,
+}: Props) {
   const { slug, date, title, tags, draft } = frontMatter
   const url = `${siteMetadata.siteUrl}/blog/${slug}`
 
@@ -94,6 +104,19 @@ export default function PostLayout({ frontMatter, authorDetails, toc, children }
               <div className="prose max-w-none pt-8 pb-8">{children}</div>
             </div>
             <footer className="flex flex-col gap-4 pt-8">
+              {relatedPosts.length > 0 && (
+                <FooterItem title="Read next">
+                  <ul className="list-disc space-y-1 pl-4">
+                    {relatedPosts.map((post) => (
+                      <li key={post.slug}>
+                        <Link href={slugToUrl(post.slug)} className="">
+                          {post.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </FooterItem>
+              )}
               <FooterItem title="Share">
                 <SocialButtons url={url} text={title} className="gap-2" />
               </FooterItem>
@@ -130,7 +153,7 @@ type FooterItemProps = {
 function FooterItem({ title, children }: FooterItemProps) {
   return (
     <div className="flex flex-col gap-1">
-      <h2 className="text-xs tracking-wide text-gray-500 dark:text-gray-400">{title}</h2>
+      <h2 className="text-sm tracking-wide">{title}</h2>
       <div>{children}</div>
     </div>
   )

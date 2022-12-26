@@ -12,8 +12,7 @@ export default function BlogPage({
   post,
   toc,
   authorDetails,
-  prev,
-  next,
+  relatedPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -24,8 +23,7 @@ export default function BlogPage({
           mdxSource={post.body.code}
           frontMatter={post}
           authorDetails={authorDetails}
-          prev={prev}
-          next={next}
+          relatedPosts={relatedPosts}
         />
       ) : (
         <div className="mt-24 text-center">
@@ -44,10 +42,15 @@ export default function BlogPage({
 export const getStaticProps = async ({ params }) => {
   const slug = (params.slug as string[]).join("/")
   const posts = getSortedBlogPosts()
-  const postIndex = posts.findIndex((post) => post.slug === slug)
-  const post = posts[postIndex]
-  const prev = posts[postIndex + 1] || null
-  const next = posts[postIndex - 1] || null
+  const post = posts.find((post) => post.slug === slug)
+  const relatedPosts = posts
+    .filter(
+      (p) =>
+        p.tags.some((tag) => post.tags.includes(tag)) &&
+        p.language === post.language &&
+        p._id !== post._id
+    )
+    .slice(0, 5)
   const toc = await getToc(post.body.raw)
 
   // rss
@@ -61,8 +64,7 @@ export const getStaticProps = async ({ params }) => {
       post,
       toc,
       authorDetails: allAuthors,
-      prev,
-      next,
+      relatedPosts,
     },
   }
 }

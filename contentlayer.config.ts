@@ -1,4 +1,4 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files"
+import { defineDocumentType, makeSource, RawDocumentData } from "contentlayer/source-files"
 import { mdxOptions } from "./lib/mdx"
 
 export const Author = defineDocumentType(() => ({
@@ -31,6 +31,10 @@ export const Author = defineDocumentType(() => ({
     },
   },
 }))
+
+function resolveSlug(raw: RawDocumentData) {
+  return raw.flattenedPath.replace("blog/", "")
+}
 
 export const Blog = defineDocumentType(() => ({
   name: "Blog",
@@ -78,14 +82,16 @@ export const Blog = defineDocumentType(() => ({
     canonicalUrl: {
       type: "string",
     },
-    slug: {
-      type: "string",
-    },
   },
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.flattenedPath.replace("blog/", ""),
+      resolve: (doc) => resolveSlug(doc._raw),
+    },
+    language: {
+      type: "enum",
+      options: ["en", "ja"],
+      resolve: (doc) => resolveSlug(doc._raw).split("/")[0],
     },
   },
 }))

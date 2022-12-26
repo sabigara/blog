@@ -7,7 +7,7 @@ draft: false
 
 Forms are an important part of website and app development. They are critical elements in terms of UX and accessibility because they are the parts that users actually interact with. Poorly designed forms are not only annoying for everyone, but if they are not properly marked up, they may also hinder the use of [assistive technologies](https://www.atia.org/home/at-resources/what-is-at/).
 
-However, the implementation of a user-friendly form is complex, and if it includes validation by JavaScript, it can be burdensome for developers. In this article, I would like to introduce the implementation of a React component called `FormControl` that help us appropriately markup the form fields.
+However, the implementation of a user-friendly form is complex, and if it includes validation by JavaScript, it can be burdensome for developers. In this article, I would like to introduce the implementation of a React component called `FormControl` that helps us appropriately markup the form fields.
 
 :::info
 The implementation in this article is largely based on [MUI - FormControl](https://github.com/mui/material-ui/blob/648e121e65d03beac54e6ccae3ea34fa3159e206/packages/mui-joy/src/FormControl/FormControl.tsx#L63).

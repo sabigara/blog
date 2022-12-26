@@ -3,6 +3,7 @@ title: "Reactでフォームのアクセシビリティを担保するFormContro
 date: "2022-12-23"
 tags: ["react", "accessibility"]
 draft: false
+language: "ja"
 ---
 
 Webサイト・アプリの開発においてフォームは重要な部分を占めます。ユーザーが実際に触れる部分なのでUXやアクセシビリティの面でもクリティカルな要素であると言えます。使いづらいフォームはすべての人にとって鬱陶しいだけでなく、適切にマークアップされていなければ[支援技術](https://www.atia.org/home/at-resources/what-is-at/)の利用を阻む可能性もあります。
