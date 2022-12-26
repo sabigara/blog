@@ -13,6 +13,7 @@ import formatDate from "@/lib/utils/formatDate"
 import { Blog } from "contentlayer/generated"
 import { ExtractContentMeta } from "@/lib/contentlayer"
 import { slugToUrl } from "@/lib/slug"
+import CamomeBanner from "@/components/CamomeBanner"
 
 interface Props {
   frontMatter: PostFrontMatter
@@ -113,7 +114,7 @@ export default function PostLayout({
               {toc && <TOCInline toc={toc} fromHeading={2} toHeading={4} />}
               <div className="prose max-w-none pt-8 pb-8">{children}</div>
             </div>
-            <footer className="flex flex-col gap-4 pt-8">
+            <footer className="flex flex-col gap-6 pt-6">
               <FooterItem title="Share">
                 <SocialButtons url={url} text={title} className="gap-2" />
               </FooterItem>
@@ -130,6 +131,7 @@ export default function PostLayout({
                   </ul>
                 </FooterItem>
               )}
+              <CamomeBanner />
               <div className="pt-4 xl:pt-8">
                 <Link
                   href="/blog"
