@@ -6,7 +6,7 @@ draft: false
 layout: PostLayout
 ---
 
-https://rubiq.vercel.app/blog/twitter-api-has-been-suspended
+https://rubiq.vercel.app/blog/ja/twitter-api-has-been-suspended
 
 この前こんな記事を書いたが、少し前に確認したら復旧していた。
 

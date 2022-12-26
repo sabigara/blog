@@ -111,7 +111,7 @@ export default function PostLayout({
           </header>
           <div className="relative pb-8 dark:divide-gray-700">
             <div className="border-y pb-6 pt-8">
-              {toc && <TOCInline toc={toc} fromHeading={2} toHeading={4} />}
+              {toc.length > 0 && <TOCInline toc={toc} fromHeading={2} toHeading={4} />}
               <div className="prose max-w-none pt-8 pb-8">{children}</div>
             </div>
             <footer className="flex flex-col gap-6 pt-6">

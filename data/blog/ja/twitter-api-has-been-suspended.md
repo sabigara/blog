@@ -6,6 +6,8 @@ draft: false
 layout: PostLayout
 ---
 
+## 経緯
+
 ある日、Twitter Developer Platformからこんなメールが届いた。
 
 <blockquote>
