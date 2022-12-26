@@ -10,6 +10,10 @@ layout: PostLayout
 
 ただし、hackyというか無理矢理感があったり、アクセシビリティを担保するのが難しかったりするので、JavaScriptを使えるなら使ったほうがいい。このあたりの問題点は後述する。
 
+:::info
+[5 UI components you can build without JavaScript](/blog/en/pure-css-components)（英語）も参照してほしい。
+:::
+
 ## CodeSandbox
 
 <iframe src="https://codesandbox.io/embed/pure-css-drawer-96bqxy?autoresize=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FHeader.tsx&theme=dark"

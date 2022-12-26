@@ -44,10 +44,10 @@ function ShareButton({ Icon, href }: ButtonProps) {
       href={href}
       rel="noopener noreferrer"
       target="_blank"
-      className="rounded-ful group grid h-10 w-10 place-content-center"
+      className="rounded-ful group grid h-8 w-8 place-content-center"
       data-no-external-icon
     >
-      <Icon className="h-6 w-6 text-gray-400 transition-colors duration-300 group-hover:text-gray-800" />
+      <Icon className="h-5 w-5 text-gray-400 transition-colors duration-300 group-hover:text-gray-800" />
     </a>
   )
 }

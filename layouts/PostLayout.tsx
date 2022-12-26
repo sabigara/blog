@@ -61,9 +61,7 @@ export default function PostLayout({
                 <PageTitle>{title}</PageTitle>
               </div>
             </div>
-          </header>
-          <div className="relative pb-8 dark:divide-gray-700">
-            <dl className="sticky pt-6 pb-10">
+            <dl className="flex flex-col gap-y-4 pt-6 pb-10">
               <dt className="sr-only">Authors</dt>
               <dd>
                 <ul className="flex justify-center space-x-8 sm:space-x-12">
@@ -98,12 +96,27 @@ export default function PostLayout({
                   ))}
                 </ul>
               </dd>
+              <dt className="sr-only">Tags</dt>
+              <dd>
+                {tags.length > 0 && (
+                  <div className="mt-2 flex flex-wrap justify-center">
+                    {tags.map((tag) => (
+                      <Tag key={tag} text={tag} />
+                    ))}
+                  </div>
+                )}
+              </dd>
             </dl>
+          </header>
+          <div className="relative pb-8 dark:divide-gray-700">
             <div className="border-y pb-6 pt-8">
               {toc && <TOCInline toc={toc} fromHeading={2} toHeading={4} />}
               <div className="prose max-w-none pt-8 pb-8">{children}</div>
             </div>
             <footer className="flex flex-col gap-4 pt-8">
+              <FooterItem title="Share">
+                <SocialButtons url={url} text={title} className="gap-2" />
+              </FooterItem>
               {relatedPosts.length > 0 && (
                 <FooterItem title="Read next">
                   <ul className="list-disc space-y-1 pl-4">
@@ -115,18 +128,6 @@ export default function PostLayout({
                       </li>
                     ))}
                   </ul>
-                </FooterItem>
-              )}
-              <FooterItem title="Share">
-                <SocialButtons url={url} text={title} className="gap-2" />
-              </FooterItem>
-              {tags.length > 0 && (
-                <FooterItem title="Tags">
-                  <div className="mt-2 flex flex-wrap">
-                    {tags.map((tag) => (
-                      <Tag key={tag} text={tag} />
-                    ))}
-                  </div>
                 </FooterItem>
               )}
               <div className="pt-4 xl:pt-8">
