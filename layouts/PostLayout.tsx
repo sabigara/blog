@@ -113,6 +113,7 @@ export default function PostLayout({
             <div className="border-y pb-6 pt-8">
               {toc.length > 0 && <TOCInline toc={toc} fromHeading={2} toHeading={4} />}
               <div className="prose max-w-none pt-8 pb-8">{children}</div>
+              <CamomeBanner />
             </div>
             <footer className="flex flex-col gap-6 pt-6">
               <FooterItem title="Share">
@@ -131,7 +132,6 @@ export default function PostLayout({
                   </ul>
                 </FooterItem>
               )}
-              <CamomeBanner />
               <div className="pt-4 xl:pt-8">
                 <Link
                   href="/blog"
