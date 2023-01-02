@@ -43,14 +43,27 @@ export const getStaticProps = async ({ params }) => {
   const slug = (params.slug as string[]).join("/")
   const posts = getSortedBlogPosts()
   const post = posts.find((post) => post.slug === slug)
-  const relatedPosts = posts
+  let relatedPosts = posts
     .filter(
       (p) =>
-        p.tags.some((tag) => post.tags.includes(tag)) &&
         p.language === post.language &&
-        p._id !== post._id
+        p._id !== post._id &&
+        p.tags.some((tag) => post.tags.includes(tag))
     )
     .slice(0, 5)
+  if (relatedPosts.length < 5) {
+    relatedPosts = [
+      ...relatedPosts,
+      ...posts
+        .filter(
+          (p) =>
+            p.language === post.language &&
+            p._id !== post._id &&
+            !relatedPosts.map((rp) => rp._id).includes(p._id)
+        )
+        .slice(0, 5 - relatedPosts.length),
+    ]
+  }
   const toc = await getToc(post.body.raw)
 
   // rss
