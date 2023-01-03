@@ -12,8 +12,9 @@ import TOCInline from "@/components/TOCInline"
 import formatDate from "@/lib/utils/formatDate"
 import { Blog } from "contentlayer/generated"
 import { ExtractContentMeta } from "@/lib/contentlayer"
-import { slugToUrl } from "@/lib/slug"
 import CamomeBanner from "@/components/CamomeBanner"
+import { blogPostUrl } from "@/lib/blog"
+import { useTranslation } from "next-i18next"
 
 interface Props {
   frontMatter: PostFrontMatter
@@ -30,8 +31,9 @@ export default function PostLayout({
   relatedPosts,
   children,
 }: Props) {
-  const { slug, date, title, tags, draft } = frontMatter
-  const url = `${siteMetadata.siteUrl}/blog/${slug}`
+  const { date, title, tags, draft } = frontMatter
+  const url = `${siteMetadata.siteUrl}/${blogPostUrl(frontMatter)}`
+  const { t } = useTranslation("blog")
 
   return (
     <>
@@ -124,7 +126,7 @@ export default function PostLayout({
                   <ul className="list-disc space-y-1 pl-4">
                     {relatedPosts.map((post) => (
                       <li key={post.slug}>
-                        <Link href={slugToUrl(post.slug)} className="">
+                        <Link href={blogPostUrl(post)} className="">
                           {post.title}
                         </Link>
                       </li>
@@ -137,7 +139,7 @@ export default function PostLayout({
                   href="/blog"
                   className="font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                 >
-                  &larr; Back to the blog
+                  &larr; {t("back-to-blog")}
                 </Link>
               </div>
             </footer>

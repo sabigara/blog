@@ -1,5 +1,5 @@
+import { ExtractContentMeta } from "@/lib/contentlayer"
 import { getFeedItemsFromSources } from "@/lib/rss"
-import { slugToUrl } from "@/lib/slug"
 import { allBlogs, Blog } from "contentlayer/generated"
 import { PostListItem } from "types"
 
@@ -10,7 +10,13 @@ async function getAllExternalPostMeta(): Promise<PostListItem[]> {
     date: item.isoDate,
     url: item.link,
     tags: [],
+    locale: "ja",
   }))
+}
+
+export function blogPostUrl(post: ExtractContentMeta<Blog>, withLocale = false) {
+  const base = `/blog/${post.slug}`
+  return (withLocale ? `/${post.locale}` : "") + base
 }
 
 export function blogPostToListItem(post: Blog): PostListItem {
@@ -18,7 +24,8 @@ export function blogPostToListItem(post: Blog): PostListItem {
     date: post.date,
     title: post.title,
     tags: post.tags,
-    url: slugToUrl(post.slug),
+    url: blogPostUrl(post),
+    locale: post.locale,
   }
   if (post.summary) {
     item.summary = post.summary
@@ -26,8 +33,22 @@ export function blogPostToListItem(post: Blog): PostListItem {
   return item
 }
 
-export async function getSortedPostListItems(): Promise<PostListItem[]> {
-  const internalItems = [...allBlogs].filter(postIsPublished).map(blogPostToListItem)
+type GetSortedPostListItemsOptions = {
+  locale?: string
+}
+
+export async function getSortedPostListItems({
+  locale,
+}: GetSortedPostListItemsOptions = {}): Promise<PostListItem[]> {
+  let publishedBlogs = [...allBlogs].filter(postIsPublished)
+  if (locale) {
+    publishedBlogs = publishedBlogs.filter((target) =>
+      publishedBlogs.some((post) => post._id !== target._id && post.slug === target.slug)
+        ? target.locale === locale
+        : true
+    )
+  }
+  const internalItems = publishedBlogs.map(blogPostToListItem)
   const externalItems = await getAllExternalPostMeta()
   return [...internalItems, ...externalItems].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()

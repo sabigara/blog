@@ -5,9 +5,9 @@ import { PostFrontMatter } from "types"
 
 const generateRssItem = (post: PostFrontMatter) => `
   <item>
-    <guid>${siteMetadata.siteUrl}/blog/${post.slug}</guid>
+    <guid>${siteMetadata.siteUrl}/${post.locale}/blog/${post.slug}</guid>
     <title>${escape(post.title)}</title>
-    <link>${siteMetadata.siteUrl}/blog/${post.slug}</link>
+    <link>${siteMetadata.siteUrl}/${post.locale}/blog/${post.slug}</link>
     ${post.summary ? `<description>${escape(post.summary)}</description>` : ""}
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <author>${siteMetadata.email} (${siteMetadata.author})</author>
@@ -15,7 +15,11 @@ const generateRssItem = (post: PostFrontMatter) => `
   </item>
 `
 
-const generateRss = (posts: PostFrontMatter[], page = "feed.xml") => `
+type Options = {
+  page?: string
+}
+
+const generateRss = (posts: PostFrontMatter[], { page = "feed.xml" }: Options = {}) => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>${escape(siteMetadata.title)}</title>
@@ -26,7 +30,7 @@ const generateRss = (posts: PostFrontMatter[], page = "feed.xml") => `
       <webMaster>${siteMetadata.email} (${siteMetadata.author})</webMaster>
       <lastBuildDate>${new Date(posts[0].date).toUTCString()}</lastBuildDate>
       <atom:link href="${siteMetadata.siteUrl}/${page}" rel="self" type="application/rss+xml"/>
-      ${posts.map(generateRssItem).join("")}
+      ${posts.map((p) => generateRssItem(p)).join("")}
     </channel>
   </rss>
 `

@@ -1,12 +1,14 @@
 import fs from "fs"
 import PageTitle from "@/components/PageTitle"
 import generateRss from "@/lib/generate-rss"
-import { MDXLayoutRenderer } from "@/components/MDXComponents"
-import { type InferGetStaticPropsType } from "next"
+import { MDXRenderer } from "@/components/MDXComponents"
+import { GetStaticPropsContext, type InferGetStaticPropsType } from "next"
 import { allAuthors } from "contentlayer/generated"
 import { getToc } from "@/lib/get-toc"
-import { getSortedBlogPosts } from "@/lib/contentlayer"
+import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
 import { postIsPublished } from "@/lib/blog"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import PostLayout from "@/layouts/PostLayout"
 
 export default function BlogPage({
   post,
@@ -17,14 +19,14 @@ export default function BlogPage({
   return (
     <>
       {postIsPublished(post) ? (
-        <MDXLayoutRenderer
-          layout={post.layout || "PostLayout"}
+        <PostLayout
           toc={toc}
-          mdxSource={post.body.code}
           frontMatter={post}
           authorDetails={authorDetails}
           relatedPosts={relatedPosts}
-        />
+        >
+          <MDXRenderer mdxSource={post.body.code} />
+        </PostLayout>
       ) : (
         <div className="mt-24 text-center">
           <PageTitle>
@@ -39,14 +41,25 @@ export default function BlogPage({
   )
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ locale, params }: GetStaticPropsContext) => {
   const slug = (params.slug as string[]).join("/")
   const posts = getSortedBlogPosts()
-  const post = posts.find((post) => post.slug === slug)
+  const post =
+    posts.find(
+      // Fallback to untranslated version if exists
+      (post) => post.slug === slug && post.locale === locale
+    ) ?? posts.find((post) => post.slug === slug)
+
+  if (!post) {
+    return {
+      notFound: true,
+    }
+  }
+
   let relatedPosts = posts
     .filter(
       (p) =>
-        p.language === post.language &&
+        p.locale === post.locale &&
         p._id !== post._id &&
         p.tags.some((tag) => post.tags.includes(tag))
     )
@@ -57,7 +70,7 @@ export const getStaticProps = async ({ params }) => {
       ...posts
         .filter(
           (p) =>
-            p.language === post.language &&
+            p.locale === post.locale &&
             p._id !== post._id &&
             !relatedPosts.map((rp) => rp._id).includes(p._id)
         )
@@ -76,8 +89,9 @@ export const getStaticProps = async ({ params }) => {
     props: {
       post,
       toc,
-      authorDetails: allAuthors,
-      relatedPosts,
+      authorDetails: allAuthors.filter((author) => author.locale === locale),
+      relatedPosts: relatedPosts.map(extractContentMeta),
+      ...(await serverSideTranslations(locale, ["common", "blog"])),
     },
   }
 }
@@ -88,7 +102,9 @@ export async function getStaticPaths() {
       params: {
         slug: p.slug.split("/"),
       },
+      locale: p.locale,
     })),
-    fallback: false,
+    // Fallback to untranslated version if exists
+    fallback: "blocking",
   }
 }

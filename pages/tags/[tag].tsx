@@ -7,7 +7,8 @@ import generateRss from "@/lib/generate-rss"
 import { getAllTags } from "@/lib/tags"
 import kebabCase from "@/lib/utils/kebabCase"
 import fs from "fs"
-import { InferGetStaticPropsType } from "next"
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import path from "path"
 
 const root = process.cwd()
@@ -21,11 +22,11 @@ export async function getStaticPaths() {
         tag,
       },
     })),
-    fallback: false,
+    fallback: "blocking",
   }
 }
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const tag = context.params.tag as string
   const filteredPosts = getSortedBlogPosts().filter(
     (post) => !post.draft && post.tags.map((t) => kebabCase(t)).includes(tag)
@@ -33,13 +34,19 @@ export const getStaticProps = async (context) => {
 
   // rss
   if (filteredPosts.length > 0) {
-    const rss = generateRss(filteredPosts, `tags/${tag}/feed.xml`)
+    const rss = generateRss(filteredPosts, { page: `tags/${tag}/feed.xml` })
     const rssPath = path.join(root, "public", "tags", tag)
     fs.mkdirSync(rssPath, { recursive: true })
     fs.writeFileSync(path.join(rssPath, "feed.xml"), rss)
   }
 
-  return { props: { posts: filteredPosts.map(blogPostToListItem), tag } }
+  return {
+    props: {
+      posts: filteredPosts.map(blogPostToListItem),
+      tag,
+      ...(await serverSideTranslations(context.locale, ["common"])),
+    },
+  }
 }
 
 export default function Tag({ posts, tag }: InferGetStaticPropsType<typeof getStaticProps>) {

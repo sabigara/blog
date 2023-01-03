@@ -3,11 +3,12 @@ import ListLayout from "@/layouts/ListLayout"
 import { PageSEO } from "@/components/SEO"
 import { GetStaticProps, InferGetStaticPropsType } from "next"
 import { getSortedPostListItems } from "@/lib/blog"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 
 export const POSTS_PER_PAGE = 10
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getSortedPostListItems()
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const posts = await getSortedPostListItems({ locale })
   const pagination = {
     currentPage: 1,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
@@ -17,6 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts: posts.slice(0, POSTS_PER_PAGE),
       pagination,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   }
 }

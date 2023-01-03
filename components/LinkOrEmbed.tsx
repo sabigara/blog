@@ -2,14 +2,17 @@
 import { AnchorHTMLAttributes, DetailedHTMLProps } from "react"
 import Link from "@/components/Link"
 
+const localeRegex = /\?__locale=[a-z][a-z]/
+
 export default function LinkOrEmbed({
   href,
   children,
   ...rest
 }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
   if (children !== href) {
+    const locale = href.match(localeRegex)?.[0]?.slice(-2)
     return (
-      <Link href={href} {...rest}>
+      <Link href={href.replace(localeRegex, "")} locale={locale} {...rest}>
         {children}
       </Link>
     )

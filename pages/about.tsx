@@ -1,15 +1,22 @@
-import { MDXLayoutRenderer } from "@/components/MDXComponents"
+import { MDXRenderer } from "@/components/MDXComponents"
+import AuthorLayout from "@/layouts/AuthorLayout"
 import { allAuthors } from "contentlayer/generated"
-import { InferGetStaticPropsType } from "next"
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 
-const DEFAULT_LAYOUT = "AuthorLayout"
-
-export const getStaticProps = async () => {
-  return { props: { author: allAuthors[0] } }
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      author: allAuthors.find((author) => author.locale === locale),
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  }
 }
 
 export default function About({ author }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <MDXLayoutRenderer layout={DEFAULT_LAYOUT} mdxSource={author.body.code} frontMatter={author} />
+    <AuthorLayout frontMatter={author}>
+      <MDXRenderer mdxSource={author.body.code} />
+    </AuthorLayout>
   )
 }

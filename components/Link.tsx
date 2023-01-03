@@ -7,11 +7,13 @@ const baseClassName = "hover:underline"
 
 type Props = {
   noExternalIcon?: boolean
+  locale?: string | false
 }
 
 const CustomLink = ({
   href,
   noExternalIcon = false,
+  locale,
   className,
   children,
   ...rest
@@ -21,7 +23,7 @@ const CustomLink = ({
 
   if (isInternalLink) {
     return (
-      <Link href={href} className={clsx(baseClassName, className)} {...rest}>
+      <Link href={href} className={clsx(baseClassName, className)} locale={locale} {...rest}>
         {children}
       </Link>
     )

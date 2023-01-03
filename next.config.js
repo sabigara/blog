@@ -2,6 +2,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 })
 const withContentlayer = require("next-contentlayer").withContentlayer
+const { i18n } = require("./next-i18next.config")
 
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
@@ -61,6 +62,7 @@ module.exports = withBundleAnalyzer(
     images: {
       domains: ["i1.ytimg.com", "i2.ytimg.com", "i3.ytimg.com", "i4.ytimg.com"],
     },
+    i18n,
     async headers() {
       return [
         {

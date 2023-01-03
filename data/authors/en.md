@@ -7,4 +7,4 @@ twitter: https://twitter.com/MatsuraYuma
 github: https://github.com/sabigara
 ---
 
-Matsura Yuma is an indie hacker and musician who is creating music and music-related apps.
+An indie hacker.

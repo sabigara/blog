@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://rubiq.vercel.app
+
+# Sitemaps
+Sitemap: https://rubiq.vercel.app/sitemap.xml

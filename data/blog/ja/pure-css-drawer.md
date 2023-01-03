@@ -11,7 +11,7 @@ layout: PostLayout
 ただし、hackyというか無理矢理感があったり、アクセシビリティを担保するのが難しかったりするので、JavaScriptを使えるなら使ったほうがいい。このあたりの問題点は後述する。
 
 :::info
-[5 UI components you can build without JavaScript](/blog/en/pure-css-components)（英語）も参照してほしい。
+[5 UI components you can build without JavaScript](/blog/pure-css-components?__locale=en)（英語）も参照してほしい。
 :::
 
 ## CodeSandbox

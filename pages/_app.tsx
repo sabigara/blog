@@ -5,20 +5,17 @@ import "katex/dist/katex.css"
 import { ThemeProvider } from "next-themes"
 import type { AppProps } from "next/app"
 import Head from "next/head"
+import { appWithTranslation } from "next-i18next"
 
 import siteMetadata from "@/data/siteMetadata"
 import Analytics from "@/components/analytics"
 import LayoutWrapper from "@/components/LayoutWrapper"
-import { ClientReload } from "@/components/ClientReload"
 import { useRouter } from "next/router"
 import React from "react"
 
-const isDevelopment = process.env.NODE_ENV === "development"
-const isSocket = process.env.SOCKET
-
 const noWrapper = ["/embed/[url]"]
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   const components = React.useMemo(() => {
@@ -45,3 +42,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   )
 }
+
+export default appWithTranslation(App)

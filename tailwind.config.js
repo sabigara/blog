@@ -22,7 +22,13 @@ module.exports = {
         14: "3.5rem",
       },
       fontFamily: {
-        sans: defaultTheme.fontFamily.sans,
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans",
+          "Meiryo,sans-serif",
+        ],
       },
       colors: {
         primary: colors.indigo,

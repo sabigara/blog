@@ -14,4 +14,5 @@ export type PostListItem = {
   url: string
   tags: string[]
   summary?: string
+  locale?: string
 }

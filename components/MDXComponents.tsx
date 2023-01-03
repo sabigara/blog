@@ -9,32 +9,22 @@ import { BlogNewsletterForm } from "./NewsletterForm"
 import LinkOrEmbed from "@/components/LinkOrEmbed"
 import Message from "@/components/Message"
 import BorderRadiusCalculator from "@/components/BorderRadiusCalculator"
-import clsx from "clsx"
-
-const Wrapper: React.ComponentType<{ layout: string }> = ({ layout, ...rest }) => {
-  const Layout = require(`../layouts/${layout}`).default
-  return <Layout {...rest} />
-}
 
 export const MDXComponents: ComponentMap = {
   Image,
   TOCInline,
   a: LinkOrEmbed,
   pre: Pre,
-  wrapper: Wrapper,
   Message,
   BlogNewsletterForm,
   BorderRadiusCalculator,
 }
 
 interface Props {
-  layout: string
   mdxSource: string
-  [key: string]: unknown
 }
 
-export const MDXLayoutRenderer = ({ layout, mdxSource, ...rest }: Props) => {
+export const MDXRenderer = ({ mdxSource }: Props) => {
   const MDXContent = useMDXComponent(mdxSource)
-
-  return <MDXContent layout={layout} components={MDXComponents} {...rest} />
+  return <MDXContent components={MDXComponents} />
 }

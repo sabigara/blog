@@ -1,6 +1,11 @@
 import { defineDocumentType, makeSource, RawDocumentData } from "contentlayer/source-files"
 import { mdxOptions } from "./lib/mdx"
 
+function resolveSlug(raw: RawDocumentData) {
+  const [, locale, ...rest] = raw.flattenedPath.split("/")
+  return { locale, slug: rest.join("/") }
+}
+
 export const Author = defineDocumentType(() => ({
   name: "Author",
   filePathPattern: `authors/**/*+(.md|.mdx)`,
@@ -30,11 +35,18 @@ export const Author = defineDocumentType(() => ({
       type: "string",
     },
   },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => resolveSlug(doc._raw).slug,
+    },
+    locale: {
+      type: "enum",
+      options: ["en", "ja"],
+      resolve: (doc) => resolveSlug(doc._raw).locale,
+    },
+  },
 }))
-
-function resolveSlug(raw: RawDocumentData) {
-  return raw.flattenedPath.replace("blog/", "")
-}
 
 export const Blog = defineDocumentType(() => ({
   name: "Blog",
@@ -86,12 +98,12 @@ export const Blog = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => resolveSlug(doc._raw),
+      resolve: (doc) => resolveSlug(doc._raw).slug,
     },
-    language: {
+    locale: {
       type: "enum",
       options: ["en", "ja"],
-      resolve: (doc) => resolveSlug(doc._raw).split("/")[0],
+      resolve: (doc) => resolveSlug(doc._raw).locale,
     },
   },
 }))

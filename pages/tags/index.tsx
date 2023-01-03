@@ -5,11 +5,20 @@ import siteMetadata from "@/data/siteMetadata"
 import { getAllTags } from "@/lib/tags"
 import kebabCase from "@/lib/utils/kebabCase"
 import { GetStaticProps, InferGetStaticPropsType } from "next"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 
-export const getStaticProps: GetStaticProps<{ tags: Record<string, number> }> = async () => {
+export const getStaticProps: GetStaticProps<{ tags: Record<string, number> }> = async ({
+  locale,
+}) => {
   const tags = getAllTags()
 
-  return { props: { tags } }
+  return {
+    props: {
+      tags,
+
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  }
 }
 
 export default function Tags({ tags }: InferGetStaticPropsType<typeof getStaticProps>) {
