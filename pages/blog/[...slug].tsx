@@ -2,7 +2,7 @@ import fs from "fs"
 import PageTitle from "@/components/PageTitle"
 import generateRss from "@/lib/generate-rss"
 import { MDXRenderer } from "@/components/MDXComponents"
-import { GetStaticPropsContext, type InferGetStaticPropsType } from "next"
+import { GetStaticPathsContext, GetStaticPropsContext, type InferGetStaticPropsType } from "next"
 import { allAuthors } from "contentlayer/generated"
 import { getToc } from "@/lib/get-toc"
 import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
@@ -96,15 +96,16 @@ export const getStaticProps = async ({ locale, params }: GetStaticPropsContext) 
   }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   return {
-    paths: getSortedBlogPosts().map((p) => ({
-      params: {
-        slug: p.slug.split("/"),
-      },
-      locale: p.locale,
-    })),
-    // Fallback to untranslated version if exists
-    fallback: "blocking",
+    paths: locales.flatMap((locale) =>
+      getSortedBlogPosts().map((p) => ({
+        params: {
+          slug: p.slug.split("/"),
+        },
+        locale,
+      }))
+    ),
+    fallback: false,
   }
 }
