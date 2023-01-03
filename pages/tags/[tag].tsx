@@ -1,48 +1,37 @@
 import { TagSEO } from "@/components/SEO"
 import siteMetadata from "@/data/siteMetadata"
 import ListLayout from "@/layouts/ListLayout"
-import { blogPostToListItem } from "@/lib/blog"
-import { getSortedBlogPosts } from "@/lib/contentlayer"
-import generateRss from "@/lib/generate-rss"
+import { getSortedPostListItems } from "@/lib/blog"
 import { getAllTags } from "@/lib/tags"
 import kebabCase from "@/lib/utils/kebabCase"
-import fs from "fs"
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import { GetStaticPathsContext, GetStaticPropsContext, InferGetStaticPropsType } from "next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import path from "path"
 
-const root = process.cwd()
-
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   const tags = getAllTags()
 
   return {
-    paths: Object.keys(tags).map((tag) => ({
-      params: {
-        tag,
-      },
-    })),
-    fallback: "blocking",
+    paths: locales.flatMap((locale) =>
+      Object.keys(tags).map((tag) => ({
+        params: {
+          tag,
+        },
+        locale,
+      }))
+    ),
+    fallback: false,
   }
 }
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const tag = context.params.tag as string
-  const filteredPosts = getSortedBlogPosts().filter(
-    (post) => !post.draft && post.tags.map((t) => kebabCase(t)).includes(tag)
-  )
-
-  // rss
-  if (filteredPosts.length > 0) {
-    const rss = generateRss(filteredPosts, { page: `tags/${tag}/feed.xml` })
-    const rssPath = path.join(root, "public", "tags", tag)
-    fs.mkdirSync(rssPath, { recursive: true })
-    fs.writeFileSync(path.join(rssPath, "feed.xml"), rss)
-  }
+  const filteredPosts = (
+    await getSortedPostListItems({ locale: context.locale, withExternal: false })
+  ).filter((post) => post.tags.map((t) => kebabCase(t)).includes(tag))
 
   return {
     props: {
-      posts: filteredPosts.map(blogPostToListItem),
+      posts: filteredPosts,
       tag,
       ...(await serverSideTranslations(context.locale, ["common"])),
     },

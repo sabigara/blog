@@ -35,10 +35,12 @@ export function blogPostToListItem(post: Blog): PostListItem {
 
 type GetSortedPostListItemsOptions = {
   locale?: string
+  withExternal?: boolean
 }
 
 export async function getSortedPostListItems({
   locale,
+  withExternal = true,
 }: GetSortedPostListItemsOptions = {}): Promise<PostListItem[]> {
   let publishedBlogs = [...allBlogs].filter(postIsPublished)
   if (locale) {
@@ -50,7 +52,7 @@ export async function getSortedPostListItems({
   }
   const internalItems = publishedBlogs.map(blogPostToListItem)
   const externalItems = await getAllExternalPostMeta()
-  return [...internalItems, ...externalItems].sort(
+  return [...internalItems, ...(withExternal ? externalItems : [])].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 }
