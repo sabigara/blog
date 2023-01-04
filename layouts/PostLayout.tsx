@@ -32,7 +32,7 @@ export default function PostLayout({
   children,
 }: Props) {
   const { date, title, tags, draft } = frontMatter
-  const url = `${siteMetadata.siteUrl}/${blogPostUrl(frontMatter)}`
+  const url = `${siteMetadata.siteUrl}${blogPostUrl(frontMatter, true)}`
   const { t } = useTranslation("blog")
 
   return (
