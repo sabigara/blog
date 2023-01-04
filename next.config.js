@@ -1,6 +1,3 @@
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-})
 const withContentlayer = require("next-contentlayer").withContentlayer
 const { i18n } = require("./next-i18next.config")
 
@@ -52,32 +49,30 @@ const securityHeaders = [
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
-module.exports = withBundleAnalyzer(
-  withContentlayer({
-    reactStrictMode: true,
-    pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-    eslint: {
-      dirs: ["pages", "components", "lib", "layouts", "scripts"],
-    },
-    images: {
-      domains: ["i1.ytimg.com", "i2.ytimg.com", "i3.ytimg.com", "i4.ytimg.com"],
-    },
-    i18n,
-    async headers() {
-      return [
-        {
-          source: "/(.*)",
-          headers: securityHeaders,
-        },
-      ]
-    },
-    webpack: (config) => {
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      })
+module.exports = withContentlayer({
+  reactStrictMode: true,
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+  eslint: {
+    dirs: ["pages", "components", "lib", "layouts", "scripts"],
+  },
+  images: {
+    domains: ["i1.ytimg.com", "i2.ytimg.com", "i3.ytimg.com", "i4.ytimg.com"],
+  },
+  i18n,
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+    ]
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    })
 
-      return config
-    },
-  })
-)
+    return config
+  },
+})

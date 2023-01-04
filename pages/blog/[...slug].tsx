@@ -9,6 +9,7 @@ import { extractContentMeta, getSortedBlogPosts } from "@/lib/contentlayer"
 import { postIsPublished } from "@/lib/blog"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import PostLayout from "@/layouts/PostLayout"
+import { useLiveReload } from "next-contentlayer/hooks"
 
 export default function BlogPage({
   post,
@@ -16,6 +17,7 @@ export default function BlogPage({
   authorDetails,
   relatedPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  useLiveReload()
   return (
     <>
       {postIsPublished(post) ? (
