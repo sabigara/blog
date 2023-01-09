@@ -40,3 +40,4 @@ data/blog/zenn/*.md
 *.cache.json
 
 .contentlayer/
+.obsidian

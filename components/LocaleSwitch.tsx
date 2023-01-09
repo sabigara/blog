@@ -23,7 +23,7 @@ export default function LocaleSwitch() {
             >
               <HiOutlineTranslate className="text-lg" />
               <span className="font-normal">{localeToLabel[currentLocale]}</span>
-              <HiChevronDown strokeWidth="1" className="text-xs" />
+              <HiChevronDown stroke-width="1" className="text-xs" />
             </div>
           )}
         </Menu.Button>
