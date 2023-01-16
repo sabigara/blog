@@ -2,6 +2,7 @@
 title: "How to change the marker of select"
 date: "2023-01-16"
 tags: ["html"]
+draft: false
 ---
 
 The appearance of the `select` element cannot be changed with CSS's `appearance: none` to show the custom icon (arrow) and remove the browser's default styles. Two common methods for implementing custom icons are:
