@@ -65,6 +65,15 @@ module.exports = withContentlayer({
         source: "/(.*)",
         headers: securityHeaders,
       },
+      {
+        source: "/.well-known/nostr.json",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+        ],
+      },
     ]
   },
   webpack: (config) => {
