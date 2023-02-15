@@ -117,6 +117,7 @@ export default function PostLayout({
               <div className="prose max-w-none pt-8 pb-8">{children}</div>
             </div>
             <footer className="flex flex-col gap-6 pt-6">
+              <CamomeBanner />
               <FooterItem title="Share">
                 <SocialButtons url={url} text={title} className="gap-2" />
               </FooterItem>
@@ -133,7 +134,6 @@ export default function PostLayout({
                   </ul>
                 </FooterItem>
               )}
-              <CamomeBanner />
               <div className="pt-4 xl:pt-8">
                 <Link
                   href="/blog"

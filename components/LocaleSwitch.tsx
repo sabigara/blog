@@ -17,13 +17,13 @@ export default function LocaleSwitch() {
           {({ open }) => (
             <div
               className={clsx(
-                "inline-flex w-full items-center justify-center gap-1 rounded-md border px-2 py-1 font-medium hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+                "inline-flex w-full items-center justify-center gap-2 rounded-md border px-2 py-1 text-sm font-semibold hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
                 open && "bg-gray-100"
               )}
             >
-              <HiOutlineTranslate className="text-lg" />
+              <HiOutlineTranslate className="text-md" />
               <span className="font-normal">{localeToLabel[currentLocale]}</span>
-              <HiChevronDown stroke-width="1" className="text-xs" />
+              <HiChevronDown strokeWidth="1" className="text-xs" />
             </div>
           )}
         </Menu.Button>

@@ -1,7 +1,7 @@
 {
   "camome": {
-    "heading": "Get beautiful UI kits from Camome",
-    "description": "Versatile UI templates and components made by me.",
-    "button": "See UI kits"
+    "heading": "Camome UI",
+    "description": "Lightweight, accessible UI framework for React and CSS.",
+    "button": "Get started"
   }
 }
