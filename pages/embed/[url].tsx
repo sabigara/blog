@@ -92,7 +92,7 @@ export default function EmbeddedPage({ siteMetadata }: Props) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={siteMetadata.ogp.image}
-              className="ml-auto h-full object-cover"
+              className="mx-auto h-full object-cover"
               alt="ページの画像"
             />
           )}

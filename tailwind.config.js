@@ -38,7 +38,7 @@ module.exports = {
         DEFAULT: {
           css: {
             color: theme("colors.gray.900"),
-            fontSize: "1.1rem",
+            fontSize: "1rem",
             lineHeight: "1.7",
             a: {
               color: theme("colors.primary.600"),
@@ -107,10 +107,10 @@ module.exports = {
             li: { margin: "0.25rem 0" },
             "ol li::marker": {
               fontWeight: "400",
-              color: theme("colors.gray.800"),
+              color: theme("colors.gray.400"),
             },
             "ul li::marker": {
-              color: theme("colors.gray.800"),
+              color: theme("colors.gray.400"),
             },
             blockquote: {
               color: theme("colors.gray.600"),

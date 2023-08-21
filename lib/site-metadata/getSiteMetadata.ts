@@ -53,6 +53,14 @@ export async function getSiteMetadata(url: string): Promise<SiteMetadata> {
       }
     }, {} as Ogp)
 
+  if (url.startsWith("https://www.amazon.")) {
+    const img = dom.window.document.getElementById("landingImage")
+    const imgSrc = img.getAttribute("src")
+    if (imgSrc) {
+      ogp.image = imgSrc
+    }
+  }
+
   const metadata = {
     ogp,
     title: dom.window.document.title,
