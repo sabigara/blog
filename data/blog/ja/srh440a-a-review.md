@@ -11,7 +11,7 @@ draft: false
 
 ## 製品リンク
 
-https://www.amazon.co.jp/dp/B09ND3ZFT9
+https://www.amazon.co.jp/dp/B09ND3ZFT9?tag=sabigara-22
 
 ## 用途
 
@@ -37,7 +37,7 @@ https://www.amazon.co.jp/dp/B09ND3ZFT9
 
 とにかくバランスの取れた音で、妙にシャキシャキしていたりアタックが強いということはない。低音はそれなりのボリューム感がしっかりと出ているが、ブーミーではなくナチュラルな印象だ。
 
-[Sony MDR-7506](https://www.amazon.co.jp/dp/B000AJIF4E)と比較すると、低音はより出ているし、空間の広がりも感じられた。定位感は楽器が耳のそばに張り付くような感じではなく、やはり自然だ。
+[Sony MDR-7506](https://www.amazon.co.jp/dp/B000AJIF4E?tag=sabigara-22)と比較すると、低音はより出ているし、空間の広がりも感じられた。定位感は楽器が耳のそばに張り付くような感じではなく、やはり自然だ。
 
 これまで使ってきたヘッドフォンはベースが聴こえなすぎて耳コピが非常にやりにくかったが、今回買い換えたおかげで捗るようになった。また、ちゃんと下まで鳴ってくれるので、DTMのトラック制作が単純に楽しくなった。プロのレコーディングとかは知らないが、趣味レベルの作業ならあまり神経質な音質が必要になる場面はなさそうに思う。
 
@@ -65,7 +65,7 @@ https://www.amazon.co.jp/dp/B09ND3ZFT9
 
 ### Sennheiser HD25
 
-https://www.amazon.co.jp/dp/B01AXUCA8G
+https://www.amazon.co.jp/dp/B01AXUCA8G?tag=sabigara-22
 
 音質だけなら本当はこれが欲しかった。
 
@@ -75,7 +75,7 @@ https://www.amazon.co.jp/dp/B01AXUCA8G
 
 ### Sony MDR-7506
 
-https://www.amazon.co.jp/dp/B000AJIF4E
+https://www.amazon.co.jp/dp/B000AJIF4E?tag=sabigara-22
 
 定番なので検討してみたが、それほどの優位性は感じなかった。
 
@@ -83,4 +83,4 @@ https://www.amazon.co.jp/dp/B000AJIF4E
 
 総じてバランスの取れた優秀なヘッドフォンだと思う。1万4000円程度で買えるのでコスパはかなり高い。多くの人にオススメできる製品だ。
 
-https://www.amazon.co.jp/dp/B09ND3ZFT9
+https://www.amazon.co.jp/dp/B09ND3ZFT9?tag=sabigara-22
