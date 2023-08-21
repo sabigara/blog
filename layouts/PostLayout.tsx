@@ -12,7 +12,6 @@ import TOCInline from "@/components/TOCInline"
 import formatDate from "@/lib/utils/formatDate"
 import { Blog } from "contentlayer/generated"
 import { ExtractContentMeta } from "@/lib/contentlayer"
-import CamomeBanner from "@/components/CamomeBanner"
 import { blogPostUrl } from "@/lib/blog"
 import { useTranslation } from "next-i18next"
 

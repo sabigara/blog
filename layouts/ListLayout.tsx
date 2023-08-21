@@ -2,7 +2,6 @@ import { ComponentProps } from "react"
 import Pagination from "@/components/Pagination"
 import { PostListItem } from "types"
 import PostList from "@/components/PostList"
-import CamomeBanner from "@/components/CamomeBanner"
 interface Props {
   title: string
   posts: PostListItem[]
