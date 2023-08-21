@@ -23,7 +23,6 @@ export default function ListLayout({ title, posts, pagination }: Props) {
       {pagination && pagination.totalPages > 1 && (
         <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
       )}
-      <CamomeBanner />
     </div>
   )
 }

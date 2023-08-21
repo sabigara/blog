@@ -76,7 +76,7 @@ export default function EmbeddedPage({ siteMetadata }: Props) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={
-                siteMetadata.url.startsWith("https://rubiq.vercel.app")
+                siteMetadata.url.startsWith("https://sabigara.com")
                   ? "/static/favicons/favicon-32x32.png"
                   : faviconUrl(siteMetadata.url)
               }

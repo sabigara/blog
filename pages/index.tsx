@@ -49,21 +49,6 @@ export default function Home({
             </Link>
           )}
         </Section>
-        <Section title={t("recent-videos")}>
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-            {videos.map((video) => (
-              <VideoCard {...video} key={video.href} />
-            ))}
-          </div>
-          <Link
-            href="https://www.youtube.com/@camome"
-            className="mt-5 inline-block text-lg font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All videos"
-          >
-            {t("all-videos")}
-          </Link>
-        </Section>
-        <CamomeBanner />
       </div>
     </>
   )

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://rubiq.vercel.app
+Host: https://sabigara.com
 
 # Sitemaps
-Sitemap: https://rubiq.vercel.app/sitemap.xml
+Sitemap: https://sabigara.com/sitemap.xml

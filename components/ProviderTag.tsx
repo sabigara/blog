@@ -19,7 +19,7 @@ const ProviderTag = ({ href, className }: Props) => {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt="ファビコン" width="16" height="16" className="inline" />
-      <span>{isRelative ? "rubiq.vercel.app" : new URL(href).hostname}</span>
+      <span>{isRelative ? "sabigara.com" : new URL(href).hostname}</span>
     </div>
   )
 }

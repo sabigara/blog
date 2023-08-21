@@ -1,11 +1,11 @@
 const siteMetadataBase = {
-  title: "Rubiq",
+  title: "Sabigara.com",
   author: "Matsura Yuma",
-  headerTitle: "Rubiq",
+  headerTitle: "Sabigara.com",
   description: "Just my journal and a bit of technical writings.",
-  language: "en-us",
+  language: "ja-jp",
   theme: "light", // system, dark or light
-  siteUrl: "https://rubiq.vercel.app",
+  siteUrl: "https://sabigara.com",
   siteRepo: "https://github.com/sabigara/blog",
   siteLogo: "/static/images/logo.png",
   image: "/static/images/avatar.png",

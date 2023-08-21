@@ -1,3 +1,3 @@
-# rubiq.vercel.app
+# sabigara.com
 
-[My personal blog](https://rubiq.vercel.app)
+[My personal blog](https://sabigara.com)
