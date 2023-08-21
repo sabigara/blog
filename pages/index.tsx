@@ -5,23 +5,17 @@ import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
 import { getSortedPostListItems } from "@/lib/blog"
 import PostList from "@/components/PostList"
 import React from "react"
-import { getYoutubeVideos } from "@/lib/youtube"
-import VideoCard from "@/components/VideoCard"
-import CamomeBanner from "@/components/CamomeBanner"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { useTranslation } from "next-i18next"
 
-const MAX_POSTS = 5 as const
-const MAX_VIDEOS = 3 as const
+const MAX_POSTS = 10 as const
 
 export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
   const posts = await getSortedPostListItems({ locale })
-  const videos = await getYoutubeVideos()
   return {
     props: {
       posts: posts.slice(0, MAX_POSTS),
       postTotalCount: posts.length,
-      videos: videos.slice(0, MAX_VIDEOS),
       ...(await serverSideTranslations(locale, ["common", "home"])),
     },
   }
@@ -30,7 +24,6 @@ export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
 export default function Home({
   posts,
   postTotalCount,
-  videos,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation("home")
   return (
