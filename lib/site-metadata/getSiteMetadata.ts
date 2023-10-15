@@ -27,7 +27,7 @@ export async function getSiteMetadata(url: string): Promise<SiteMetadata> {
   }
 
   console.debug("fetching siteMetadata for", url)
-  const resp = await fetch(url)
+  const resp = await fetch(decodeURIComponent(url))
   if (!resp.ok) {
     throw new Error(`Failed to fetch ${url}. Status: ${resp.status}. Body: ${await resp.text()}`)
   }
