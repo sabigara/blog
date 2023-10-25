@@ -24,7 +24,7 @@ function ensureDate(date: Date | number | string) {
 
 export function relativeTimeFormat(
   date: Date | number | string,
-  base = new Date()
+  base = new Date(),
 ) {
   const d = ensureDate(date);
   const diffInSecs = Math.floor((d.getTime() - base.getTime()) / 1000);
@@ -50,7 +50,7 @@ export function relativeTimeFormat(
     // 1分未満は１分として扱う
     const minutes = Math.min(
       Math.floor(diffInSecs / MIN_IN_SECS),
-      diffInSecs <= 0 ? -1 : 1
+      diffInSecs <= 0 ? -1 : 1,
     );
     intlRes = intlRelative.format(minutes, "minute");
   }

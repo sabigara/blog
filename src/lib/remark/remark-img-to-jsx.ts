@@ -22,14 +22,14 @@ export default function remarkImgToJsx() {
         node.children.some((n) => n.type === "image"),
       (node: Parent) => {
         const imageNode = node.children.find(
-          (n) => n.type === "image"
+          (n) => n.type === "image",
         ) as ImageNode;
         const normalizedUrl = imageNode.url.replace(/^\/?public\//, "/");
 
         // only local files
         if (fs.existsSync(`${process.cwd()}/public${normalizedUrl}`)) {
           const dimensions = imageSize(
-            `${process.cwd()}/public${normalizedUrl}`
+            `${process.cwd()}/public${normalizedUrl}`,
           );
 
           // Convert original node to next/image
@@ -54,7 +54,7 @@ export default function remarkImgToJsx() {
           node.type = "div";
           node.children = [imageNode];
         }
-      }
+      },
     );
   };
 }

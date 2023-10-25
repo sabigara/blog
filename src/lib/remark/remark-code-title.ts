@@ -38,6 +38,6 @@ export default function remarkCodeTitles() {
 
         parent.children.splice(index, 0, titleNode);
         node.lang = language;
-      }
+      },
     );
 }

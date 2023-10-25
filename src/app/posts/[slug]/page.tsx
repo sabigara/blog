@@ -16,7 +16,7 @@ type Props = {
 export default function BlogPostPage({ params }: Props) {
   const post = allPosts.find(
     (post) =>
-      post._raw.flattenedPath === post._raw.sourceFileDir + "/" + params.slug
+      post._raw.flattenedPath === post._raw.sourceFileDir + "/" + params.slug,
   );
   if (!post) {
     return notFound();

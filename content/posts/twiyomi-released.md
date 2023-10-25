@@ -58,13 +58,13 @@ DBについては後述する。
 ```typescript
 export async function getThreadRecursive(
   statusId: string,
-  results: TweetV2[] = []
+  results: TweetV2[] = [],
 ) {
   const tweet = await twitter.singleTweet(statusId, {
     expansions: "referenced_tweets.id",
   });
   const previous = tweet.data.referenced_tweets?.find(
-    (t) => t.type === "replied_to"
+    (t) => t.type === "replied_to",
   );
 
   results.push(tweet.data);

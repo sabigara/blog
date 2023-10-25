@@ -17,7 +17,7 @@ export default function ProjectPage({ params }: Props) {
   const project = allProjects.find(
     (project) =>
       project._raw.flattenedPath ===
-      project._raw.sourceFileDir + "/" + params.slug
+      project._raw.sourceFileDir + "/" + params.slug,
   );
 
   if (!project) {

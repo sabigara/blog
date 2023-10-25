@@ -11,7 +11,7 @@ export function Message({ children, className }: Props) {
     <div
       className={twMerge(
         "p-4 border text-[0.92em] rounded-md bg-slate-50 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
-        className
+        className,
       )}
     >
       {children}

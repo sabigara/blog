@@ -85,7 +85,7 @@ return (
 ```typescript
 // pages/embed/[url].tsx
 export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
+  ctx: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<Props>> {
   const url = ctx.params.url as string;
   const siteMetadata = await getSiteMetadata(url);
