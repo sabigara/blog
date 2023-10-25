@@ -4,9 +4,9 @@ import { defineDocumentType } from "contentlayer/source-files";
 
 import { mdxOptions } from "./src/lib/mdx/options";
 
-export const Blog = defineDocumentType(() => ({
-  name: "Blog",
-  filePathPattern: `blog/**/*+(.md|.mdx)`,
+export const Post = defineDocumentType(() => ({
+  name: "Post",
+  filePathPattern: `posts/**/*+(.md|.mdx)`,
   contentType: "mdx",
   fields: {
     title: {
@@ -75,6 +75,6 @@ function resolveProjectSlug(raw: RawDocumentData) {
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Blog, Project],
+  documentTypes: [Post, Project],
   mdx: mdxOptions,
 });

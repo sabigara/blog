@@ -1,4 +1,4 @@
-import type { Blog } from "contentlayer/generated";
+import type { Post } from "contentlayer/generated";
 import { twMerge } from "tailwind-merge";
 
 import { CalendarIcon } from "@/components/icons";
@@ -7,7 +7,7 @@ import { datetimeFormat } from "@/lib/datetime/format";
 
 type Props = {
   className?: string;
-  post: Blog;
+  post: Post;
 };
 
 export function BlogPostItem({ className, post }: Props) {

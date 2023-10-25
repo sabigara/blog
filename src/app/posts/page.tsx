@@ -1,11 +1,11 @@
-import type { Blog } from "contentlayer/generated";
-import { allBlogs } from "contentlayer/generated";
+import type { Post } from "contentlayer/generated";
+import { allPosts } from "contentlayer/generated";
 
 import { BlogPostItem } from "@/components/blog/post-item";
 
 export default function BlogListPage() {
-  const posts = allBlogs.sort((a, b) => (a.date > b.date ? -1 : 1));
-  const postsByYear = (posts: Blog[]) =>
+  const posts = allPosts.sort((a, b) => (a.date > b.date ? -1 : 1));
+  const postsByYear = (posts: Post[]) =>
     posts.reduce(
       (acc, post) => {
         const year = new Date(post.date).getFullYear();
@@ -18,7 +18,7 @@ export default function BlogListPage() {
       {} as Record<number, typeof posts>
     );
 
-  const postsBySeason = (posts: Blog[]) =>
+  const postsBySeason = (posts: Post[]) =>
     posts.reduce(
       (acc, post) => {
         const date = new Date(post.date);

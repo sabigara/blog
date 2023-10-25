@@ -1,4 +1,4 @@
-import { allBlogs, allProjects } from "contentlayer/generated";
+import { allPosts, allProjects } from "contentlayer/generated";
 import { twMerge } from "tailwind-merge";
 
 import { BlogPostItem } from "@/components/blog/post-item";
@@ -16,7 +16,7 @@ export default function Home() {
   const projects = allProjects
     .sort((a, b) => (a.date > b.date ? -1 : 1))
     .slice(0, PROJECT_LIMIT);
-  const posts = allBlogs
+  const posts = allPosts
     .sort((a, b) => (a.date > b.date ? -1 : 1))
     .slice(0, BLOG_LIMIT);
 
@@ -40,7 +40,7 @@ export default function Home() {
       <h2 className={twMerge(twHeading, "mt-12")}>
         Posts
         <span className="ml-[1em] text-sm text-gray-400 font-medium">
-          {posts.length} of {allBlogs.length}
+          {posts.length} of {allPosts.length}
         </span>
       </h2>
       <ul className="space-y-1">

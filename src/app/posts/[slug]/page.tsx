@@ -1,4 +1,4 @@
-import { allBlogs } from "contentlayer/generated";
+import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import { TbCalendarEvent as CalendarIcon } from "react-icons/tb";
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function BlogPostPage({ params }: Props) {
-  const post = allBlogs.find(
+  const post = allPosts.find(
     (post) =>
       post._raw.flattenedPath === post._raw.sourceFileDir + "/" + params.slug
   );

@@ -1,4 +1,4 @@
-import { allBlogs } from "contentlayer/generated";
+import { allPosts } from "contentlayer/generated";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
 import { Link } from "@/components/link";
@@ -11,7 +11,7 @@ type Props = {
 
 export function Paginator({ buildUrl, page, perPage }: Props) {
   const hasPreviousPage = page > 1;
-  const hasNextPage = allBlogs.length > perPage * page;
+  const hasNextPage = allPosts.length > perPage * page;
 
   const twLink = "";
   const twIcon = "inline";
