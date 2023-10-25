@@ -1,6 +1,7 @@
 import { allBlogs } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
+import { TbCalendarEvent as CalendarIcon } from "react-icons/tb";
 
 import { Link } from "@/components/link";
 import { datetimeFormat } from "@/lib/datetime/format";
@@ -14,8 +15,7 @@ type Props = {
 
 export default function BlogPostPage({ params }: Props) {
   const post = allBlogs.find(
-    (post) =>
-      post._raw.flattenedPath === post._raw.sourceFileDir + "/" + params.slug
+    (post) => post._raw.flattenedPath === post._raw.sourceFileDir + params.slug
   );
   if (!post) {
     return notFound();
@@ -27,7 +27,8 @@ export default function BlogPostPage({ params }: Props) {
     <>
       <header className="py-8">
         <h1 className="text-3xl font-bold">{post.title}</h1>
-        <time className="text-sm text-gray-500 mt-3 inline-block">
+        <time className="text-sm text-gray-500 mt-3 flex items-center gap-x-1">
+          <CalendarIcon aria-hidden className="translate-y-[-0.5px]" />
           {datetimeFormat(post.date)}
         </time>
       </header>

@@ -2,9 +2,13 @@ import "./globals.css";
 import "./prism.css";
 
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { twMerge } from "tailwind-merge";
 
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className="max-w-3xl px-4 mx-auto">
+      <body className={twMerge(inter.className, "max-w-3xl px-4 mx-auto")}>
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

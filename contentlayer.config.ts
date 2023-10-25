@@ -30,7 +30,7 @@ export const Blog = defineDocumentType(() => ({
 }));
 
 function resolveBlogSlug(raw: RawDocumentData) {
-  return raw.flattenedPath;
+  return "/" + raw.flattenedPath;
 }
 
 export const Project = defineDocumentType(() => ({
@@ -70,7 +70,7 @@ export const Project = defineDocumentType(() => ({
 }));
 
 function resolveProjectSlug(raw: RawDocumentData) {
-  return raw.flattenedPath;
+  return "/" + raw.flattenedPath;
 }
 
 export default makeSource({
