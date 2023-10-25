@@ -5,9 +5,9 @@ const radius = "0.5rem";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/mdx/components.tsx",
   ],
   theme: {
     extend: {

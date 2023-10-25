@@ -13,5 +13,5 @@ export const mdxComponents = {
     // eslint-disable-next-line jsx-a11y/alt-text
     <Image {...props} />
   ),
-  Message: (props) => <Message {...props} className="my-4" />,
+  Message: (props) => <Message {...props} className="my-8" />,
 } satisfies MDXComponents;

@@ -28,15 +28,15 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
+  padding: 1rem;
+  margin: 2rem 0;
   overflow: auto;
 }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   color: white;
-  background: #1e1e1e;
+  background: #14182a;
 }
 
 :not(pre) > code[class*="language-"] {
@@ -141,10 +141,10 @@ pre[class*="language-"] {
   color: white;
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
-  background-color: #212636;
+  background-color: #23283f;
 }
 
-.remark-code-title + * pre {
+.remark-code-title + pre[class*="language-"] {
   margin-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
