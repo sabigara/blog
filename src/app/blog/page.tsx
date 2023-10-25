@@ -36,7 +36,8 @@ export default function BlogListPage() {
     );
 
   return (
-    <div className="pb-12">
+    <div className="pt-8 pb-12">
+      <h1 className="text-4xl font-bold">Posts</h1>
       {Object.entries(postsByYear(posts))
         .reverse()
         .map(([year, posts]) => (

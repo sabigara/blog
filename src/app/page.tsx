@@ -28,7 +28,7 @@ export default function Home() {
           {projects.length} of {allProjects.length}
         </span>
       </h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
         {projects.map((project) => (
           <ProjectCard key={project._id} project={project} />
         ))}
