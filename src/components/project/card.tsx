@@ -12,13 +12,13 @@ type Props = {
 
 export function ProjectCard({ as: Component = "h3", project }: Props) {
   return (
-    <article className="relative w-fit flex flex-col hover:bg-slate-100 -m-3 p-3 rounded-md">
-      <div className="flex-1">
+    <article className="relative flex flex-col hover:bg-slate-100 -m-3 p-3 rounded-lg w-full">
+      <div className="relative flex-1 w-full aspect-[2/1] rounded-md overflow-clip">
         <Image
           alt={project.title}
-          height={300}
+          className="object-cover"
+          fill
           src={project.coverImg}
-          width={500}
         />
       </div>
       <div>
