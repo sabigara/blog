@@ -1,9 +1,9 @@
 import { allPosts, allProjects } from "contentlayer/generated";
 import { twMerge } from "tailwind-merge";
 
-import { BlogPostItem } from "@/components/blog/post-item";
 import { ArrowRightIcon } from "@/components/icons";
 import { Link } from "@/components/link";
+import { BlogPostItem } from "@/components/post/post-item";
 import { ProjectCard } from "@/components/project/card";
 
 const twHeading = "text-4xl font-bold mt-8 mb-4";
@@ -50,7 +50,7 @@ export default function Home() {
           </li>
         ))}
       </ul>
-      <Link className={twViewAll} href="/blog">
+      <Link className={twViewAll} href="/posts">
         View all posts <ArrowRightIcon aria-hidden className="inline" />
       </Link>
     </div>
