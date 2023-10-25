@@ -7,7 +7,14 @@ import { Message } from "@/components/message";
 export const mdxComponents = {
   a: (props) => (
     // @ts-expect-error
-    <Link {...props} />
+    <Link
+      {...props}
+      external={
+        !!props.href &&
+        !props.href.startsWith("/") &&
+        !props.href.startsWith("#")
+      }
+    />
   ),
   Image: (props) => (
     // eslint-disable-next-line jsx-a11y/alt-text

@@ -1,0 +1,5 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    "(?:const|let|var)\\s+tw[A-Z][\\w$_][_\\w\\d]*\\s*=\\s*['\\\"](.*?)['\\\"]"
+  ]
+}

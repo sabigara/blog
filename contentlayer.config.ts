@@ -24,17 +24,57 @@ export const Blog = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => resolveSlug(doc._raw),
+      resolve: (doc) => resolveBlogSlug(doc._raw),
     },
   },
 }));
 
-function resolveSlug(raw: RawDocumentData) {
+function resolveBlogSlug(raw: RawDocumentData) {
+  return raw.flattenedPath;
+}
+
+export const Project = defineDocumentType(() => ({
+  name: "Project",
+  filePathPattern: `projects/**/*+(.md|.mdx)`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    subtitle: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+    },
+    date: {
+      type: "date",
+      required: true,
+    },
+    coverImg: {
+      type: "string",
+      required: true,
+    },
+    url: {
+      type: "string",
+    },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => resolveProjectSlug(doc._raw),
+    },
+  },
+}));
+
+function resolveProjectSlug(raw: RawDocumentData) {
   return raw.flattenedPath;
 }
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Blog],
+  documentTypes: [Blog, Project],
   mdx: mdxOptions,
 });
