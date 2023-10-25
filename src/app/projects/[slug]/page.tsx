@@ -5,6 +5,7 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { mdxComponents } from "@/lib/mdx/components";
+import { IMG_SIZES } from "@/styles/constants";
 
 type Props = {
   params: {
@@ -28,12 +29,15 @@ export default function ProjectPage({ params }: Props) {
   return (
     <>
       <header className="py-8">
-        <Image
-          alt={project.title}
-          height={300}
-          src={project.coverImg}
-          width={800}
-        />
+        <div className="relative w-full aspect-[2/1]">
+          <Image
+            alt={project.title}
+            className="object-contain"
+            fill
+            sizes={IMG_SIZES}
+            src={project.coverImg}
+          />
+        </div>
         <h1 className="text-5xl font-bold mt-4">{project.title}</h1>
         <p className="text-lg text-gray-400 mt-2">{project.subtitle}</p>
         {project.url && (

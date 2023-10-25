@@ -22,7 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={twMerge(inter.className, "max-w-3xl px-4 mx-auto")}>
+      <body
+        className={twMerge(inter.className, "max-w-container px-4 mx-auto")}
+      >
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
