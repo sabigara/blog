@@ -8,11 +8,22 @@ type Props<T extends string> = NextLinkProps<T> &
   Omit<JSX.IntrinsicElements["a"], "href" | "ref"> & {
     external?: boolean;
     externalClassName?: string;
+    externalIcon?: boolean;
   };
 
 //  forwardRef にジェネリックコンポーネントを渡すことができないので型アサーションを行う
 export const Link = forwardRef<HTMLAnchorElement, Props<string>>(
-  ({ href, children, external = false, externalClassName, ...props }, ref) => {
+  (
+    {
+      href,
+      children,
+      external = false,
+      externalClassName,
+      externalIcon = true,
+      ...props
+    },
+    ref
+  ) => {
     const externalProps = {
       target: "_blank",
       rel: "noopener noreferrer",
@@ -25,11 +36,11 @@ export const Link = forwardRef<HTMLAnchorElement, Props<string>>(
         {...props}
       >
         {children}
-        {external && (
+        {external && externalIcon && (
           <FiArrowUpRight
             className={twMerge(
               "text-gray-400 inline mx-[0.1em]",
-              externalClassName,
+              externalClassName
             )}
             size="1.3em"
             strokeWidth={1.75}
@@ -37,7 +48,7 @@ export const Link = forwardRef<HTMLAnchorElement, Props<string>>(
         )}
       </NextLink>
     );
-  },
+  }
 ) as (<T extends string>(props: Props<T>) => JSX.Element) & {
   displayName: string;
 };

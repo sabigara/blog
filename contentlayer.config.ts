@@ -77,4 +77,5 @@ export default makeSource({
   contentDirPath: "content",
   documentTypes: [Post, Project],
   mdx: mdxOptions,
+  contentDirExclude: ["social-links/**"],
 });
