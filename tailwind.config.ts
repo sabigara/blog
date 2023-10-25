@@ -1,7 +1,8 @@
-import typography from "@tailwindcss/typography";
+import typographyPlugin from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
-import { CONTAINER_WIDTH } from "./src/styles/constants";
+import { CONTAINER_PADDING, CONTAINER_WIDTH } from "./src/styles/constants";
+import containerPlugin from "./src/styles/tailwind/container";
 import { tailwindTypographyConfig } from "./src/styles/tailwind/typography";
 
 const config: Config = {
@@ -10,6 +11,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/lib/mdx/components.tsx",
   ],
+  corePlugins: {
+    container: false,
+  },
   theme: {
     extend: {
       fontFamily: {
@@ -18,9 +22,12 @@ const config: Config = {
       maxWidth: {
         container: CONTAINER_WIDTH,
       },
+      padding: {
+        container: CONTAINER_PADDING,
+      },
       typography: tailwindTypographyConfig,
     },
   },
-  plugins: [typography],
+  plugins: [typographyPlugin, containerPlugin],
 };
 export default config;

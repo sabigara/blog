@@ -3,7 +3,6 @@ import "./prism.css";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { twMerge } from "tailwind-merge";
 
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -22,11 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body
-        className={twMerge(inter.className, "max-w-container px-4 mx-auto")}
-      >
+      <body className={inter.className}>
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen container px-container">{children}</main>
         <Footer />
       </body>
     </html>
