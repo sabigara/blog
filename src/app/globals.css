@@ -13,3 +13,10 @@
     cursor: inherit;
   }
 }
+
+/* Tailwind流ではないが、Typographyプラグインのレスポンシブなカスタマイズが煩雑なのでこれで楽をする。 */
+@media (max-width: 640px) {
+  .prose {
+    font-size: 15px;
+  }
+}
