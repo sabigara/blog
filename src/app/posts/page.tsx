@@ -1,65 +1,75 @@
 import type { Post } from "contentlayer/generated";
 import { allPosts } from "contentlayer/generated";
+import { useMemo } from "react";
 
 import { BlogPostItem } from "@/components/post/post-item";
 
 export default function BlogListPage() {
   const posts = allPosts.sort((a, b) => (a.date > b.date ? -1 : 1));
-  const postsByYear = (posts: Post[]) =>
-    posts.reduce(
-      (acc, post) => {
-        const year = new Date(post.date).getFullYear();
-        if (!acc[year]) {
-          acc[year] = [];
-        }
-        acc[year].push(post);
-        return acc;
-      },
-      {} as Record<number, typeof posts>,
-    );
+  const items = useMemo(() => {
+    const items: Item[] = [];
+    let prevYear = -1;
+    let prevSeason: Season | null = null;
+    for (const post of posts) {
+      const date = new Date(post.date);
+      const year = date.getFullYear();
+      const season = dateToSeason(date);
+      if (year !== prevYear) {
+        items.push({ kind: "year", value: year });
+        prevYear = year;
+      }
+      if (season !== prevSeason) {
+        items.push({ kind: "season", value: season });
+        prevSeason = season;
+      }
+      items.push({ kind: "post", value: post });
+    }
+    return items;
+  }, [posts]);
 
-  const postsBySeason = (posts: Post[]) =>
-    posts.reduce(
-      (acc, post) => {
-        const date = new Date(post.date);
-        const season = dateToSeason(date);
-        if (!acc[season]) {
-          acc[season] = [];
-        }
-        acc[season].push(post);
-        return acc;
-      },
-      { "❄️": [], "🍁": [], "🌻": [], "🌸": [] } as Record<
-        ReturnType<typeof dateToSeason>,
-        typeof posts
-      >,
-    );
+  const renderItem = (item: Item) => {
+    switch (item.kind) {
+      case "post":
+        return (
+          <BlogPostItem
+            className="my-1"
+            key={item.value._id}
+            post={item.value as Post}
+          />
+        );
+      case "season":
+        return <h2 className="text-2xl font-bold my-4">{item.value}</h2>;
+      case "year":
+        return (
+          <h3 className="text-3xl font-bold my-8" key={item.value}>
+            {item.value}
+          </h3>
+        );
+    }
+  };
 
   return (
     <div className="pt-8 pb-12">
-      <h1 className="text-4xl font-bold">Posts</h1>
-      {Object.entries(postsByYear(posts))
-        .reverse()
-        .map(([year, posts]) => (
-          <div className="mt-8" key={year}>
-            <h2 className="text-3xl font-bold mb-8">{year}</h2>
-            {Object.entries(postsBySeason(posts)).map(([season, posts]) => (
-              <div className="mt-4" key={season}>
-                <h3 className="text-xl font-bold">{season}</h3>
-                <ul className="mt-4 space-y-1">
-                  {posts.map((post) => (
-                    <li key={post._id}>
-                      <BlogPostItem post={post} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        ))}
+      <h1 className="text-4xl font-bold mb-8">Posts</h1>
+      {items.map(renderItem)}
     </div>
   );
 }
+
+type Season = ReturnType<typeof dateToSeason>;
+type Item =
+  | {
+      kind: "post";
+      value: Post;
+    }
+  | {
+      kind: "season";
+      value: Season;
+    }
+  | {
+      kind: "year";
+      value: number;
+    };
 
 function dateToSeason(date: Date) {
   const month = date.getMonth() + 1;
