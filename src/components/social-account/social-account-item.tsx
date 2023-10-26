@@ -1,15 +1,15 @@
 import { twMerge } from "tailwind-merge";
 
 import { Link } from "@/components/link";
-import { Website } from "@/constants/website";
-import type { SocialLink } from "@/types/social-link";
+import { WebChannel } from "@/constants/web-channel";
+import type { SocialAccount } from "@/types/social-account";
 
 type Props = {
-  socialLink: SocialLink;
+  socialLink: SocialAccount;
 };
 
-export function SocialLinkItem({ socialLink }: Props) {
-  const website = Website[socialLink.website];
+export function SocialAccountItem({ socialLink }: Props) {
+  const website = WebChannel[socialLink.channel];
   const { Icon, label } = website;
 
   return (

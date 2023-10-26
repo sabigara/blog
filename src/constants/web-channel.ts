@@ -3,35 +3,35 @@ import {
   TbBrandGithub,
   TbBrandSoundcloud,
   TbBrandTwitter,
+  TbMail,
 } from "react-icons/tb";
 
 import ZennSvg from "@/assets/svg/zenn.svg";
 
-type Website = {
+type IWebChannel = {
   Icon: IconType;
-  hostname: string;
   label: string;
 };
 
-export const Website = {
+export const WebChannel = {
   Twitter: {
-    hostname: "twitter.com",
     Icon: TbBrandTwitter,
     label: "Twitter",
   },
   GitHub: {
-    hostname: "github.com",
     Icon: TbBrandGithub,
     label: "GitHub",
   },
   SoundCloud: {
-    hostname: "soundcloud.com",
     Icon: TbBrandSoundcloud,
     label: "SoundCloud",
   },
   Zenn: {
-    hostname: "zenn.dev",
     Icon: ZennSvg,
     label: "Zenn",
   },
-} as const satisfies Record<string, Website>;
+  Email: {
+    Icon: TbMail,
+    label: "Email",
+  },
+} as const satisfies Record<string, IWebChannel>;
