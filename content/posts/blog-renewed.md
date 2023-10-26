@@ -85,7 +85,7 @@ return (
 ```typescript
 // pages/embed/[url].tsx
 export async function getServerSideProps(
-  ctx: GetServerSidePropsContext,
+  ctx: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> {
   const url = ctx.params.url as string;
   const siteMetadata = await getSiteMetadata(url);
@@ -111,7 +111,7 @@ iframeから同じNext.jsの `pages/embed/[url].tsx` というSSRページを表
 
 記事のリストには、以下の画像のようにZennの投稿へのリンクも表示するようにした。
 
-![](/images/blog/blog-renewd.png)
+![](/images/posts/blog-renewd.png)
 
 Zennの記事もGitHubで管理しているので、API経由で自由にフェッチできる。ビルド前にそれらのファイルを記事用のディレクトリに書き出しておくことで、あまり苦労せずに接続することができた。
 

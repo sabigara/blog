@@ -9,7 +9,7 @@ date: "2022-11-24"
 
 これを[Product Huntに投稿](https://www.producthunt.com/products/reaktr#reaktr)するとたくさんのUpvoteとポジティブな感想が集まり、最後には２位になりました。
 
-![ReaktrがProduct Huntで2位を獲得](/images/blog/reaktr-ph.png)
+![ReaktrがProduct Huntで2位を獲得](/images/posts/reaktr-ph.png)
 
 そう言うと、多くの人には大成功に聞こえると思います。大量のユーザー流入があるだろうし、有料化すればビジネスになると思うかもしれません。
 
@@ -76,7 +76,7 @@ Reaktrは最初は無料サービスとしてリリースしましたが、約3�
 
 5月に有料プランを実装してから今月サービスをクローズするまでの半年の合計は **約$74** でした。しかし、私自身が契約している分を除くと **$50** になります。
 
-![Stripeの収益ダッシュボード](/images/blog/reaktr-stripe.png)
+![Stripeの収益ダッシュボード](/images/posts/reaktr-stripe.png)
 
 **有料ユーザーの合計は6人**でした。Reaktrの機能に満足されない方はすぐに退会してしまいましたが、長く（といっても数ヶ月ですが）購読してくれる人もいました。ちなみに無料ユーザーも含めると合計で518人がサインアップしてくれました。
 
@@ -104,7 +104,7 @@ Reaktrのアイデア自体は悪くないと今でも思っていますし、�
 
 ## 次のプロジェクト
 
-![Image of Saazy](/images/blog/saazy.png)
+![Image of Saazy](/images/posts/saazy.png)
 
 つい先日、[マーケティング用のNext.jsテンプレート](https://camome.net/)をリリースしました。これも[Product Huntに投稿](https://www.producthunt.com/posts/saazy-template)しましたが、47位に終わりました。このプロジェクトが上位を獲れるとは思っていなかったので気にしていませんが。
 

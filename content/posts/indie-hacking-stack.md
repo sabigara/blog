@@ -82,7 +82,7 @@ export default function Example() {
 }
 ```
 
-![Chakraのデモ](/images/blog/chakra-demo.png)
+![Chakraのデモ](/images/posts/chakra-demo.png)
 
 「Tailwindっぽい」と感じた人も多いと思う。スタイリングとマークアップが渾然一体になっている点は全く同じだ。
 
@@ -208,7 +208,7 @@ Twitterでバズるつもりの人は読み飛ばしてください。
 
 ### OGP画像
 
-![ツイヨミ OGP画像](/images/blog/twiyomi-ogp.png)
+![ツイヨミ OGP画像](/images/posts/twiyomi-ogp.png)
 
 1200x630サイズの画像を以下のように設定しておくと、Twitterなどで目立たせることができる。
 

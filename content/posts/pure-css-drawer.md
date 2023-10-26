@@ -27,17 +27,17 @@ date: "2022-09-01"
 
 ハンバーガーメニューではなく、下図のように普通のナビゲーションとして表示する。
 
-![ナビゲーションが表示されている](/images/blog/drawer-disabled.png)
+![ナビゲーションが表示されている](/images/posts/drawer-disabled.png)
 
 ### スクリーンの幅が一定以上狭い場合
 
 ナビゲーションを非表示にして、ハンバーガーメニューを開くためのボタンを表示する。
 
-![ハンバーガーメニューを開くボタンが表示されている](/images/blog/drawer-enabled.png)
+![ハンバーガーメニューを開くボタンが表示されている](/images/posts/drawer-enabled.png)
 
 クリックしたら右から滑ってくる。
 
-![ハンバーガーメニューが開いている](/images/blog/drawer-open.png)
+![ハンバーガーメニューが開いている](/images/posts/drawer-open.png)
 
 ### 閉じるボタンで閉じる
 

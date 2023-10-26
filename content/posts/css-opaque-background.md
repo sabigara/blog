@@ -7,15 +7,15 @@ date: "2023-01-30"
 
 既存のフレームワークなどではどうやって対処しているのかと調べてみたが、例えば[Tailwind](https://tailwindcss.com/)のヘッダー右のタグのような微妙な背景色は `rgba(56, 189, 248, 0.1)` のようにアルファチャンネルを付加して半透明にしてあるし、他にも [Mantine](https://mantine.dev/core/button/#variants) の `light` バリアントの背景色も同じように半透明だった。
 
-![Tailwind、ダークモード、薄い背景色のタグ](public/images/blog/tailwind-tag.png)
+![Tailwind、ダークモード、薄い背景色のタグ](/images/posts/tailwind-tag.png)
 
 [MUI Joy](https://mui.com/joy-ui/react-button/) の `soft` バリアントはシェードの一番暗い色を使用している。シンプルなのはいいのだが、これはちょっと暗すぎるようにも見える。
 
-![MUI Joyのボタン、softバリアント](public/images/blog/mui-joy-button.png)
+![MUI Joyのボタン、softバリアント](/images/posts/mui-joy-button.png)
 
 半透明にすることでいい感じにはなったので、この方法を採用することにした。しかし問題点としては**要素同士を重ねると透けてしまう**（当たり前すぎるのだが）。
 
-![複数のAvatarコンポーネントが重ねっていて、背景が透けている](public/images/blog/alpha-avatar-group.png)
+![複数のAvatarコンポーネントが重ねっていて、背景が透けている](/images/posts/alpha-avatar-group.png)
 
 ## 解決方法
 

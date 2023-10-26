@@ -45,7 +45,7 @@ HTMLは以下のように出力されます。`id` はコンポーネント内�
 
 以下がスタイル例です。CSSについては今回はあまり触れませんが、 `error` propを渡すことでクラス名を付与したり、 `&:has([required])` セレクターで必須項目のアスタリスクを疑似要素として表示したりできます。
 
-![Erroneous text field labeled "Name", described "Tell us your name" and "Something is wrong"](/images/blog/form-control.png)
+![Erroneous text field labeled "Name", described "Tell us your name" and "Something is wrong"](/images/posts/form-control.png)
 
 :::warn
 `:has()` はFirefoxではまだ実装されていません。
@@ -162,7 +162,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
         {...props}
       />
     );
-  },
+  }
 );
 
 Input.displayName = "Input";

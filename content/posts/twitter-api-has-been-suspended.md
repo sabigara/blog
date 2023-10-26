@@ -32,7 +32,7 @@ The Twitter Developer Platform team
 
 Twitter APIのダッシュボードを開いてみると、`Project` の `Production` 環境に登録されていた `App` が、 `Standalone Apps` (v1専用)に移動されていた。(v2 APIでは1つの `Project` に対して複数環境を作り、独自のAPIキーを発行できる)
 
-![developer portal](/images/blog/twitter-dev-portal.png)
+![developer portal](/images/posts/twitter-dev-portal.png)
 
 [プラン表](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api)によると、Essentialプランは「1 App per Project」だから、僕は現在Essentialだということになる。
 
@@ -47,7 +47,7 @@ Twitter APIのダッシュボードを開いてみると、`Project` の `Produc
 
 しかし僕はElevatedアクセスを申請して受理されていたはずで、実際ダッシュボードにも以下のように表示されている。つまり、**僕は自分でElevatedアクセスを申請してProduction Appをv2 Projectに移行することができない**。
 
-![Elevatedアクセスを持っている](/images/blog/twitter-api-elevated.png)
+![Elevatedアクセスを持っている](/images/posts/twitter-api-elevated.png)
 
 ただ、おかしいのはTwitter開発者プログラムに登録した時点ですでに1つのProjectに対して3つのAppを作れていた気がすることだ。Twitterからのメールはたぶんそのことを言っているだと思う。
 

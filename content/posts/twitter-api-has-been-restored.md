@@ -7,7 +7,7 @@ https://sabigara.com/blog/ja/twitter-api-has-been-suspended
 
 この前こんな記事を書いたが、少し前に確認したら復旧していた。
 
-![APIの権限がelevatedにもどった](/images/blog/twitter-api-access.png)
+![APIの権限がelevatedにもどった](/images/posts/twitter-api-access.png)
 
 ただし、プロジェクトから強制的に排除されたAppはそのまま `Standalone App` にいるし、全部直してくれるわけではないらしい。
 
