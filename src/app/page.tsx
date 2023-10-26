@@ -72,7 +72,7 @@ export default function Home() {
 
       <section>
         <h2 className={twHeading}>
-          Works
+          <Link href="/works">Works</Link>
           <span className="ml-[1em] text-sm text-gray-400 font-medium">
             {works.length} of {allWorks.length}
           </span>
@@ -89,7 +89,7 @@ export default function Home() {
 
       <section>
         <h2 className={twMerge(twHeading, "mt-12")}>
-          Posts
+          <Link href="/posts">Posts</Link>
           <span className="ml-[1em] text-sm text-gray-400 font-medium">
             {posts.length} of {allPosts.length}
           </span>
