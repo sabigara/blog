@@ -33,9 +33,9 @@ function resolveBlogSlug(raw: RawDocumentData) {
   return "/" + raw.flattenedPath;
 }
 
-export const Project = defineDocumentType(() => ({
-  name: "Project",
-  filePathPattern: `projects/**/*+(.md|.mdx)`,
+export const Work = defineDocumentType(() => ({
+  name: "Work",
+  filePathPattern: `works/**/*+(.md|.mdx)`,
   contentType: "mdx",
   fields: {
     title: {
@@ -64,18 +64,18 @@ export const Project = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => resolveProjectSlug(doc._raw),
+      resolve: (doc) => resolveWorkSlug(doc._raw),
     },
   },
 }));
 
-function resolveProjectSlug(raw: RawDocumentData) {
+function resolveWorkSlug(raw: RawDocumentData) {
   return "/" + raw.flattenedPath;
 }
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Post, Project],
+  documentTypes: [Post, Work],
   mdx: mdxOptions,
   contentDirExclude: ["social-links/**"],
 });

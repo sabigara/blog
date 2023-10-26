@@ -1,25 +1,25 @@
-import { allPosts, allProjects } from "contentlayer/generated";
+import { allPosts, allWorks } from "contentlayer/generated";
 import { twMerge } from "tailwind-merge";
 
 import { ArrowRightIcon } from "@/components/icons";
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { BlogPostItem } from "@/components/post/post-item";
-import { ProjectCard } from "@/components/project/card";
 import { SocialAccountItem } from "@/components/social-account/social-account-item";
+import { WorkCard } from "@/components/work/card";
 import { socialAccounts } from "@/constants/social-accounts";
 
 const twHeading = "text-4xl font-bold mb-8";
 const twViewAll = "mt-6 inline-block underline decoration-from-font";
 const twParagraph = "text-gray-600 mt-2 text-[0.94em]";
 
-const PROJECT_LIMIT = 4;
+const WORK_LIMIT = 4;
 const BLOG_LIMIT = 5;
 
 export default function Home() {
-  const projects = allProjects
+  const works = allWorks
     .sort((a, b) => (a.date > b.date ? -1 : 1))
-    .slice(0, PROJECT_LIMIT);
+    .slice(0, WORK_LIMIT);
   const posts = allPosts
     .sort((a, b) => (a.date > b.date ? -1 : 1))
     .slice(0, BLOG_LIMIT);
@@ -74,15 +74,15 @@ export default function Home() {
         <h2 className={twHeading}>
           Works
           <span className="ml-[1em] text-sm text-gray-400 font-medium">
-            {projects.length} of {allProjects.length}
+            {works.length} of {allWorks.length}
           </span>
         </h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-          {projects.map((project) => (
-            <ProjectCard key={project._id} project={project} />
+          {works.map((work) => (
+            <WorkCard key={work._id} work={work} />
           ))}
         </ul>
-        <Link className={twViewAll} href="/projects">
+        <Link className={twViewAll} href="/works">
           View all works <ArrowRightIcon aria-hidden className="inline" />
         </Link>
       </section>

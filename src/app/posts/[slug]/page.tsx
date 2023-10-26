@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import { TbCalendarEvent as CalendarIcon } from "react-icons/tb";
 
-import { Link } from "@/components/link";
 import { datetimeFormat } from "@/lib/datetime/format";
 import { mdxComponents } from "@/lib/mdx/components";
 
@@ -36,9 +35,7 @@ export default function BlogPostPage({ params }: Props) {
       <article className="prose pb-12">
         <Content components={mdxComponents} />
       </article>
-      <aside className="py-8 border-t">
-        <Link href="/">戻る</Link>
-      </aside>
+      <aside className="py-8 border-t"></aside>
     </>
   );
 }
