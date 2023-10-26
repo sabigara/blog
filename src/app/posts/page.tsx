@@ -15,14 +15,14 @@ export default function BlogListPage() {
       const year = date.getFullYear();
       const season = dateToSeason(date);
       if (year !== prevYear) {
-        items.push({ kind: "year", value: year });
+        items.push({ key: year.toString(), kind: "year", value: year });
         prevYear = year;
       }
       if (season !== prevSeason) {
-        items.push({ kind: "season", value: season });
+        items.push({ key: `${year}-${season}`, kind: "season", value: season });
         prevSeason = season;
       }
-      items.push({ kind: "post", value: post });
+      items.push({ key: post._id, kind: "post", value: post });
     }
     return items;
   }, [posts]);
@@ -33,15 +33,19 @@ export default function BlogListPage() {
         return (
           <BlogPostItem
             className="my-1"
-            key={item.value._id}
+            key={item.key}
             post={item.value as Post}
           />
         );
       case "season":
-        return <h2 className="text-2xl font-bold my-4">{item.value}</h2>;
+        return (
+          <h2 className="text-2xl font-bold my-4" key={item.key}>
+            {item.value}
+          </h2>
+        );
       case "year":
         return (
-          <h3 className="text-3xl font-bold my-8" key={item.value}>
+          <h3 className="text-3xl font-bold my-8" key={item.key}>
             {item.value}
           </h3>
         );
@@ -59,14 +63,17 @@ export default function BlogListPage() {
 type Season = ReturnType<typeof dateToSeason>;
 type Item =
   | {
+      key: string;
       kind: "post";
       value: Post;
     }
   | {
+      key: string;
       kind: "season";
       value: Season;
     }
   | {
+      key: string;
       kind: "year";
       value: number;
     };
