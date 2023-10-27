@@ -20,9 +20,15 @@ export function DataList({ data, classNames }: Props) {
           return null;
         }
         return (
-          <div className={twMerge("space-y-2", classNames?.item)} key={term}>
-            <dt className="text-lg text-gray-300">{term.toUpperCase()}</dt>
-            <dd className="text-lg">{data}</dd>
+          <div
+            className={twMerge(
+              "space-y-2 text-base md:text-lg",
+              classNames?.item
+            )}
+            key={term}
+          >
+            <dt className="text-gray-300">{term.toUpperCase()}</dt>
+            <dd className="">{data}</dd>
           </div>
         );
       })}
