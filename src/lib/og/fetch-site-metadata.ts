@@ -1,7 +1,5 @@
 import { JSDOM } from "jsdom";
 
-import { JsonCache } from "@/lib/json-cache";
-
 export type Ogp = {
   description?: string;
   image?: string;
@@ -18,20 +16,7 @@ export type SiteMetadata = {
   url: string;
 };
 
-const isDev = process.env.NODE_ENV === "development";
-const cacheStore = isDev
-  ? new JsonCache<SiteMetadata>("./site-metadata.cache.json")
-  : null;
-
 export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
-  if (isDev) {
-    const cache = cacheStore!.get(url);
-    if (cache) {
-      return cache;
-    }
-  }
-
-  console.debug("fetching siteMetadata for", url);
   const resp = await fetch(decodeURIComponent(url));
   if (!resp.ok) {
     throw new Error(
@@ -83,8 +68,5 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
     description,
     url,
   };
-  if (isDev) {
-    cacheStore!.set(url, metadata);
-  }
   return metadata;
 }
