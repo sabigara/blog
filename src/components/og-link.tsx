@@ -13,10 +13,15 @@ export async function OgLink({ className, href }: Props) {
   let hostname: string | null = null;
   try {
     metadata = await fetchSiteMetadata(href);
+  } catch (e) {
+    console.error(e);
+  }
+  try {
     hostname = new URL(href).hostname;
   } catch (e) {
     console.error(e);
   }
+
   return (
     <a
       className={twMerge("relative h-full w-full flex", className)}
