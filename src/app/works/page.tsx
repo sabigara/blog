@@ -1,6 +1,8 @@
 import { allWorks } from "contentlayer/generated";
+import type { Metadata } from "next";
 
 import { WorkCard } from "@/components/work/card";
+import { createMetadata } from "@/lib/metadata/create-metadata";
 
 export default function WorkListPage() {
   const works = allWorks.sort((a, b) => (a.date > b.date ? -1 : 1));
@@ -16,3 +18,7 @@ export default function WorkListPage() {
     </div>
   );
 }
+
+export const metadata: Metadata = createMetadata({
+  title: "Works",
+});

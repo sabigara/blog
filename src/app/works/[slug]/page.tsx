@@ -1,10 +1,12 @@
 import { allWorks } from "contentlayer/generated";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { mdxComponents } from "@/lib/mdx/components";
+import { createMetadata } from "@/lib/metadata/create-metadata";
 import { IMG_SIZES } from "@/styles/constants";
 
 type Props = {
@@ -14,18 +16,14 @@ type Props = {
 };
 
 export default function WorkPage({ params }: Props) {
-  const works = allWorks.find(
-    (work) =>
-      work._raw.flattenedPath === work._raw.sourceFileDir + "/" + params.slug
-  );
-
+  const works = getWork(params.slug);
   if (!works) {
     return notFound();
   }
 
-  const Content = getMDXComponent(works.body.code);
-
   const hostname = works.url ? new URL(works.url).hostname : null;
+
+  const Content = getMDXComponent(works.body.code);
 
   return (
     <>
@@ -59,5 +57,23 @@ export default function WorkPage({ params }: Props) {
         <Link href="/">戻る</Link>
       </aside>
     </>
+  );
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const work = getWork(params.slug);
+  if (!work) {
+    return {};
+  }
+
+  return createMetadata({
+    title: work.title,
+    description: work.subtitle,
+  });
+}
+
+function getWork(slug: string) {
+  return allWorks.find(
+    (work) => work._raw.flattenedPath === work._raw.sourceFileDir + "/" + slug
   );
 }

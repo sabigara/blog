@@ -1,8 +1,10 @@
 import type { Post } from "contentlayer/generated";
 import { allPosts } from "contentlayer/generated";
+import type { Metadata } from "next";
 import { useMemo } from "react";
 
 import { BlogPostItem } from "@/components/post/post-item";
+import { createMetadata } from "@/lib/metadata/create-metadata";
 
 export default function BlogListPage() {
   const posts = allPosts.sort((a, b) => (a.date > b.date ? -1 : 1));
@@ -92,3 +94,7 @@ function dateToSeason(date: Date) {
     throw new Error("Should not reach here.");
   }
 }
+
+export const metadata: Metadata = createMetadata({
+  title: "Posts",
+});
