@@ -5,7 +5,7 @@ import { WorkCard } from "@/components/work/card";
 import { createMetadata } from "@/lib/metadata/create-metadata";
 
 export default function WorkListPage() {
-  const works = allWorks.sort((a, b) => (a.date > b.date ? -1 : 1));
+  const works = allWorks.sort((a, b) => (!!a.featured > !!b.featured ? -1 : 1));
 
   return (
     <div className="pt-8 pb-12">

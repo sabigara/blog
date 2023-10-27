@@ -50,7 +50,7 @@ export const Work = defineDocumentType(() => ({
       type: "string",
     },
     date: {
-      type: "date",
+      type: "string",
       required: true,
     },
     coverImg: {
@@ -59,6 +59,16 @@ export const Work = defineDocumentType(() => ({
     },
     url: {
       type: "string",
+    },
+    role: {
+      type: "string",
+      required: true,
+    },
+    achievement: {
+      type: "string",
+    },
+    featured: {
+      type: "boolean",
     },
   },
   computedFields: {

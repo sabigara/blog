@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
+import { DataList } from "@/components/data-list";
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { mdxComponents } from "@/lib/mdx/components";
@@ -22,6 +23,17 @@ export default function WorkPage({ params }: Props) {
   }
 
   const hostname = works.url ? new URL(works.url).hostname : null;
+  const link = works.url ? (
+    <Link
+      className="hover:underline"
+      external
+      externalClassName="translate-y-[-1px] mr-0"
+      href={works.url}
+      key="url"
+    >
+      https://{hostname}
+    </Link>
+  ) : null;
 
   const Content = getMDXComponent(works.body.code);
 
@@ -37,25 +49,24 @@ export default function WorkPage({ params }: Props) {
             src={works.coverImg}
           />
         </div>
-        <h1 className="text-5xl font-bold mt-4">{works.title}</h1>
-        <p className="text-lg text-gray-400 mt-2">{works.subtitle}</p>
-        {works.url && hostname && (
-          <Link
-            className="mt-4 border text-sm rounded-md px-2 inline-block leading-7 hover:border-gray-300"
-            external
-            externalClassName="translate-y-[-1px] mr-0"
-            href={works.url}
-          >
-            <span className="font-mono">https://{hostname}</span>
-          </Link>
-        )}
+        <h1 className="text-5xl font-bold mt-8">{works.title}</h1>
+        <p className="text-lg text-gray-400 leading-tight mt-4">
+          {works.subtitle}
+        </p>
+        <DataList
+          classNames={{ list: "mt-8", item: "" }}
+          data={[
+            { term: "制作時期", data: works.date },
+            { term: "役割", data: works.role },
+            { term: "実績", data: works.achievement },
+            { term: "URL", data: link || "N/A" },
+          ]}
+        />
       </header>
       <article className="prose pb-12">
         <Content components={mdxComponents} />
       </article>
-      <aside className="py-8 border-t">
-        <Link href="/">戻る</Link>
-      </aside>
+      <aside className="py-8 border-t"></aside>
     </>
   );
 }

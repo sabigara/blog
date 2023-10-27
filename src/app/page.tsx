@@ -14,11 +14,11 @@ const twViewAll = "mt-6 inline-block underline decoration-from-font";
 const twParagraph = "text-gray-600 mt-2 text-[0.94em]";
 
 const WORK_LIMIT = 4;
-const BLOG_LIMIT = 5;
+const BLOG_LIMIT = 6;
 
 export default function Home() {
   const works = allWorks
-    .sort((a, b) => (a.date > b.date ? -1 : 1))
+    .sort((a, b) => (!!a.featured > !!b.featured ? -1 : 1))
     .slice(0, WORK_LIMIT);
   const posts = allPosts
     .sort((a, b) => (a.date > b.date ? -1 : 1))
