@@ -12,7 +12,7 @@ import { mdxComponents } from "@/lib/mdx/components";
 import { createMetadata } from "@/lib/metadata/create-metadata";
 
 const twAdjacentPostLink =
-  "block h-fit max-w-[14rem] -m-2 p-2 rounded-md text-sm sm:text-base hover:bg-slate-100";
+  "block h-fit max-w-[14rem] -m-2 p-2 rounded-md text-sm hover:bg-slate-100";
 
 type Props = {
   params: {
