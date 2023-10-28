@@ -41,11 +41,13 @@ export const tailwindTypographyConfig = (theme: (token: string) => string) => ({
       code: {
         color: theme("colors.gray.800"),
         backgroundColor: theme("colors.gray.100"),
+        border: `1px solid ${theme("colors.gray.200")}`,
         paddingLeft: "4px",
         paddingRight: "4px",
         paddingTop: "2px",
         paddingBottom: "2px",
         borderRadius: "0.25rem",
+        fontWeight: "400",
       },
       "code::before": {
         content: "none",
