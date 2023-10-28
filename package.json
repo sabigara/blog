@@ -12,6 +12,7 @@
     "format:fix": "prettier --cache --write ."
   },
   "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@types/mdx": "^2.0.9",
     "contentlayer": "^0.3.4",
     "jsdom": "^22.1.0",
