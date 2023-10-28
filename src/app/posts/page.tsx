@@ -1,13 +1,13 @@
 import type { Post } from "contentlayer/generated";
-import { allPosts } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { useMemo } from "react";
 
 import { BlogPostItem } from "@/components/post/post-item";
+import { listPosts } from "@/lib/content/post";
 import { createMetadata } from "@/lib/metadata/create-metadata";
 
 export default function BlogListPage() {
-  const posts = allPosts.sort((a, b) => (a.date > b.date ? -1 : 1));
+  const posts = listPosts();
   const items = useMemo(() => {
     const items: Item[] = [];
     let prevYear = -1;

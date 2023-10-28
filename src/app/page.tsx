@@ -8,21 +8,20 @@ import { BlogPostItem } from "@/components/post/post-item";
 import { SocialAccountItem } from "@/components/social-account/social-account-item";
 import { WorkCard } from "@/components/work/card";
 import { socialAccounts } from "@/constants/social-accounts";
+import { listPosts } from "@/lib/content/post";
 
 const twHeading = "text-4xl font-bold mb-8";
 const twViewAll = "mt-6 inline-block underline decoration-from-font";
 const twParagraph = "text-gray-600 mt-2 text-[0.94em]";
 
 const WORK_LIMIT = 4;
-const BLOG_LIMIT = 6;
+const POST_LIMIT = 6;
 
 export default function Home() {
   const works = allWorks
     .sort((a, b) => (!!a.featured > !!b.featured ? -1 : 1))
     .slice(0, WORK_LIMIT);
-  const posts = allPosts
-    .sort((a, b) => (a.date > b.date ? -1 : 1))
-    .slice(0, BLOG_LIMIT);
+  const posts = listPosts({ limit: POST_LIMIT });
 
   return (
     <div className="pt-8 pb-12 space-y-16">
