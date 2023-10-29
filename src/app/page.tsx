@@ -7,7 +7,7 @@ import { Link } from "@/components/link";
 import { BlogPostItem } from "@/components/post/post-item";
 import { SocialAccountItem } from "@/components/social-account/social-account-item";
 import { WorkCard } from "@/components/work/card";
-import { socialAccounts } from "@/constants/social-accounts";
+import { socialAccounts } from "@/content/social-accounts";
 import { listPosts } from "@/lib/content/post";
 
 const twHeading = "text-4xl font-bold mb-8";
