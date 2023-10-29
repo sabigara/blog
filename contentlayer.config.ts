@@ -84,7 +84,7 @@ function resolveWorkSlug(raw: RawDocumentData) {
 }
 
 export default makeSource({
-  contentDirPath: "content",
+  contentDirPath: "src/content",
   documentTypes: [Post, Work],
   mdx: mdxOptions,
   contentDirExclude: ["social-links/**"],
