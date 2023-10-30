@@ -4,7 +4,7 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 import { TbCalendarEvent as CalendarIcon } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 
-import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
+import { ArrowLeftIcon, ArrowRightIcon, RefreshIcon } from "@/components/icons";
 import { Link } from "@/components/link";
 import { getAdjacentPosts, getPostBySlug } from "@/lib/content/post";
 import { datetimeFormat } from "@/lib/datetime/format";
@@ -34,10 +34,18 @@ export default function BlogPostPage({ params }: Props) {
     <>
       <header className="py-8">
         <h1 className="text-3xl font-bold">{post.title}</h1>
-        <time className="text-sm text-gray-500 mt-3 flex items-center gap-x-1">
-          <CalendarIcon aria-hidden className="translate-y-[-0.5px]" />
-          {datetimeFormat(post.date)}
-        </time>
+        <div className="flex items-center gap-3 mt-3 text-sm text-gray-500 ">
+          <time className="flex items-center gap-x-1">
+            <CalendarIcon className="translate-y-[-0.5px]" title="公開日" />
+            {datetimeFormat(post.publishedAt)}
+          </time>
+          {post.modifiedAt && (
+            <time className="flex items-center gap-x-1">
+              <RefreshIcon title="更新日" />
+              {datetimeFormat(post.modifiedAt)}
+            </time>
+          )}
+        </div>
       </header>
       <article className="prose pb-12">
         <Content components={mdxComponents} />

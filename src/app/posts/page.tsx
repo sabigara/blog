@@ -13,7 +13,7 @@ export default function BlogListPage() {
     let prevYear = -1;
     let prevSeason: Season | null = null;
     for (const post of posts) {
-      const date = new Date(post.date);
+      const date = new Date(post.publishedAt);
       const year = date.getFullYear();
       const season = dateToSeason(date);
       if (year !== prevYear) {

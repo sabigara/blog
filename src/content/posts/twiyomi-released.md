@@ -1,6 +1,6 @@
 ---
 title: Twitter上のマンガスレッドを一気読みできる「ツイヨミ」をリリースした
-date: "2022-08-04"
+publishedAt: "2022-08-04"
 ---
 
 https://twiyomi.vercel.app

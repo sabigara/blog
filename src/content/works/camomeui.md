@@ -7,6 +7,7 @@ achievement: "⭐️ 220"
 coverImg: "/images/projects/camomeui.jpg"
 url: "https://camome.net"
 featured: true
+publishedAt: "2023-10-30"
 ---
 
 ---

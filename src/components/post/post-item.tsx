@@ -23,10 +23,10 @@ export function BlogPostItem({ className, post }: Props) {
       </Link>
       <time
         className="text-sm text-gray-400 flex items-center gap-x-1"
-        dateTime={post.date}
+        dateTime={post.publishedAt}
       >
         <CalendarIcon aria-hidden className="translate-y-[-0.5px]" />
-        {datetimeFormat(post.date)}
+        {datetimeFormat(post.publishedAt)}
       </time>
     </article>
   );

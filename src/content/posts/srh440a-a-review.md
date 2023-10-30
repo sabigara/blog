@@ -1,6 +1,7 @@
 ---
 title: "[レビュー] SHURE SRH440A-Aはバランス型の優良モニターヘッドフォンだった"
-date: "2023-08-21"
+publishedAt: "2023-08-21"
+modifiedAt: "2023-08-27"
 ---
 
 ![s](/images/posts/srh440a-a.webp)

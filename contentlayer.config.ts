@@ -27,9 +27,12 @@ export const Post = defineDocumentType(() => ({
     description: {
       type: "string",
     },
-    date: {
+    publishedAt: {
       type: "date",
       required: true,
+    },
+    modifiedAt: {
+      type: "date",
     },
   },
   computedFields,
@@ -71,6 +74,13 @@ export const Work = defineDocumentType(() => ({
     },
     featured: {
       type: "boolean",
+    },
+    publishedAt: {
+      type: "date",
+      required: true,
+    },
+    modifiedAt: {
+      type: "date",
     },
   },
   computedFields,

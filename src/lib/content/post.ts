@@ -3,7 +3,8 @@ import { allPosts } from "contentlayer/generated";
 
 export function listPosts({ limit }: { limit?: number } = {}) {
   const sortedPosts = [...allPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
   return sortedPosts.slice(0, limit);
 }

@@ -5,5 +5,6 @@ export {
   TbCheck as CheckIcon,
   TbCode as CodeIcon,
   TbPencilMinus as PenLineIcon,
+  TbRefresh as RefreshIcon,
   TbSelector as SelectorIcon,
 } from "react-icons/tb";

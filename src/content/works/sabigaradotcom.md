@@ -6,6 +6,5 @@ role: "デザイン/開発"
 coverImg: "/images/projects/sabigaradotcom.jpg"
 url: "https://sabigara.com"
 featured: true
----
-
+publishedAt: "2023-10-30"
 ---
