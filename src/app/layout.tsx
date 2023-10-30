@@ -1,7 +1,7 @@
 import "./globals.css";
 import "./prism.css";
 
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { Inter } from "next/font/google";
 
 import { Footer } from "@/components/footer";
@@ -32,10 +32,18 @@ export default function RootLayout({
   );
 }
 
-export const metadata: Metadata = createMetadata({
-  title: {
-    default: "Sabigara",
-    template: "%s | Sabigara",
-  },
-  description: "Sabigaraのポートフォリオサイトです",
-});
+export async function generateMetadata(
+  _: unknown,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  return createMetadata(
+    {
+      title: {
+        default: "Sabigara",
+        template: "%s | Sabigara",
+      },
+      description: "Sabigaraのポートフォリオ/ブログ",
+    },
+    parent
+  );
+}

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import { TbCalendarEvent as CalendarIcon } from "react-icons/tb";
@@ -77,13 +77,21 @@ export default function BlogPostPage({ params }: Props) {
   );
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const post = getPostBySlug(params.slug);
+
   if (!post) {
     return {};
   }
 
-  return createMetadata({
-    title: post.title,
-  });
+  return createMetadata(
+    {
+      title: post.title,
+      description: "Sabigaraのブログ記事",
+    },
+    parent
+  );
 }

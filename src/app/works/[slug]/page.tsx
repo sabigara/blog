@@ -1,5 +1,5 @@
 import { allWorks } from "contentlayer/generated";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
@@ -84,19 +84,25 @@ export default function WorkPage({ params }: Props) {
   );
 }
 
-export function generateMetadata({ params }: Props): Metadata {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const work = getWork(params.slug);
   if (!work) {
     return {};
   }
 
-  return createMetadata({
-    title: work.title,
-    description: work.subtitle,
-    openGraph: {
-      images: [work.coverImg],
+  return createMetadata(
+    {
+      title: work.title,
+      description: work.subtitle,
+      openGraph: {
+        images: [work.coverImg],
+      },
     },
-  });
+    parent
+  );
 }
 
 function getWork(slug: string) {

@@ -1,5 +1,5 @@
 import { allWorks } from "contentlayer/generated";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { WorkCard } from "@/components/work/card";
 import { createMetadata } from "@/lib/metadata/create-metadata";
@@ -19,6 +19,14 @@ export default function WorkListPage() {
   );
 }
 
-export const metadata: Metadata = createMetadata({
-  title: "Works",
-});
+export async function generateMetadata(
+  _: unknown,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  return createMetadata(
+    {
+      title: "Works",
+    },
+    parent
+  );
+}
