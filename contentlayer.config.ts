@@ -82,6 +82,12 @@ export const Work = defineDocumentType(() => ({
     modifiedAt: {
       type: "date",
     },
+    status: {
+      type: "enum",
+      options: ["active", "archived"],
+      default: "active",
+      required: true,
+    },
   },
   computedFields,
 }));

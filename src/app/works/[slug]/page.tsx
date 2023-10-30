@@ -40,7 +40,7 @@ export default function WorkPage({ params }: Props) {
   return (
     <>
       <header className="py-8">
-        <div className="relative w-full aspect-[2/1]">
+        <div className="relative w-full aspect-[5/3]">
           <Image
             alt={works.title}
             className="object-cover"
@@ -54,6 +54,11 @@ export default function WorkPage({ params }: Props) {
         <p className="text-lg text-gray-400 leading-tight mt-4">
           {works.subtitle}
         </p>
+        {works.status === "archived" && (
+          <p className="text-sm text-gray-600 font-medium rounded-full bg-slate-200 leading-relaxed inline-flex px-2 mt-4">
+            Archived
+          </p>
+        )}
         <DataList
           classNames={{ list: "mt-8", item: "" }}
           data={[
