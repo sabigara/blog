@@ -26,9 +26,7 @@ The Twitter Developer Platform team
 
 日本語で要約すると「あなたはTwitter APIのEssentialプランに登録したけど、こちら側のバグのせいでもっと上のプランが使えるようになっていたから直したよ」ということ。
 
-その数日前に[Twitter APIを使った新しいサービス](https://twiyomi.vercel.app)を公開していたので、ああそれのことね、くらいにしか思っていなかった。
-
-しかし、**翌日にサービスを使ってみるとTwitter APIからエラーが返ってきている**。具体的には「**そのトークンではTwitter API v2にはアクセスできません**」というものだ。
+**試しにアクセスしてみるとTwitter APIからエラーが返ってきている**。具体的には「**そのトークンではTwitter API v2にはアクセスできません**」というものだ。
 
 Twitter APIのダッシュボードを開いてみると、`Project` の `Production` 環境に登録されていた `App` が、 `Standalone Apps` (v1専用)に移動されていた。(v2 APIでは1つの `Project` に対して複数環境を作り、独自のAPIキーを発行できる)
 

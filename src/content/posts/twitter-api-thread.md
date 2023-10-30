@@ -3,9 +3,7 @@ title: "Twitter API v2 でスレッド内のツイート一覧を取得する"
 publishedAt: "2022-08-05"
 ---
 
-https://twiyomi.vercel.app
-
-上記アプリの機能として、Twitterのスレッド内のツイートをまとめて取得する要件があった。
+開発していたアプリの機能として、Twitterのスレッド内のツイートをまとめて取得する要件があった。
 
 要件は以下の通り。
 
@@ -94,11 +92,3 @@ export async function getThreadRecursive(
 Academic Research accessがない以上、とりあえず試行２の方法を使うしかなさそう。
 
 他に良いやり方があればぜひ教えてください。
-
-## 宣伝
-
-https://twiyomi.vercel.app
-
-この記事の方法を使用して作ったサービスです。
-
-スレッド形式で投稿されたマンガを見開きでイッキに読めるようにしました。よければ使ってみてください。
