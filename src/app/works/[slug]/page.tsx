@@ -41,7 +41,7 @@ export default function WorkPage({ params }: Props) {
 
   return (
     <>
-      <header className="py-8">
+      <header className="py-8 border-b">
         <div className="relative w-full aspect-[5/3] rounded-2xl overflow-clip bg-slate-100">
           <Image
             alt={works.title}
@@ -71,7 +71,7 @@ export default function WorkPage({ params }: Props) {
           ]}
         />
       </header>
-      <article className="prose pb-12">
+      <article className="mt-8 prose pb-12">
         <Content components={mdxComponents} />
       </article>
       <aside className="py-8 border-t">

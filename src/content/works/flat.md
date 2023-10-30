@@ -11,3 +11,7 @@ status: "archived"
 publishedAt: "2023-10-30"
 modifiedAt: null
 ---
+
+[Bluesky](https://bsky.social)のWebクライアントアプリです。
+
+2ヶ月ほど開発していましたが音楽性の違いで解散しました。
