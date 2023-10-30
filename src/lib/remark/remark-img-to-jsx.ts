@@ -24,14 +24,22 @@ export default function remarkImgToJsx() {
         const imageNode = node.children.find(
           (n) => n.type === "image"
         ) as ImageNode;
-        const normalizedUrl = imageNode.url.replace(/^\/?public\//, "/");
+        const url = imageNode.url;
 
         let dimensions: { height?: number; width?: number } | null = null;
 
-        // ローカルファイルのみここでサイズを計測する。
-        // リモートファイルは`MdxImg` (Server Component)で`fetch`し計測する。
-        if (fs.existsSync(`${process.cwd()}/public${normalizedUrl}`)) {
-          dimensions = imageSize(`${process.cwd()}/public${normalizedUrl}`);
+        // リモートのファイルが以下のようなURLにアップロードされていればサイズを取得する。
+        // `https://static.sabigara.com/uploads/WGvpEaAz_512x512.webp`
+        const dimensionUrlMatch = url.match(/_(\d+)x(\d+)\./);
+
+        // ローカルファイルはここでサイズを計測する。
+        if (fs.existsSync(`${process.cwd()}/public${url}`)) {
+          dimensions = imageSize(`${process.cwd()}/public${url}`);
+        } else if (dimensionUrlMatch) {
+          dimensions = {
+            width: Number(dimensionUrlMatch[1]),
+            height: Number(dimensionUrlMatch[2]),
+          };
         }
 
         // Convert original node to next/image
@@ -39,7 +47,7 @@ export default function remarkImgToJsx() {
         imageNode.name = "Image";
         imageNode.attributes = [
           { type: "mdxJsxAttribute", name: "alt", value: imageNode.alt },
-          { type: "mdxJsxAttribute", name: "src", value: normalizedUrl },
+          { type: "mdxJsxAttribute", name: "src", value: url },
         ];
 
         if (dimensions?.width) {
