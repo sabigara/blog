@@ -45,7 +45,7 @@ export default function BlogPostPage({ params }: Props) {
       <aside className="py-8 border-t">
         <nav className="grid grid-cols-2 gap-4">
           {prevPost ? (
-            <Link className={twAdjacentPostLink} href={prevPost?.slug}>
+            <Link className={twAdjacentPostLink} href={prevPost?.path}>
               <ArrowLeftIcon className="inline" title="前" /> {prevPost?.title}
             </Link>
           ) : (
@@ -54,7 +54,7 @@ export default function BlogPostPage({ params }: Props) {
           {nextPost && (
             <Link
               className={twMerge(twAdjacentPostLink, "justify-self-end")}
-              href={nextPost?.slug}
+              href={nextPost?.path}
             >
               {nextPost.title} <ArrowRightIcon className="inline" title="次" />
             </Link>

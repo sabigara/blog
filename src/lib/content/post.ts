@@ -9,11 +9,7 @@ export function listPosts({ limit }: { limit?: number } = {}) {
 }
 
 export function getPostBySlug(slug: string): Post | null {
-  return (
-    allPosts.find(
-      (post) => post._raw.flattenedPath === post._raw.sourceFileDir + "/" + slug
-    ) ?? null
-  );
+  return allPosts.find((post) => post.slug === slug) ?? null;
 }
 
 export function getAdjacentPosts(slug: string) {

@@ -1,8 +1,19 @@
-import type { RawDocumentData } from "contentlayer/source-files";
+import type { ComputedFields } from "contentlayer/source-files";
 import { makeSource } from "contentlayer/source-files";
 import { defineDocumentType } from "contentlayer/source-files";
 
 import { mdxOptions } from "./src/lib/mdx/options";
+
+const computedFields: ComputedFields = {
+  slug: {
+    type: "string",
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ""),
+  },
+  path: {
+    type: "string",
+    resolve: (doc) => doc._raw.flattenedPath,
+  },
+};
 
 export const Post = defineDocumentType(() => ({
   name: "Post",
@@ -21,17 +32,8 @@ export const Post = defineDocumentType(() => ({
       required: true,
     },
   },
-  computedFields: {
-    slug: {
-      type: "string",
-      resolve: (doc) => resolveBlogSlug(doc._raw),
-    },
-  },
+  computedFields,
 }));
-
-function resolveBlogSlug(raw: RawDocumentData) {
-  return "/" + raw.flattenedPath;
-}
 
 export const Work = defineDocumentType(() => ({
   name: "Work",
@@ -71,21 +73,12 @@ export const Work = defineDocumentType(() => ({
       type: "boolean",
     },
   },
-  computedFields: {
-    slug: {
-      type: "string",
-      resolve: (doc) => resolveWorkSlug(doc._raw),
-    },
-  },
+  computedFields,
 }));
-
-function resolveWorkSlug(raw: RawDocumentData) {
-  return "/" + raw.flattenedPath;
-}
 
 export default makeSource({
   contentDirPath: "src/content",
   documentTypes: [Post, Work],
   mdx: mdxOptions,
-  contentDirExclude: ["social-links/**"],
+  contentDirExclude: ["*.ts"],
 });

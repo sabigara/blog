@@ -23,7 +23,7 @@ export function WorkCard({ as: Component = "h3", work }: Props) {
       </div>
       <div>
         <Component className="mt-2 font-bold">
-          <Link className="clickable-overlay" href={work.slug}>
+          <Link className="clickable-overlay" href={work.path}>
             {work.title}
           </Link>
         </Component>

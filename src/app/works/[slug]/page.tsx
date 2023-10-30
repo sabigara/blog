@@ -84,7 +84,5 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 function getWork(slug: string) {
-  return allWorks.find(
-    (work) => work._raw.flattenedPath === work._raw.sourceFileDir + "/" + slug
-  );
+  return allWorks.find((work) => work.slug === slug);
 }
