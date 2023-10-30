@@ -8,4 +8,9 @@ coverImg: "/images/projects/reaktr.jpg"
 url: "https://www.producthunt.com/products/reaktr#reaktr"
 featured: true
 publishedAt: "2023-10-30"
+status: "archived"
 ---
+
+## メディア掲載
+
+https://gigazine.net/news/20220219-reaktr-audio-reactive-video
