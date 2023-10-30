@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
 import { DataList } from "@/components/data-list";
+import { ArrowLeftIcon } from "@/components/icons";
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { mdxComponents } from "@/lib/mdx/components";
@@ -72,7 +73,12 @@ export default function WorkPage({ params }: Props) {
       <article className="prose pb-12">
         <Content components={mdxComponents} />
       </article>
-      <aside className="py-8 border-t"></aside>
+      <aside className="py-8 border-t">
+        <Link className="underline decoration-from-font " href="/works">
+          <ArrowLeftIcon className="inline" />
+          All works
+        </Link>
+      </aside>
     </>
   );
 }
