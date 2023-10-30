@@ -83,6 +83,12 @@ export default function WorkPage({ params }: Props) {
   );
 }
 
+export async function generateStaticParams() {
+  return allWorks.map((work) => ({
+    slug: work.slug,
+  }));
+}
+
 export const generateMetadata = generateMetadataFactory<Props>(
   async ({ params }) => {
     const work = getWork(params.slug);

@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 import { ArrowLeftIcon, ArrowRightIcon, RefreshIcon } from "@/components/icons";
 import { Link } from "@/components/link";
-import { getAdjacentPosts, getPostBySlug } from "@/lib/content/post";
+import { getAdjacentPosts, getPostBySlug, listPosts } from "@/lib/content/post";
 import { datetimeFormat } from "@/lib/datetime/format";
 import { mdxComponents } from "@/lib/mdx/components";
 import { generateMetadataFactory } from "@/lib/metadata/create-metadata";
@@ -74,6 +74,12 @@ export default function BlogPostPage({ params }: Props) {
       </aside>
     </>
   );
+}
+
+export async function generateStaticParams() {
+  return listPosts().map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export const generateMetadata = generateMetadataFactory<Props>(
