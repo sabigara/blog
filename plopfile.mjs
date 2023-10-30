@@ -8,11 +8,8 @@ function fn(plop) {
 
   plop.setActionType("open", function (answers) {
     const filePath = `src/content/posts/${answers.slug}.mdx`;
-    exec(`code ${filePath}`, (error) => {
-      if (error) {
-        console.error("Failed to open the file in VSCode:", error);
-      }
-    });
+    exec(`code ${filePath}`);
+    exec(`open http://localhost:3700/posts/${answers.slug}`);
   });
 
   plop.setGenerator("post", {
