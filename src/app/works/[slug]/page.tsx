@@ -45,6 +45,7 @@ export default function WorkPage({ params }: Props) {
             alt={works.title}
             className="object-cover"
             fill
+            priority
             sizes={IMG_SIZES}
             src={works.coverImg}
           />

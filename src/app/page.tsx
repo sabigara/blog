@@ -32,6 +32,7 @@ export default function Home() {
             alt="Sabigaraのアバター"
             className="rounded-full w-24 h-24 sm:w-32 sm:h-32"
             height={100}
+            priority
             src="/images/avatar.jpg"
             width={100}
           />
