@@ -1,12 +1,11 @@
 import "./globals.css";
 import "./prism.css";
 
-import type { Metadata, ResolvingMetadata } from "next";
 import { Inter } from "next/font/google";
 
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { createMetadata } from "@/lib/metadata/create-metadata";
+import { generateMetadataFactory } from "@/lib/metadata/create-metadata";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,18 +31,10 @@ export default function RootLayout({
   );
 }
 
-export async function generateMetadata(
-  _: unknown,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  return createMetadata(
-    {
-      title: {
-        default: "Sabigara",
-        template: "%s | Sabigara",
-      },
-      description: "Sabigaraのポートフォリオ/ブログ",
-    },
-    parent
-  );
-}
+export const generateMetadata = generateMetadataFactory({
+  title: {
+    default: "Sabigara",
+    template: "%s | Sabigara",
+  },
+  description: "Sabigaraのポートフォリオ/ブログ",
+});

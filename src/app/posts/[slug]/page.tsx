@@ -1,4 +1,3 @@
-import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import { TbCalendarEvent as CalendarIcon } from "react-icons/tb";
@@ -9,7 +8,7 @@ import { Link } from "@/components/link";
 import { getAdjacentPosts, getPostBySlug } from "@/lib/content/post";
 import { datetimeFormat } from "@/lib/datetime/format";
 import { mdxComponents } from "@/lib/mdx/components";
-import { createMetadata } from "@/lib/metadata/create-metadata";
+import { generateMetadataFactory } from "@/lib/metadata/create-metadata";
 
 const twAdjacentPostLink =
   "block h-fit max-w-[14rem] -m-2 p-2 rounded-md text-sm hover:bg-slate-100";
@@ -77,21 +76,18 @@ export default function BlogPostPage({ params }: Props) {
   );
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
-
-  if (!post) {
-    return {};
-  }
-
-  return createMetadata(
-    {
+export const generateMetadata = generateMetadataFactory<Props>(
+  async ({ params }) => {
+    const post = getPostBySlug(params.slug);
+    if (!post) {
+      return {};
+    }
+    return {
       title: post.title,
       description: "Sabigaraのブログ記事",
-    },
-    parent
-  );
-}
+    };
+  },
+  {
+    interceptOgImages: true,
+  }
+);

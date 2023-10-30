@@ -1,10 +1,9 @@
 import type { Post } from "contentlayer/generated";
-import type { Metadata, ResolvingMetadata } from "next";
 import { useMemo } from "react";
 
 import { BlogPostItem } from "@/components/post/post-item";
 import { listPosts } from "@/lib/content/post";
-import { createMetadata } from "@/lib/metadata/create-metadata";
+import { generateMetadataFactory } from "@/lib/metadata/create-metadata";
 
 export default function BlogListPage() {
   const posts = listPosts();
@@ -95,14 +94,4 @@ function dateToSeason(date: Date) {
   }
 }
 
-export async function generateMetadata(
-  _: unknown,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  return createMetadata(
-    {
-      title: "Posts",
-    },
-    parent
-  );
-}
+export const generateMetadata = generateMetadataFactory({ title: "Posts" });

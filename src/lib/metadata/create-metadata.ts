@@ -2,24 +2,44 @@ import type { Metadata, ResolvingMetadata } from "next";
 
 import { siteConfig } from "@/content/site-config";
 
-export async function createMetadata(
-  base: Metadata,
-  resolvingParent: ResolvingMetadata
-): Promise<Metadata> {
-  const parent = await resolvingParent;
-  const title = base.title ?? undefined;
-  const description = base.description ?? undefined;
+type GenerateMetadata<P> = (
+  props: P,
+  parent: ResolvingMetadata
+) => Promise<Metadata>;
 
-  return {
-    metadataBase: new URL(siteConfig.url),
-    ...(title && { title }),
-    ...(description && { description }),
-    ...base,
-    openGraph: {
-      ...(parent.openGraph ?? {}),
+type Options = {
+  /** `generateMetadata`の方が優先されるため、`opengraph-image.tsx`を設定する場合は`true`を渡す必要がある */
+  interceptOgImages?: boolean;
+};
+
+export function generateMetadataFactory<P>(
+  metadata: Metadata | ((props: P) => Promise<Metadata>),
+  options: Options = {}
+): GenerateMetadata<P> {
+  const { interceptOgImages = false } = options;
+
+  return async (props, resolvingParent: ResolvingMetadata) => {
+    const base =
+      typeof metadata === "function" ? await metadata(props) : metadata;
+    const title = base.title ?? undefined;
+    const description = base.description ?? undefined;
+    const parent = await resolvingParent;
+
+    if (interceptOgImages) {
+      delete parent.openGraph?.images;
+    }
+
+    return {
+      metadataBase: new URL(siteConfig.url),
       ...(title && { title }),
       ...(description && { description }),
-      ...base.openGraph,
-    } as Metadata["openGraph"],
+      ...base,
+      openGraph: {
+        ...(parent.openGraph ?? {}),
+        ...(title && { title }),
+        ...(description && { description }),
+        ...base.openGraph,
+      } as Metadata["openGraph"],
+    };
   };
 }

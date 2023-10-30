@@ -1,5 +1,4 @@
 import { allWorks } from "contentlayer/generated";
-import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
@@ -9,7 +8,7 @@ import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { Tag } from "@/components/tag";
 import { mdxComponents } from "@/lib/mdx/components";
-import { createMetadata } from "@/lib/metadata/create-metadata";
+import { generateMetadataFactory } from "@/lib/metadata/create-metadata";
 import { IMG_SIZES } from "@/styles/constants";
 
 type Props = {
@@ -84,26 +83,21 @@ export default function WorkPage({ params }: Props) {
   );
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const work = getWork(params.slug);
-  if (!work) {
-    return {};
-  }
-
-  return createMetadata(
-    {
+export const generateMetadata = generateMetadataFactory<Props>(
+  async ({ params }) => {
+    const work = getWork(params.slug);
+    if (!work) {
+      return {};
+    }
+    return {
       title: work.title,
       description: work.subtitle,
       openGraph: {
         images: [work.coverImg],
       },
-    },
-    parent
-  );
-}
+    };
+  }
+);
 
 function getWork(slug: string) {
   return allWorks.find((work) => work.slug === slug);
