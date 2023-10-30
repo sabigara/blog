@@ -5,6 +5,13 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "static.sabigara.com",
+      },
+    ],
+  },
   async redirects() {
     return [
       {
