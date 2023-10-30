@@ -4,6 +4,7 @@ import React from "react";
 
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
+import { IMG_SIZES } from "@/styles/constants";
 
 type Props = {
   as?: ElementType;
@@ -18,6 +19,7 @@ export function WorkCard({ as: Component = "h3", work }: Props) {
           alt={work.title}
           className="object-cover"
           fill
+          sizes={IMG_SIZES}
           src={work.coverImg}
         />
       </div>
