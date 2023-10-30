@@ -1,5 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next";
 
+import { siteConfig } from "@/content/site-config";
+
 export async function createMetadata(
   base: Metadata,
   resolvingParent: ResolvingMetadata
@@ -9,6 +11,7 @@ export async function createMetadata(
   const description = base.description ?? undefined;
 
   return {
+    metadataBase: new URL(siteConfig.url),
     ...(title && { title }),
     ...(description && { description }),
     ...base,
