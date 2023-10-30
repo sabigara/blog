@@ -93,6 +93,9 @@ export function generateMetadata({ params }: Props): Metadata {
   return createMetadata({
     title: work.title,
     description: work.subtitle,
+    openGraph: {
+      images: [work.coverImg],
+    },
   });
 }
 
