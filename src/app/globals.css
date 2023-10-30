@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .clickable-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    cursor: inherit;
+  }
+}
+
+/* Tailwind流ではないが、Typographyプラグインのレスポンシブなカスタマイズが煩雑なのでこれで楽をする。 */
+@media (max-width: 640px) {
+  .prose {
+    font-size: 15px;
+  }
+}
+
+.DropdownMenuContent {
+  @apply bg-white border rounded-lg min-w-[8rem] p-2 z-50;
+
+  will-change: transform, opacity;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+}
+
+.DropdownMenuContent[data-state="open"] {
+  animation: in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DropdownMenuContent[data-state="closed"] {
+  animation: out 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DropdownMenuItem {
+  @apply flex justify-between items-center gap-4 px-2 py-[6px] cursor-pointer;
+}
+
+.DropdownMenuItem[data-state="unchecked"] {
+  @apply text-gray-400;
+}
+
+.DropdownMenuItem[data-highlighted] {
+  @apply outline-none bg-slate-100 text-gray-900 rounded-md;
+}
+
+.DropdownMenuItem[data-state="checked"] {
+}
+
+.DropdownMenuLabel {
+  padding-left: 25px;
+  font-size: 12px;
+  line-height: 25px;
+  color: var(--mauve-11);
+}
+
+@keyframes in {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes out {
+  from {
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    scale: 0;
+    opacity: 0;
+  }
+}

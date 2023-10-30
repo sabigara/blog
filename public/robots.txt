@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://sabigara.com
-
-# Sitemaps
-Sitemap: https://sabigara.com/sitemap.xml

@@ -1,12 +1,8 @@
 {
+  "tailwindCSS.experimental.classRegex": [
+    "(?:const|let|var)\\s+tw[A-Z][\\w$_][_\\w\\d]*\\s*=\\s*['\\\"](.*?)['\\\"]"
+  ],
   "markdownlint.config": {
-    "no-bare-urls": false,
-    "single-h1": false,
-    "fenced-code-language": false,
-    "no-inline-html": false,
-  },
-  "editor.formatOnSaveMode": "file",
-  "[markdown]": {
-    "editor.wordWrap": "wordWrapColumn"
-  },
+    "MD034": false
+  }
 }

@@ -1,115 +1,106 @@
-import { defineDocumentType, makeSource, RawDocumentData } from "contentlayer/source-files"
-import { mdxOptions } from "./lib/mdx"
+import type { ComputedFields } from "contentlayer/source-files";
+import { makeSource } from "contentlayer/source-files";
+import { defineDocumentType } from "contentlayer/source-files";
 
-function resolveSlug(raw: RawDocumentData) {
-  const [, locale, ...rest] = raw.flattenedPath.split("/")
-  return { locale, slug: rest.join("/") }
-}
+import { mdxOptions } from "./src/lib/mdx/options";
 
-export const Author = defineDocumentType(() => ({
-  name: "Author",
-  filePathPattern: `authors/**/*+(.md|.mdx)`,
-  contentType: "mdx",
-  fields: {
-    name: {
-      type: "string",
-      required: true,
-    },
-    avatar: {
-      type: "string",
-      required: true,
-    },
-    occupation: {
-      type: "string",
-    },
-    company: {
-      type: "string",
-    },
-    email: {
-      type: "string",
-    },
-    twitter: {
-      type: "string",
-    },
-    github: {
-      type: "string",
-    },
+const computedFields: ComputedFields = {
+  slug: {
+    type: "string",
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ""),
   },
-  computedFields: {
-    slug: {
-      type: "string",
-      resolve: (doc) => resolveSlug(doc._raw).slug,
-    },
-    locale: {
-      type: "enum",
-      options: ["en", "ja"],
-      resolve: (doc) => resolveSlug(doc._raw).locale,
-    },
+  path: {
+    type: "string",
+    resolve: (doc) => "/" + doc._raw.flattenedPath,
   },
-}))
+};
 
-export const Blog = defineDocumentType(() => ({
-  name: "Blog",
-  filePathPattern: `blog/**/*+(.md|.mdx)`,
+export const Post = defineDocumentType(() => ({
+  name: "Post",
+  filePathPattern: `posts/**/*+(.md|.mdx)`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
       required: true,
     },
-    date: {
+    description: {
+      type: "string",
+    },
+    publishedAt: {
       type: "date",
       required: true,
     },
-    tags: {
-      type: "list",
-      of: {
-        type: "string",
-      },
-    },
-    lastmod: {
+    modifiedAt: {
       type: "date",
     },
-    draft: {
+  },
+  computedFields,
+}));
+
+export const Work = defineDocumentType(() => ({
+  name: "Work",
+  filePathPattern: `works/**/*+(.md|.mdx)`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    subtitle: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+    },
+    date: {
+      type: "string",
+      required: true,
+    },
+    coverImg: {
+      type: "string",
+      required: true,
+    },
+    url: {
+      type: "string",
+    },
+    role: {
+      type: "string",
+      required: true,
+    },
+    achievement: {
+      type: "string",
+    },
+    featured: {
       type: "boolean",
     },
-    summary: {
-      type: "string",
+    publishedAt: {
+      type: "date",
+      required: true,
     },
-    images: {
-      type: "list",
-      of: {
-        type: "string",
-      },
+    modifiedAt: {
+      type: "date",
     },
-    authors: {
-      type: "list",
-      of: {
-        type: "string",
-      },
-    },
-    layout: {
-      type: "string",
-    },
-    canonicalUrl: {
-      type: "string",
-    },
-  },
-  computedFields: {
-    slug: {
-      type: "string",
-      resolve: (doc) => resolveSlug(doc._raw).slug,
-    },
-    locale: {
+    status: {
       type: "enum",
-      options: ["en", "ja"],
-      resolve: (doc) => resolveSlug(doc._raw).locale,
+      options: ["active", "archived"],
+      default: "active",
+      required: true,
+    },
+    kind: {
+      type: "enum",
+      options: ["commissioned", "indie"],
+      default: "indie",
+      required: true,
     },
   },
-}))
+  computedFields,
+}));
 
 export default makeSource({
-  contentDirPath: "data",
-  documentTypes: [Author, Blog],
+  contentDirPath: "src/content",
+  documentTypes: [Post, Work],
   mdx: mdxOptions,
-})
+  contentDirExclude: ["*.ts"],
+});
