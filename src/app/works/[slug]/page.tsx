@@ -7,6 +7,7 @@ import { DataList } from "@/components/data-list";
 import { ArrowLeftIcon } from "@/components/icons";
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
+import { Tag } from "@/components/tag";
 import { mdxComponents } from "@/lib/mdx/components";
 import { createMetadata } from "@/lib/metadata/create-metadata";
 import { IMG_SIZES } from "@/styles/constants";
@@ -41,7 +42,7 @@ export default function WorkPage({ params }: Props) {
   return (
     <>
       <header className="py-8">
-        <div className="relative w-full aspect-[5/3]">
+        <div className="relative w-full aspect-[5/3] rounded-2xl overflow-clip bg-slate-100">
           <Image
             alt={works.title}
             className="object-cover"
@@ -55,15 +56,15 @@ export default function WorkPage({ params }: Props) {
         <p className="text-lg text-gray-400 leading-tight mt-4">
           {works.subtitle}
         </p>
-        {works.status === "archived" && (
-          <p className="text-sm text-gray-600 font-medium rounded-full bg-slate-200 leading-relaxed inline-flex px-2 mt-4">
-            Archived
-          </p>
-        )}
+        {works.status === "archived" && <Tag className="mt-3">Archived</Tag>}
         <DataList
           classNames={{ list: "mt-8", item: "" }}
           data={[
             { term: "制作時期", data: works.date },
+            {
+              term: "種別",
+              data: works.kind === "commissioned" ? "受託開発" : "個人開発",
+            },
             { term: "役割", data: works.role },
             { term: "実績", data: works.achievement },
             { term: "URL", data: link || "N/A" },

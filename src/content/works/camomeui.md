@@ -4,7 +4,7 @@ subtitle: "React UI framework"
 date: "2023年1月"
 role: "デザイン/開発"
 achievement: "⭐️ 220"
-coverImg: "/images/projects/camomeui.jpg"
+coverImg: "/images/projects/camomeui.png"
 url: "https://camome.net"
 featured: true
 publishedAt: "2023-10-30"

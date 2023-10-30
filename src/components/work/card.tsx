@@ -13,7 +13,7 @@ type Props = {
 export function WorkCard({ as: Component = "h3", work }: Props) {
   return (
     <article className="relative flex flex-col ring-gray-100 hover:ring-2 p-3 -m-3 rounded-lg">
-      <div className="relative aspect-[5/3] rounded-md overflow-clip">
+      <div className="relative aspect-[5/3] rounded-lg overflow-clip bg-slate-100">
         <Image
           alt={work.title}
           className="object-cover"

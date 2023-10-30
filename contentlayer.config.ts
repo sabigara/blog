@@ -88,6 +88,12 @@ export const Work = defineDocumentType(() => ({
       default: "active",
       required: true,
     },
+    kind: {
+      type: "enum",
+      options: ["commissioned", "indie"],
+      default: "indie",
+      required: true,
+    },
   },
   computedFields,
 }));
