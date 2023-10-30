@@ -2,6 +2,7 @@ import "./globals.css";
 import "./prism.css";
 
 import { Inter } from "next/font/google";
+import Script from "next/script";
 
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -21,6 +22,11 @@ export default function RootLayout({
         <link href="/favicon.ico" rel="icon" sizes="any" />
         <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
         <link href="/manifest.webmanifest" rel="manifest" />
+        <Script
+          data-cf-beacon={`{"token": "97727030f84245d7985ffb295d72de53"}`}
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+        />
       </head>
       <body className={inter.className}>
         <Header />
