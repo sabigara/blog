@@ -75,7 +75,7 @@ export default function WorkPage({ params }: Props) {
         <Content components={mdxComponents} />
       </article>
       <aside className="py-8 border-t">
-        <Link className="underline decoration-from-font " href="/works">
+        <Link className="decoration-from-font " href="/works">
           <ArrowLeftIcon className="inline" />
           All works
         </Link>

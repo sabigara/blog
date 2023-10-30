@@ -68,6 +68,10 @@ export default function BlogPostPage({ params }: Props) {
             </Link>
           )}
         </nav>
+        <Link className="decoration-from-font mt-8 inline-block" href="/posts">
+          <ArrowLeftIcon className="inline" />
+          All posts
+        </Link>
       </aside>
     </>
   );
