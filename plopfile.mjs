@@ -6,9 +6,10 @@ function fn(plop) {
     return new Date().toISOString().split("T")[0];
   });
 
-  plop.setActionType("open", function (answers) {
+  plop.setActionType("open", async (answers) => {
     const filePath = `src/content/posts/${answers.slug}.mdx`;
     exec(`code ${filePath}`);
+    await sleep(1000);
     exec(`open http://localhost:3700/posts/${answers.slug}`);
   });
 
@@ -33,6 +34,10 @@ function fn(plop) {
       },
     ],
   });
+}
+
+async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export default fn;
