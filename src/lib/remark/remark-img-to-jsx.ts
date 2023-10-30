@@ -29,8 +29,11 @@ export default function remarkImgToJsx() {
         let dimensions: { height?: number; width?: number } | null = null;
 
         // リモートのファイルが以下のようなURLにアップロードされていればサイズを取得する。
+        // （念のためドメインもチェック）
         // `https://static.sabigara.com/uploads/WGvpEaAz_512x512.webp`
-        const dimensionUrlMatch = url.match(/_(\d+)x(\d+)\./);
+        const dimensionUrlMatch = url.match(
+          /https:\/\/static\.sabigara\.com\/uploads\/.*_(\d+)x(\d+)\./
+        );
 
         // ローカルファイルはここでサイズを計測する。
         if (fs.existsSync(`${process.cwd()}/public${url}`)) {
