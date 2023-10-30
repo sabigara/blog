@@ -9,6 +9,8 @@ export function createMetadata(base: Metadata): Metadata {
     openGraph: {
       title,
       description,
+      ...base.openGraph,
     },
+    ...base,
   };
 }
