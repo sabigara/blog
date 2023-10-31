@@ -67,8 +67,6 @@ export default function remarkImgToJsx() {
             value: dimensions.width,
           });
         }
-        // Change node type from p to div to avoid nesting error
-        node.type = "div";
         node.children = [imageNode];
       }
     );
