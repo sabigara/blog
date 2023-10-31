@@ -3,7 +3,7 @@ title: Twitter APIへのアクセスが回復した
 publishedAt: "2022-08-16"
 ---
 
-https://sabigara.com/blog/ja/twitter-api-has-been-suspended
+https://sabigara.com/posts/twitter-api-has-been-suspended
 
 この前こんな記事を書いたが、少し前に確認したら復旧していた。
 
