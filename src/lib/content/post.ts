@@ -2,10 +2,14 @@ import type { Post } from "contentlayer/generated";
 import { allPosts } from "contentlayer/generated";
 
 export function listPosts({ limit }: { limit?: number } = {}) {
-  const sortedPosts = [...allPosts].sort(
-    (a, b) =>
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  );
+  const sortedPosts = [...allPosts]
+    .filter((p) =>
+      process.env.NODE_ENV === "development" ? true : p.status === "published"
+    )
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
   return sortedPosts.slice(0, limit);
 }
 

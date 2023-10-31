@@ -1,6 +1,7 @@
 ---
 title: "Product Huntのデイリー2位を動画エディタで獲得したけど半年で閉鎖した"
 publishedAt: "2022-11-24"
+status: "published"
 ---
 
 (この[記事はMediumに投稿した英語版](https://medium.com/@sabigara/i-got-2-on-product-hunt-by-a-video-editor-and-closed-it-in-6-months-9a277d5027a8)の翻訳です)

@@ -1,6 +1,7 @@
 ---
 title: Next.jsとTailwindでブログを作り直した
 publishedAt: "2022-08-04"
+status: "published"
 ---
 
 はてなブログや別の自作ブログでも一瞬だけ書いていた時期があるが、今回作り直すことにした。

@@ -34,6 +34,10 @@ export const Post = defineDocumentType(() => ({
     modifiedAt: {
       type: "date",
     },
+    status: {
+      type: "enum",
+      options: ["published", "draft"],
+    },
   },
   computedFields,
 }));

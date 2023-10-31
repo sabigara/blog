@@ -6,6 +6,7 @@ import { twMerge } from "tailwind-merge";
 import { ArrowLeftIcon, ArrowRightIcon, RefreshIcon } from "@/components/icons";
 import { Link } from "@/components/link";
 import { PageSharer } from "@/components/page-sharer";
+import { Tag } from "@/components/tag";
 import { getAdjacentPosts, getPostBySlug, listPosts } from "@/lib/content/post";
 import { datetimeFormat } from "@/lib/datetime/format";
 import { mdxComponents } from "@/lib/mdx/components";
@@ -45,6 +46,7 @@ export default function BlogPostPage({ params }: Props) {
               {datetimeFormat(post.modifiedAt)}
             </time>
           )}
+          {post.status === "draft" && <Tag className="">Draft</Tag>}
         </div>
       </header>
       <article className="prose pb-8">

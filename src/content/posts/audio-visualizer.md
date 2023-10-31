@@ -1,6 +1,7 @@
 ---
 title: "How to make audio visualizer with React Three Fiber"
 publishedAt: "2022-12-01"
+status: "published"
 ---
 
 ## Overview

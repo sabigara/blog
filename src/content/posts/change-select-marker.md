@@ -1,6 +1,7 @@
 ---
 title: "select要素のアイコンを変更する方法"
 publishedAt: "2023-01-16"
+status: "published"
 ---
 
 `select` 要素の見た目をCSSで変更する際、`appearance: none` でブラウザデフォルトのスタイルを削除してオリジナルのアイコン（矢印）を表示しようとしたが、そこまで自由度が高くないことがわかった。

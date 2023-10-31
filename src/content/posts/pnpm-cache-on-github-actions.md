@@ -1,6 +1,7 @@
 ---
 title: "GitHub Actions上でpnpmをキャッシュする"
 publishedAt: "2023-01-23"
+status: "published"
 ---
 
 GitHub Actionsで実行する `pnpm install` の時間を短縮するためにキャッシュしようとしたが、公式情報でも複数の方法が掲載されているので少し迷った。

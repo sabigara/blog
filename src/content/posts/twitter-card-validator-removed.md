@@ -1,6 +1,7 @@
 ---
 title: "「Twitter Card Validator」がOGP画像を表示してくれない件"
 publishedAt: "2022-08-05"
+status: "published"
 ---
 
 新サービス公開の際にOGP画像を作ったのでTwitter公式の「Card Validator」で確認しようとしたら、ログは `Card loaded successfully` と言っているのに、本来画像が表示されるべき箇所に `Unable to render Card preview` と出る。

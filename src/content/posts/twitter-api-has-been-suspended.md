@@ -1,6 +1,7 @@
 ---
 title: Twitter APIへのアクセスをいきなり遮断された
 publishedAt: "2022-08-09"
+status: "published"
 ---
 
 ## 経緯

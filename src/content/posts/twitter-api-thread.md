@@ -1,6 +1,7 @@
 ---
 title: "Twitter API v2 でスレッド内のツイート一覧を取得する"
 publishedAt: "2022-08-05"
+status: "published"
 ---
 
 開発していたアプリの機能として、Twitterのスレッド内のツイートをまとめて取得する要件があった。

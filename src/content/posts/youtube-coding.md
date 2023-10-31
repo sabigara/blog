@@ -1,6 +1,7 @@
 ---
 title: "YouTubeにプログラミング動画を3つ上げたら何回再生されるか？"
 publishedAt: "2022-10-03"
+status: "published"
 ---
 
 Camome UIというプロジェクトを最近公開した。

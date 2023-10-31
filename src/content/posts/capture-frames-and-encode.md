@@ -1,6 +1,7 @@
 ---
 title: "How to capture 3D animation and encode it into video by WebCodecs"
 publishedAt: "2022-11-30"
+status: "published"
 ---
 
 I built a web service called Reaktr that enables users to create audio-reactive video like the demo below:

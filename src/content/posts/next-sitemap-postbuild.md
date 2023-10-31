@@ -1,6 +1,7 @@
 ---
 title: "next-sitemapがビルドしてくれないと思ったらpnpmが原因だった"
 publishedAt: "2022-08-19"
+status: "published"
 ---
 
 https://github.com/iamvishnusankar/next-sitemap

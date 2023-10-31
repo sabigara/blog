@@ -1,6 +1,7 @@
 ---
 title: "CSSで半透明な背景色を透けなくする"
 publishedAt: "2023-01-30"
+status: "published"
 ---
 
 ダークモード向けのCSSを書いていて気づいたが、一般的なカラーパレット（例えば[Tailwind](https://tailwindcss.com/docs/customizing-colors)）だと、一番黒に近い色を使っても微妙に目立ちすぎてしまう。
