@@ -31,17 +31,17 @@ export async function OgLink({ className, href }: Props) {
     >
       <span className="flex flex-col justify-between gap-1 overflow-hidden p-3">
         <span className="font-medium line-clamp-1 leading-tight">
-          {metadata?.ogp.title || metadata?.title || href}
+          {metadata?.ogp?.title || metadata?.title || href}
         </span>
         <span className="line-clamp-1 text-sm leading-tight text-gray-500">
-          {metadata?.ogp.description || metadata?.description}
+          {metadata?.ogp?.description || metadata?.description}
         </span>
         <span className="flex items-center gap-2 truncate text-sm leading-tight text-gray-500">
           <img alt="ファビコン" height={14} src={faviconUrl(href)} width={14} />
           {hostname}
         </span>
       </span>
-      {metadata?.ogp.image && (
+      {metadata?.ogp?.image && (
         <img
           alt="ページの画像"
           className="h-full ml-auto object-cover hidden border-l sm:block"

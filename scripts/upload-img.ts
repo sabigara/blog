@@ -10,17 +10,9 @@ dotenv.config({
   path: ".env.local",
 });
 
-const env = {
-  BUCKET_NAME: process.env.BUCKET_NAME,
-  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-  S3_ENDPOINT: process.env.S3_ENDPOINT,
-  S3_PUBLIC_URL: process.env.S3_PUBLIC_URL,
-};
+const { env } = require("@/env");
 
 async function uploadImageToS3(filePath: string): Promise<void> {
-  assertIsEnvConfig(env);
-
   console.log("🟠 Uploading...");
 
   const s3Client = new S3Client({
@@ -41,7 +33,7 @@ async function uploadImageToS3(filePath: string): Promise<void> {
   }.${ext}`;
 
   const uploadParams = {
-    Bucket: env.BUCKET_NAME,
+    Bucket: env.S3_BUCKET_NAME,
     Key: key,
     Body: fileContent,
     ContentType: `image/${ext}`,
@@ -56,30 +48,6 @@ async function uploadImageToS3(filePath: string): Promise<void> {
     console.log("🟢 Successfully uploaded to:", publicUrl);
   } catch (error) {
     console.error("Error uploading to S3:", error);
-  }
-}
-
-type EnvVars = {
-  AWS_ACCESS_KEY_ID: string;
-  AWS_SECRET_ACCESS_KEY: string;
-  BUCKET_NAME: string;
-  S3_ENDPOINT: string;
-  S3_PUBLIC_URL: string;
-};
-
-function assertIsEnvConfig(obj: any): asserts obj is EnvVars {
-  const expectedKeys: (keyof EnvVars)[] = [
-    "BUCKET_NAME",
-    "AWS_ACCESS_KEY_ID",
-    "AWS_SECRET_ACCESS_KEY",
-    "S3_ENDPOINT",
-    "S3_PUBLIC_URL",
-  ];
-
-  for (const key of expectedKeys) {
-    if (!obj[key] || typeof obj[key] !== "string") {
-      throw new Error(`${key} is not defined or is not a string`);
-    }
   }
 }
 

@@ -1,9 +1,11 @@
 import { JSDOM } from "jsdom";
 
+import { extractAsin } from "@/lib/amazon/extract-asin";
+import { fetchAmazonItem } from "@/lib/amazon/proxy";
+
 export type Ogp = {
   description?: string;
   image?: string;
-  site_name: string;
   title?: string;
   type?: string;
   url?: string;
@@ -11,9 +13,9 @@ export type Ogp = {
 
 export type SiteMetadata = {
   description?: string;
-  ogp: Ogp;
+  ogp?: Ogp;
   title?: string;
-  url: string;
+  url?: string;
 };
 
 export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
@@ -25,6 +27,12 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
       }. Body: ${await resp.text()}`
     );
   }
+
+  // if amazon url
+  if (url.startsWith("https://www.amazon.")) {
+    return fetchMetadataByPaApi(url);
+  }
+
   const htmlStr = await resp.text();
   const dom = new JSDOM(htmlStr);
   const meta = dom.window.document.querySelectorAll("head > meta");
@@ -54,14 +62,6 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
       };
     }, {} as Ogp);
 
-  if (url.startsWith("https://www.amazon.")) {
-    const img = dom.window.document.getElementById("landingImage");
-    const imgSrc = img?.getAttribute("src");
-    if (imgSrc) {
-      ogp.image = imgSrc;
-    }
-  }
-
   const metadata = {
     ogp,
     title,
@@ -69,4 +69,24 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
     url,
   };
   return metadata;
+}
+
+async function fetchMetadataByPaApi(url: string): Promise<SiteMetadata> {
+  const asin = extractAsin(url);
+
+  if (!asin) {
+    return {};
+  }
+
+  const item = await fetchAmazonItem({ asin });
+
+  return {
+    ogp: {
+      title: item.title,
+      image: item.image.url,
+      url: item.url,
+    },
+    title: item.title,
+    url: item.url,
+  };
 }
