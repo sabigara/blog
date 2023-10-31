@@ -19,6 +19,10 @@ export type SiteMetadata = {
 };
 
 export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
+  if (url.startsWith("https://www.amazon.")) {
+    return fetchMetadataByPaApi(url);
+  }
+
   const resp = await fetch(decodeURIComponent(url));
   if (!resp.ok) {
     throw new Error(
@@ -26,11 +30,6 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
         resp.status
       }. Body: ${await resp.text()}`
     );
-  }
-
-  // if amazon url
-  if (url.startsWith("https://www.amazon.")) {
-    return fetchMetadataByPaApi(url);
   }
 
   const htmlStr = await resp.text();
