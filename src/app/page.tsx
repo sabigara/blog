@@ -48,7 +48,7 @@ export default function Home() {
               フロントエンド開発者
               <span className="text-gray-400 mx-[5px]">/</span>
               趣味ギタリスト<span className="text-gray-400 mx-[5px]">/</span>
-              趣味作曲家。
+              趣味作曲家
             </p>
             <p className={twParagraph}>
               React/Nextの受託開発や個人開発、OSS活動をしています。デザインも少しできます。ご依頼やお問い合わせは以下のチャンネルから。
