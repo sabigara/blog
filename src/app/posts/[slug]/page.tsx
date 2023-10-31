@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 import { ArrowLeftIcon, ArrowRightIcon, RefreshIcon } from "@/components/icons";
 import { Link } from "@/components/link";
+import { PageSharer } from "@/components/page-sharer";
 import { getAdjacentPosts, getPostBySlug, listPosts } from "@/lib/content/post";
 import { datetimeFormat } from "@/lib/datetime/format";
 import { mdxComponents } from "@/lib/mdx/components";
@@ -46,11 +47,12 @@ export default function BlogPostPage({ params }: Props) {
           )}
         </div>
       </header>
-      <article className="prose pb-12">
+      <article className="prose pb-8">
         <Content components={mdxComponents} />
       </article>
-      <aside className="py-8 border-t">
-        <nav className="grid grid-cols-2 gap-4">
+      <aside className="pt-4 pb-8">
+        <PageSharer className="" title={post.title} />
+        <nav className="grid grid-cols-2 gap-4 mt-4 pt-8 border-t">
           {prevPost ? (
             <Link className={twAdjacentPostLink} href={prevPost?.path}>
               <ArrowLeftIcon className="inline" title="前" /> {prevPost?.title}

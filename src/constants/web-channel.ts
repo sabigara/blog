@@ -1,12 +1,12 @@
 import type { IconType } from "react-icons";
-import {
-  TbBrandGithub,
-  TbBrandSoundcloud,
-  TbBrandTwitter,
-  TbMail,
-} from "react-icons/tb";
 
-import ZennSvg from "@/assets/svg/zenn.svg";
+import {
+  EnvelopIcon,
+  GithubIcon,
+  SoundcloudIcon,
+  TwitterIcon,
+  ZennIcon,
+} from "@/components/icons";
 
 type IWebChannel = {
   Icon: IconType;
@@ -15,23 +15,23 @@ type IWebChannel = {
 
 export const WebChannel = {
   Twitter: {
-    Icon: TbBrandTwitter,
+    Icon: TwitterIcon,
     label: "Twitter",
   },
   GitHub: {
-    Icon: TbBrandGithub,
+    Icon: GithubIcon,
     label: "GitHub",
   },
   SoundCloud: {
-    Icon: TbBrandSoundcloud,
+    Icon: SoundcloudIcon,
     label: "SoundCloud",
   },
   Zenn: {
-    Icon: ZennSvg,
+    Icon: ZennIcon,
     label: "Zenn",
   },
   Email: {
-    Icon: TbMail,
+    Icon: EnvelopIcon,
     label: "Email",
   },
 } as const satisfies Record<string, IWebChannel>;
