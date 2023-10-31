@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 
-import { HatenaBookmarkIcon, TwitterIcon } from "@/components/icons";
+import { HatenaBookmarkIcon, TwitterFillIcon } from "@/components/icons";
 
 type IShareChannel = {
   Icon: IconType;
@@ -9,7 +9,7 @@ type IShareChannel = {
 
 export const ShareChannel = {
   Twitter: {
-    Icon: TwitterIcon,
+    Icon: TwitterFillIcon,
     label: "Twitter",
   },
   Hatena: {

@@ -29,7 +29,7 @@ export function PageSharer({ className, title }: Props) {
         <li className="relative" key={key}>
           <button
             aria-label={`${label}でシェア`}
-            className="grid place-items-center p-2 rounded-md text-gray-400 hover:text-gray-900"
+            className="grid place-items-center p-2 rounded-md text-gray-300 hover:text-gray-900"
             onClick={createClickHandler(key as ShareChannelName)}
           >
             <Icon className="text-xl" />
