@@ -79,7 +79,7 @@ export default function Home() {
         </h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
           {works.map((work) => (
-            <WorkCard key={work._id} work={work} />
+            <WorkCard key={work._id} priority work={work} />
           ))}
         </ul>
         <Link className={twViewAll} href="/works">
