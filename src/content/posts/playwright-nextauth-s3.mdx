@@ -1,0 +1,289 @@
+---
+title: "Playwright + NextAuth + S3互換でNextアプリのE2Eテストを構築する"
+description: ""
+publishedAt: "2023-11-04"
+modifiedAt: null
+status: "published"
+---
+
+## やりたいこと
+
+- S3互換ストレージへのアップロード
+- 開発環境とは別のテスト専用インフラを構築
+  - DB, ストレージ
+- 認証 (NextAuthで)
+  - 複数ユーザー/非ログイン
+  - アプリ側でOAuth認証が必須でもテストでは外部APIとはやりとりしない
+
+## 使用するライブラリなど
+
+- [Playwright: ^1.39.0](https://github.com/microsoft/playwright)
+- [Prisma: ^5.4.2](https://github.com/prisma/prisma)
+- [NextAuth: ^4.23.1](https://github.com/nextauthjs/next-auth)
+- [LocalStack](https://github.com/localstack/localstack)
+
+## テスト用インフラを構築する
+
+- テスト用インフラの環境変数を `.env.test` に設定する
+- DBやS3互換ストレージを `docker-compose.test.yaml` で立ち上げる
+- Nextアプリは `.env.test` を読み、テスト用インフラに接続する
+
+開発環境も `docker compose` するとして、 インフラを立ち上げるためのスクリプトに `--env test` 引数を渡すことで分岐させたい。以下のスクリプトで環境ごとに読む `.env*` ファイルと `docker-compose.*` を変更する。
+
+```sh title=start-infra.sh
+ENVIRONMENT=""
+COMPOSE_FILE="docker-compose.yaml"
+ENV_FILES=".env"
+
+if [ "$ENVIRONMENT" == "test" ]; then
+  COMPOSE_FILE="docker-compose.test.yaml"
+  ENV_FILES=".env .env.test"
+elif [ ! -z "$ENVIRONMENT" ]; then
+  echo "Invalid environment: $ENVIRONMENT. Allowed values are '' or 'test'"
+  exit 1
+fi
+
+source $DIR/setenv.sh $ENV_FILES
+docker-compose -f $COMPOSE_FILE up -d
+```
+
+```sh title=setenv.sh
+# 後に指定されたファイル内の値が優先される
+if [[ $# -eq 0 ]]; then
+  echo "Usage: $0 <path-to-env-file1> <path-to-env-file2> ..."
+  exit 1
+fi
+
+for file in "$@"; do
+  if [[ -f $file ]]; then
+    export $(grep -v '^#' $file | xargs)
+  else
+    echo "Warning: $file does not exist or is not a regular file."
+  fi
+done
+```
+
+### LocalStack
+
+ローカルでAWSサービスをエミュレートできるLocalStackの設定を `docker-compose` に加える。
+
+```yaml title=docker-compose.test.yaml
+version: "3.9"
+name: test
+services:
+  # DBその他...
+  localstack:
+    image: localstack/localstack
+    ports:
+      - 127.0.0.1:4566:4566
+      - 127.0.0.1:4510-4559:4510-4559
+    environment:
+      SERVICES: S3
+      AWS_ACCESS_KEY_ID: localstack-access-key-id
+      AWS_SECRET_ACCESS_KEY: localstack-secret-access-key
+    volumes:
+      - localstack:/var/lib/localstack
+volumes:
+  localstack:
+```
+
+例によってDockerサービスの起動を待機するのは面倒だ。`wait-for-it.sh` はリクエスト・レスポンスを細かく設定できなさそうだったので以下のようなスクリプトを書いた（AIが）。
+
+```sh title=wait-for-localstack.sh
+HOST=$1
+PORT=$2
+TIMEOUT=${3:-30}
+
+echo "Waiting for LocalStack to be ready..."
+
+for i in $(seq "$TIMEOUT"); do
+  if [[ $(curl -s "$HOST:$PORT/_localstack/init/ready" | jq .completed) == "true" ]]; then
+    echo "LocalStack is ready!"
+    exit 0
+  fi
+  sleep 1
+done
+
+echo "Timed out waiting for LocalStack to be ready."
+exit 1
+```
+
+:::info
+`/_localstack/init/ready` については[LocalStackのドキュメント](https://docs.localstack.cloud/references/init-hooks/#query-individual-stages)に記述がある。
+:::
+
+バケットの作成とCORSの設定も必要だ。
+
+```sh title=start-infra.sh
+docker compose -f $COMPOSE_FILE exec localstack \
+  awslocal s3api create-bucket --bucket <bucket_name>
+docker compose -f $COMPOSE_FILE exec localstack \
+  awslocal s3api put-bucket-cors --bucket <bucket_name> --cors-configuration "$(cat localstack/bucket-cors.json)"
+```
+
+```json title=bucket-cors.json
+{
+  "CORSRules": [
+    {
+      "AllowedHeaders": ["*"],
+      "AllowedMethods": ["PUT"],
+      "AllowedOrigins": ["*"],
+      "ExposeHeaders": []
+    }
+  ]
+}
+```
+
+:::info
+JSONファイルがホスト側に置いてありコンテナ内部からアクセスできないので文字列としてコマンドから送り込んでいる。
+:::
+
+## Playwright設定
+
+https://playwright.dev/docs/intro
+
+基本的に公式チュートリアル通りで問題ない。ただしテスト内部からテスト環境（DBなど）に接続するには、以下のようにテスト用dotenvファイルを自分で読みこむ必要がある。
+
+```ts title=playwright.config.ts
+import { config } from "dotenv";
+
+config();
+config({ override: true, path: ".env.test" });
+
+export default defineConfig({
+  // その他...
+  webServer: {
+    command: `pnpm next dev --port ${PORT}`,
+    url: BASE_URL,
+    reuseExistingServer: !process.env.CI,
+  },
+});
+```
+
+## 認証
+
+https://playwright.dev/docs/auth
+
+Playwrightで（実際のフローを経由せず）認証を行うにはCookieなどのストレージを直接いじるのがよさそう。基本は公式チュートリアルの通りだが、NextAuth (+ Prisma)を使う場合は以下のコードで実現できた。
+
+```ts
+type WorkerFixtures = {
+  auth: { user: User };
+  workerStorageState: string;
+};
+
+export const test = base.extend<Fixtures, WorkerFixtures>({
+  auth: [
+    async ({ workerStorageState }, use) => {
+      const cookies = JSON.parse(
+        fs.readFileSync(workerStorageState, "utf-8")
+      ).cookies;
+      const sessionToken = cookies.find(
+        (cookie: any) => cookie.name === SESSION_TOKEN_COOKIE_NAME
+      ).value;
+      const user = await prisma.user.findFirstOrThrow({
+        where: {
+          sessions: {
+            some: {
+              sessionToken,
+            },
+          },
+        },
+      });
+      await use({
+        user,
+      });
+    },
+    { scope: "worker" },
+  ],
+
+  storageState: ({ workerStorageState }, use) => use(workerStorageState),
+
+  workerStorageState: [
+    async ({ browser }, use) => {
+      const id = test.info().parallelIndex;
+      const fileName = path.resolve(path.join(AUTH_DIR, `${id}.json`));
+
+      if (fs.existsSync(fileName)) {
+        await use(fileName);
+        return;
+      }
+
+      const { page } = await createAuthedPage(browser);
+      await page.context().storageState({ path: fileName });
+      await page.close();
+      await use(fileName);
+    },
+    { scope: "worker" },
+  ],
+});
+```
+
+```ts title=create-authed-page
+import type { Browser } from "@playwright/test";
+
+import { SESSION_TOKEN_COOKIE_NAME } from "./constants";
+
+export async function createAuthedPage(browser: Browser) {
+  const page = await browser.newPage({
+    storageState: undefined,
+  });
+  const session = {
+    expires: getOneMonthLater(),
+    sessionToken: faker.string.uuid(),
+  };
+  const user = await prisma.user.create({
+    data: {
+      email: fakeEmail(),
+      sessions: {
+        create: session,
+      },
+    },
+  });
+  await page.context().addCookies([
+    {
+      domain: "localhost",
+      expires: session.expires.getTime() / 1000,
+      httpOnly: true,
+      name: SESSION_TOKEN_COOKIE_NAME,
+      path: "/",
+      value: session.sessionToken,
+    },
+  ]);
+  return {
+    auth: {
+      user,
+    },
+    page,
+  };
+}
+```
+
+上記実装によってワーカーごとに別のユーザーとしてログインされ、テスト内部からも `auth` fixture経由でアクセス可能。以下のように様々なログイン状態をエミュレートできる。
+
+```ts
+test("ログイン中", async ({ page, auth }) => {
+  // test code...
+});
+
+test.describe("非ログイン", () => {
+  test.use({
+    storageState: {
+      cookies: [],
+      origins: [],
+    },
+  });
+});
+
+test("複数ユーザー", async ({ browser, page, auth }) => {
+  const {
+    page: anotherPage,
+    auth: { profile: anotherProfile },
+  } = await createAuthedPage(browser);
+});
+```
+
+## まとめ
+
+- 認証関連は少々複雑だったが、ここまで設定しておけば大体のテストは書けそう。
+- データベースが共通だがワーカーごとに別ユーザーなので基本的には問題なさそう。ただし不特定多数ユーザーの投稿などが表示されるページはコンテンツが不確定になる。
