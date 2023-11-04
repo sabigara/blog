@@ -26,7 +26,7 @@ pnpm add three @react-three/fiber @react-three/drei meshline
 
 Before starting the implementation of detailed logic, create a basic layout and scene to test if `react-three-fiber` is correctly installed.
 
-```tsx:/src/App.tsx
+```tsx title=/src/App.tsx
 import React, { ChangeEvent } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Box, OrbitControls } from "@react-three/drei";
@@ -81,7 +81,7 @@ To use the `<audio />` tag as the source of frequency analysis, create `MediaEle
 
 I'll explain the details about the returned data of `getFFT` in the [later section](/#implement-visualizer-component-that-draws-a-line-in-3d-space).
 
-```ts:/src/lib/audio-analyzer.ts
+```ts title=/src/lib/audio-analyzer.ts
 export class AudioAnalyzer {
   #ctx: AudioContext;
   #analyzerNode: AnalyserNode;
@@ -119,7 +119,7 @@ Because `THREE.Line` is not so flexible to draw complex lines, I'd like to use [
 
 If you're a TypeScript user, make sure to extend `IntrinsicElements` to use `meshLine` and `meshLineMaterial` in your JSX.
 
-```ts:/src/lib/meshline.ts
+```ts title=/src/lib/meshline.ts
 import { extend, Object3DNode } from "@react-three/fiber";
 import { MeshLine, MeshLineMaterial } from "meshline";
 
@@ -141,7 +141,7 @@ export function extendMeshLine() {
 
 Also define some utils for calculation...
 
-```ts:/src/lib/math.ts
+```ts title=/src/lib/math.ts
 export const radians = (degrees: number) => {
   return (degrees * Math.PI) / 180;
 };
@@ -153,7 +153,7 @@ export const normalizeBetween = (val: number, min: number, max: number) => {
 
 ## Implement `Visualizer` component that draws a line in 3D space
 
-```tsx:/src/Visualizer.tsx
+```tsx title=/src/Visualizer.tsx
 import React from "react";
 import { useFrame } from "@react-three/fiber";
 import { Color } from "three";
@@ -225,15 +225,15 @@ The simplest visualization is as follows:
 
 We need to connect all the parts to make the app work.
 
-```tsx:/src/App.tsx
+```tsx title=/src/App.tsx
 function App() {
-  const [analyzer, setAnalyzer] = React.useState<AudioAnalyzer | null>(null)
+  const [analyzer, setAnalyzer] = React.useState<AudioAnalyzer | null>(null);
   // {...}
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     // {...}
-    setAnalyzer(new AudioAnalyzer(audioElmRef.current))
-  }
+    setAnalyzer(new AudioAnalyzer(audioElmRef.current));
+  };
   return (
     <div>
       {/* {...} */}
@@ -243,7 +243,7 @@ function App() {
       </Canvas>
       {/* {...} */}
     </div>
-  )
+  );
 }
 ```
 

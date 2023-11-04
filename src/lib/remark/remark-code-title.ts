@@ -6,19 +6,19 @@ export default function remarkCodeTitles() {
     visit(
       tree,
       "code",
-      (node: Parent & { lang?: string }, index, parent: Parent) => {
+      (
+        node: Parent & { lang?: string; meta: string | null },
+        index,
+        parent: Parent
+      ) => {
         if (!index) {
           return;
         }
 
-        const nodeLang = node.lang || "";
-        let language = "";
-        let title = "";
-
-        if (nodeLang.includes(":")) {
-          language = nodeLang.slice(0, nodeLang.search(":"));
-          title = nodeLang.slice(nodeLang.search(":") + 1, nodeLang.length);
-        }
+        const meta = node.meta?.split(" ") ?? [];
+        const title = meta
+          .find((item) => item.startsWith("title="))
+          ?.split("=")[1];
 
         if (!title) {
           return;
@@ -37,7 +37,7 @@ export default function remarkCodeTitles() {
         };
 
         parent.children.splice(index, 0, titleNode);
-        node.lang = language;
-      },
+        node.meta = null; // これがないと無限ループする
+      }
     );
 }

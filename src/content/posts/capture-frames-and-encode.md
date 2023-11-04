@@ -53,67 +53,67 @@ First, let's create a 3D scene to be captured. I think anything drawn on HTML Ca
 
 https://threejs.org/
 
-```ts:main.ts
-import * as THREE from "three"
-import "./styles.css"
+```ts title=main.ts
+import * as THREE from "three";
+import "./styles.css";
 
-const appElm = document.getElementById("app")!
+const appElm = document.getElementById("app")!;
 
 const size = {
   width: 1280,
   height: 720,
-} as const
+} as const;
 
 function initScene() {
-  const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(75, 16 / 9, 0.1, 1000)
-  camera.position.z = 2.5
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, 16 / 9, 0.1, 1000);
+  camera.position.z = 2.5;
 
-  const light = new THREE.DirectionalLight(0xffffff, 1)
-  light.position.set(0, 0, 2)
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(0, 0, 2);
 
-  scene.add(light)
+  scene.add(light);
 
-  const renderer = new THREE.WebGLRenderer()
-  renderer.setSize(size.width, size.height)
-  appElm.appendChild(renderer.domElement)
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(size.width, size.height);
+  appElm.appendChild(renderer.domElement);
 
-  const cubes = [makeCube([-1, 0, 0]), makeCube([1, 0, 0])]
-  scene.add(...cubes)
+  const cubes = [makeCube([-1, 0, 0]), makeCube([1, 0, 0])];
+  scene.add(...cubes);
 
   return {
     renderer,
     scene,
     camera,
     cubes,
-  }
+  };
 }
 
 function makeCube(position: [number, number, number]) {
-  const geometry = new THREE.BoxGeometry(1, 1, 1)
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
   const material = new THREE.MeshStandardMaterial({
     color: 0x3283a8,
-  })
+  });
 
-  const cube = new THREE.Mesh(geometry, material)
-  cube.position.set(...position)
-  return cube
+  const cube = new THREE.Mesh(geometry, material);
+  cube.position.set(...position);
+  return cube;
 }
 
-const { renderer, cubes, scene, camera } = initScene()
+const { renderer, cubes, scene, camera } = initScene();
 
 async function onFrame() {
   cubes.forEach((cube, i) => {
-    const speed = 0.01 * (i + 1)
-    cube.rotation.x += speed
-    cube.rotation.y += speed
-  })
-  renderer.render(scene, camera)
+    const speed = 0.01 * (i + 1);
+    cube.rotation.x += speed;
+    cube.rotation.y += speed;
+  });
+  renderer.render(scene, camera);
 
-  requestAnimationFrame(onFrame)
+  requestAnimationFrame(onFrame);
 }
 
-requestAnimationFrame(onFrame)
+requestAnimationFrame(onFrame);
 ```
 
 ![Two blue cubes](/images/posts/two-cubes.png)

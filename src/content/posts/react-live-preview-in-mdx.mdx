@@ -58,15 +58,15 @@ MDX allows us to specify custom components dedicated to each HTML tag by passing
 
 The following component examines the content of a `pre` tag to decide whether it's a code block because `pre` can be used for other purposes. The role for rendering a preview and highlighted code should be delegated to `CodeBlock` which is implemented next.
 
-```tsx:Pre.tsx
-import React from "react"
+```tsx title=Pre.tsx
+import React from "react";
 // We'll create this later
-import CodeBlock from "@/components/MdxComponents/CodeBlock"
+import CodeBlock from "@/components/MdxComponents/CodeBlock";
 
 type Props = {
-  live?: boolean
-  children?: React.ReactNode
-}
+  live?: boolean;
+  children?: React.ReactNode;
+};
 
 export default function Pre({ live, children, ...props }: Props) {
   if (React.isValidElement(children) && children.type === "code") {
@@ -74,16 +74,16 @@ export default function Pre({ live, children, ...props }: Props) {
       <div {...props}>
         <CodeBlock live={live} {...children.props} />
       </div>
-    )
+    );
   }
-  return <pre {...props}>{children}</pre>
+  return <pre {...props}>{children}</pre>;
 }
 ```
 
-```tsx:MdxComponents.tsx
+```tsx title=MdxComponents.tsx
 export const mdxComponents: MDXComponents = {
   pre: Pre,
-} as const
+} as const;
 ```
 
 ## `CodeBlock` component
@@ -92,17 +92,17 @@ We depend on [react-live](https://github.com/FormidableLabs/react-live) for prev
 
 https://github.com/FormidableLabs/react-live
 
-```tsx:CodeBlock.tsx
-import React from "react"
-import { LiveProvider, LiveError, LivePreview, LiveEditor } from "react-live"
-import { type Language } from "prism-react-renderer"
-import theme from "prism-react-renderer/themes/vsDark"
-import Button from "@/components/Button"
+```tsx title=CodeBlock.tsx
+import React from "react";
+import { LiveProvider, LiveError, LivePreview, LiveEditor } from "react-live";
+import { type Language } from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/vsDark";
+import Button from "@/components/Button";
 
 export default function CodeBlock({ children, className, live }: Props) {
-  const language = className.replace(/language-/, "") as Language
-  const code = children.replace(/\n$/, "")
-  const codeBlock = <code>Render Non-interactive code here...</code>
+  const language = className.replace(/language-/, "") as Language;
+  const code = children.replace(/\n$/, "");
+  const codeBlock = <code>Render Non-interactive code here...</code>;
 
   if (live) {
     return (
@@ -111,10 +111,10 @@ export default function CodeBlock({ children, className, live }: Props) {
         <LiveError />
         <LiveEditor code={code} language={language} theme={theme} />
       </LiveProvider>
-    )
+    );
   }
 
-  return codeBlock
+  return codeBlock;
 }
 ```
 

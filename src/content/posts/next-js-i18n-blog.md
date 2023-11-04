@@ -26,11 +26,11 @@ status: "published"
 
 `getStaticPaths` には引数として全ての `locales` が渡されるので、これを使って全ての `locale + slug` の組み合わせを網羅する。
 
-```tsx:/pages/blog/[...slug].tsx
+```tsx title=/pages/blog/[...slug].tsx
 type Post = {
-	slug: string;
-	locale: "en" | "ja";
-}
+  slug: string;
+  locale: "en" | "ja";
+};
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   return {
@@ -43,7 +43,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
       }))
     ),
     fallback: false,
-  }
+  };
 }
 ```
 
@@ -71,20 +71,23 @@ export async function getStaticPaths() {
 
 `getStaticProps` には `locale` と `slug` が渡されるので、それを使ってデータを取得する。もしその言語への翻訳がない場合は元の言語で表示する。その際に**別のロケールにリダイレクトされるわけではない**ので、記事の内容とその他のコンテンツ（フッターのテキストなど）で言語が不一致になる。これは基本的には望ましい挙動だと思う。
 
-```tsx:/pages/blog/[...slug].tsx
-export const getStaticProps = async ({ locale, params }: GetStaticPropsContext) => {
-  const slug = (params.slug as string[]).join("/")
-  const posts = getBlogPosts()
+```tsx title=/pages/blog/[...slug].tsx
+export const getStaticProps = async ({
+  locale,
+  params,
+}: GetStaticPropsContext) => {
+  const slug = (params.slug as string[]).join("/");
+  const posts = getBlogPosts();
   const post =
     posts.find(
       // Fallback to untranslated version if exists
       (post) => post.slug === slug && post.locale === locale
-    ) ?? posts.find((post) => post.slug === slug)
+    ) ?? posts.find((post) => post.slug === slug);
 
   if (!post) {
     return {
       notFound: true,
-    }
+    };
   }
 
   return {
@@ -92,8 +95,8 @@ export const getStaticProps = async ({ locale, params }: GetStaticPropsContext) 
       post,
       ...(await serverSideTranslations(locale, ["common", "blog"])),
     },
-  }
-}
+  };
+};
 ```
 
 ## TODO
