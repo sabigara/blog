@@ -1,5 +1,5 @@
 ---
-title: "Playwright + NextAuth + S3互換でNextアプリのE2Eテストを構築する"
+title: "PlaywrightでNextアプリのE2Eテスト環境を構築する"
 description: ""
 publishedAt: "2023-11-04"
 modifiedAt: null
@@ -8,18 +8,24 @@ status: "published"
 
 ## やりたいこと
 
-- S3互換ストレージへのアップロード
 - 開発環境とは別のテスト専用インフラを構築
-  - DB, ストレージ
+  - DB
+  - S3互換ストレージ
 - 認証 (NextAuthで)
   - 複数ユーザー/非ログイン
   - アプリ側でOAuth認証が必須でもテストでは外部APIとはやりとりしない
 
-## 使用するライブラリなど
+## 技術スタック
+
+アプリ
+
+- [Next.js: ^14.0.0](https://github.com/vercel/next.js)
+- [NextAuth: ^4.23.1](https://github.com/nextauthjs/next-auth)
+- [Prisma: ^5.4.2](https://github.com/prisma/prisma)
+
+テスト
 
 - [Playwright: ^1.39.0](https://github.com/microsoft/playwright)
-- [Prisma: ^5.4.2](https://github.com/prisma/prisma)
-- [NextAuth: ^4.23.1](https://github.com/nextauthjs/next-auth)
 - [LocalStack](https://github.com/localstack/localstack)
 
 ## テスト用インフラを構築する
