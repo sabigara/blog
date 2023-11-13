@@ -8,7 +8,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { generateMetadataFactory } from "@/lib/metadata/create-metadata";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export default function RootLayout({
   children,
@@ -28,7 +28,7 @@ export default function RootLayout({
           src="https://static.cloudflareinsights.com/beacon.min.js"
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} font-sans`}>
         <Header />
         <main className="min-h-screen container px-container">{children}</main>
         <Footer />
