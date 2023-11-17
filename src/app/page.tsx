@@ -61,7 +61,7 @@ export default function Home() {
         <h2 className={twHeading}>
           Available <span className="inline-block -translate-y-1">@</span>
         </h2>
-        <ul className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-4 md:gap-6 mt-8">
+        <ul className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-4 mt-8">
           {socialAccounts.map((link) => (
             <li key={link.url}>
               <SocialAccountItem socialLink={link} />
@@ -77,7 +77,7 @@ export default function Home() {
             {works.length} of {allWorks.length}
           </span>
         </h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8">
           {works.map((work) => (
             <WorkCard key={work._id} priority work={work} />
           ))}
