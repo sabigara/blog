@@ -1,5 +1,8 @@
 export { default as ZennIcon } from "@/assets/svg/zenn.svg";
-export { FaInfo as InfoIcon } from "react-icons/fa";
+export {
+  FaExclamation as ExclamationIcon,
+  FaInfo as InfoIcon,
+} from "react-icons/fa";
 export {
   HiArrowSmLeft as ArrowLeftIcon,
   HiArrowSmRight as ArrowRightIcon,

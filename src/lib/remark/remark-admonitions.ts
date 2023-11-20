@@ -8,7 +8,7 @@ export default function remarkAdmonitions() {
         node.type === "leafDirective" ||
         node.type === "containerDirective"
       ) {
-        if (!["info", "success", "warn", "danger"].includes(node.name)) {
+        if (!["info", "warning"].includes(node.name)) {
           return;
         }
         // Store node.name before overwrite with "Alert".

@@ -14,7 +14,7 @@ I managed this feature to work with the help of [WebCodecs API](https://develope
 
 You can record the viewport of the browser by `MediaRecorder` but it may be unstable (frames are skipped) and the quality is limited depending on the spec of the user's device. Another method is performing rendering on a server, but it requires a powerful and **expensive** GPU.
 
-:::warn
+:::warning
 [WebCodecs is only supported by Chromium browsers](https://caniuse.com/?search=webcodecs) as of 2022-11-30.
 :::
 

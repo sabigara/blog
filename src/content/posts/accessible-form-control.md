@@ -48,7 +48,7 @@ HTMLは以下のように出力されます。`id` はコンポーネント内�
 
 ![Erroneous text field labeled "Name", described "Tell us your name" and "Something is wrong"](/images/posts/form-control.png)
 
-:::warn
+:::warning
 `:has()` はFirefoxではまだ実装されていません。
 :::
 
@@ -169,7 +169,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
 Input.displayName = "Input";
 ```
 
-:::warn
+:::warning
 この実装だと `aria-describedby` に余計なスペースが入る場合があるので、なんらかのフィルタリングはしたほうがいいかもしれません。
 :::
 
