@@ -37,6 +37,7 @@ export const Post = defineDocumentType(() => ({
     status: {
       type: "enum",
       options: ["published", "draft"],
+      default: "draft",
     },
   },
   computedFields,
