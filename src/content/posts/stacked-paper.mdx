@@ -1,0 +1,43 @@
+---
+title: "紙が積み重なってるみたいなデザインをCSSで実装する"
+description: ""
+publishedAt: "2023-11-29"
+modifiedAt: null
+---
+
+![Noteのスクリーンショット](https://static.sabigara.com/uploads/5Abe8eQX_814x297.png)
+
+Noteで使われている、紙を積み重ねたようなUI表現をCSSで実装してみた。Noteでは `::before` `::after` 疑似要素を使っているが、 `box-shadow` の方が楽そうだったのでこっちにした。
+
+```scss
+.stacked {
+  box-shadow:
+    2px 2px 0 -1px var(--color-surface),
+    2px 2px 0 0 var(--color-border),
+    4px 4px 0 -1px var(--color-surface),
+    4px 4px 0 0 var(--color-border);
+}
+```
+
+それほど複雑というわけではないが一瞬で実装できるほどでもないのでメモしておく。
+
+ChatGPTに生成させたSassのmixinは以下の通り。
+
+```scss
+@mixin stacked($count, $offsetX, $offsetY, $surfaceColor, $borderColor) {
+  $shadow: ();
+  @for $i from 1 through $count {
+    $shadow: append(
+      $shadow,
+      #{($i * $offsetX)}px #{($i * $offsetY)}px 0 -1px $surfaceColor,
+      comma
+    );
+    $shadow: append(
+      $shadow,
+      #{($i * $offsetX)}px #{($i * $offsetY)}px 0 0px $borderColor,
+      comma
+    );
+  }
+  box-shadow: $shadow;
+}
+```
