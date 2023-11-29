@@ -1,0 +1,149 @@
+---
+title: "コードエディタで気軽にブログ記事を書くための工夫"
+description: ""
+publishedAt: "2023-11-30"
+modifiedAt: null
+status: "published"
+---
+
+:::info
+ここでのコードエディタとはVSCodeなどのプログラミングに特化したテキストエディタを指す。
+:::
+
+静的サイトジェネレータが普及したこともあり、コードエディタでマークダウン形式でブログ記事を書いている人はけっこう多いと思う。プログラマにとって使い慣れたエディタで書けるのは馴染みやすくて便利ではあるが、その反面ブログを書くのに必ずしも向いているとは言えない。
+
+個人的に煩雑だと思うのは、
+
+1. **画像の管理やアップロードが面倒** – Git管理するにしても、ローカルだと却ってURLが相対になって面倒だったりする。リモートに置くと画像サイズが不明になりCLSが発生して不快。
+2. **記事の初期化が面倒** – タイトルなどのメタデータはFrontmatterで書くことが多いと思うが、手動管理は面倒。
+3. **すぐプレビューできない** – エディタの拡張機能などでマークダウンのプレビューは生成可能だが、できれば実際の表示もすぐに見たい。
+
+このブログはNext.js (App Router) で構築されており、記事はマークダウンファイルで管理されている。ちょっとした工夫で上記の3つの辛さをある程度克服することができたので紹介する。
+
+結果として、以下のように **2つのコマンドを実行するだけで雛形を生成し、エディタとブラウザプレビューを瞬時に起動できる**ようになった。
+
+```bash
+pnpm dev # 開発サーバーを起動
+pnpm new:post # 雛形生成, エディタとプレビューを起動
+```
+
+画像のアップロードも以下のコマンドで手軽に実行できるようになった。
+
+```bash
+pnpm upload </path/to/image/file.jpg>
+```
+
+## 画像アップロード
+
+まずローカルとリモートのどちらで管理するかだが、僕はクラウドストレージにアップロードすることにした。一番大きな理由は、常にURLが一定なので記事をどこにどんな形式で移しても影響を受けづらいから。どんなディレクトリ構造でも関係ないし、どこかのブログサービスにそのままコピペすることもたぶんできる。
+
+### アップロードをスクリプトで自動化する
+
+```ts
+async function uploadImageToS3(filePath: string): Promise<void> {
+  const s3Client = new S3Client({
+    endpoint: env.S3_ENDPOINT,
+    region: "auto",
+  });
+  const fileContent = await fs.readFile(filePath);
+  const dimensions = sizeOf(filePath);
+
+  const ext = filePath.split(".").pop() || "jpg";
+  const key = `uploads/${nanoid(8)}_${dimensions.width}x${
+    dimensions.height
+  }.${ext}`;
+
+  const uploadParams = {
+    Bucket: env.S3_BUCKET_NAME,
+    Key: key,
+    Body: fileContent,
+    ContentType: `image/${ext}`,
+    ACL: "public-read",
+  } as const;
+
+  await s3Client.send(new PutObjectCommand(uploadParams));
+
+  const publicUrl = `${env.S3_PUBLIC_URL}/${key}`;
+  clipboardy.writeSync(`![](${publicUrl})`);
+}
+```
+
+こんな感じのスクリプトを実装し、 `pnpm upload <画像をターミナルにD&D>` でアップロードできるようにした。WYSIWYGのようにエディタに直接ドロップするほど楽ではないが、URLが自動でクリップボードにコピーされるので大して面倒ではない。
+
+ファイル名は自動でUIDを生成しているので、ローカルファイルで管理するときのように命名を考える必要はない（まあローカルでも自動生成&対象ディレクトリにコピーすればいいのだが）。
+
+### CLSの排除
+
+[Tailwind Nextjs Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog)はRemarkプラグインとして画像ファイルのサイズを計測して `next/image` に渡してくれる機能があるが、リモートファイルはサポートしていない。
+
+リモートでも画像ファイルのヘッダーだけ読めばサイズは判別できるようなので、ビルド時に毎回fetchしてもそれほどのコストにはならないかもしれないが、ビルド時間にも響きそうなのでできれば避けたい。
+
+上記スクリプトでは `image-size` でアップロード時に計測し、ファイル名の末尾に付加している。あとはレンダリング時にパースしてコンポーネントの `width` と `height` に渡すだけだ。めちゃくちゃシンプルだが何も問題はないと思う。
+
+### Cloudflare R2で配信コストはゼロ
+
+このブログのように大してPVの多くないサイトであればS3にアップロードしても十分安いと思うが、今は下りのネットワーク帯域量に料金が加算されない [Cloudflare R2](https://www.cloudflare.com/ja-jp/developer-platform/r2/)を使っている。S3互換なので `@aws-sdk/client-s3` が使える。
+
+## ファイル初期化 & エディタとプレビューの自動起動
+
+https://github.com/plopjs/plop
+
+マークダウンの雛形生成やエディタ・プレビューの起動などはPlopで一括して行うことができた。生成されたファイルは自動的にエディタで表示されるし、ブラウザによるプレビュー表示も自動化されている。ちょっとしたことだが、これだけでかなり執筆体験がよくなったと感じる。
+
+```ts title=plopfile.js
+function plop(plop) {
+  plop.setHelper("today", () => {
+    return new Date().toISOString().split("T")[0];
+  });
+
+  plop.setActionType("open", async (answers) => {
+    const filePath = `src/content/posts/${answers.slug}.mdx`;
+    exec(`code ${filePath}`); // 生成したファイルをVSCodeで起動
+    exec(`open http://localhost:3700/posts/${answers.slug}`); // プレビューURLをデフォルトブラウザで開く。たぶんMac限定コマンド？
+  });
+
+  plop.setGenerator("post", {
+    description: "Blog post",
+    prompts: [
+      {
+        type: "input",
+        name: "slug",
+        message: "filename that will be used as the slug for the post",
+        default: () => nanoid(8),
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "src/content/posts/{{slug}}.mdx",
+        templateFile: "templates/post.mdx.hbs",
+      },
+      {
+        type: "open",
+      },
+    ],
+  });
+}
+```
+
+テンプレートは [handlebars](https://handlebarsjs.com) で記述する。あまり使ったことはなかったが、シンプルで直感的に書けるので特に迷うことはなかった。
+
+```txt title=post.mdx.hbs
+---
+title: "タイトル未設定"
+description: ""
+publishedAt: "{{today}}"
+modifiedAt: null
+status: "draft"
+---
+```
+
+:::info
+Next.jsで `fs.readFile` などを使ってマークダウンを読み込んでいると、記事を書き換えても変更は自動でプレビューに適用されない。[Contentlayer](https://contentlayer.dev) を使えば、自動リロードだけでなくメタデータのバリデーションなども行ってくれるのでオススメ。
+:::
+
+## まとめ
+
+NoteやZennなどのホスティングサービスは開けばすぐに書き始められるのだから、手軽さという意味ではなんだかんだで強い。ローカルファイルをちまちま整理したり手動でファイルを開くのは小さいようで意外とストレスになるものだ。
+
+今回紹介した改善も地味といえば地味だが、ブログを書くモチベーションに繋がるくらいの影響があると思っている（結果は今後の更新状況をみて評価してください）。
