@@ -3,12 +3,12 @@ title: "Camome UI"
 subtitle: "React UI framework"
 date: "2023年1月"
 role: "デザイン/開発"
-achievement: "⭐️ 220"
+achievement: "⭐️ 230"
 coverImg: "/images/projects/camomeui.png"
 url: "https://camome.net"
 featured: true
 publishedAt: "2023-10-30"
-modifiedAt: null
+modifiedAt: "2023-12-01"
 ---
 
 シンプルながらも美しく使いやすいReact用UIフレームワーク。CSS Modulesで実装されています。
