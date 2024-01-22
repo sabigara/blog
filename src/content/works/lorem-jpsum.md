@@ -1,7 +1,7 @@
 ---
 title: "Lorem JPsum"
 subtitle: "Lorem generator for Japanese"
-date: "2022年1月"
+date: "2022-01"
 role: "デザイン/開発"
 coverImg: "/images/projects/lorem-jpsum.png"
 url: "https://lorem.sabigara.com"

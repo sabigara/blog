@@ -21,7 +21,7 @@ export function DataList({ data, classNames }: Props) {
         }
         return (
           <div className={twMerge("space-y-2", classNames?.item)} key={term}>
-            <dt className="text-gray-300">{term.toUpperCase()}</dt>
+            <dt className="text-gray-400">{term.toUpperCase()}</dt>
             <dd className="">{data}</dd>
           </div>
         );

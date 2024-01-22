@@ -2,43 +2,37 @@
 
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { usePathname, useRouter } from "next/navigation";
-import { twMerge } from "tailwind-merge";
 
 import { CheckIcon, SelectorIcon } from "@/components/icons";
 import { CATEGORIES } from "@/constants/categories";
 import { upperCaseFirst } from "@/lib/string/upper-case-first";
 import type { Category } from "@/types/category";
 
-type Props = {
-  className?: string;
-};
+type Props = {};
 
-export function CategoryDropdown({ className }: Props) {
+export function CategoryDropdown({}: Props) {
   const pathname = usePathname();
-  const current = pathname.split("/")[1];
+  const currentCategory = pathname.split("/")[1];
   const router = useRouter();
 
-  if (!CATEGORIES.includes(current as Category)) {
+  if (!CATEGORIES.includes(currentCategory as Category)) {
     return null;
   }
 
   return (
     <DropdownMenu.Root modal={false}>
-      <DropdownMenu.Trigger asChild>
-        <button
-          className={twMerge(
-            "inline-flex p-2 rounded-md hover:bg-slate-100",
-            className
-          )}
-        >
-          <SelectorIcon />
-        </button>
+      <DropdownMenu.Trigger className="inline-flex items-center p-2 rounded-md hover:bg-slate-100">
+        <span className="text-black/30">/</span>
+        <span className="mx-2 font-medium">
+          {upperCaseFirst(currentCategory)}
+        </span>
+        <SelectorIcon className="" />
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content className="DropdownMenuContent" sideOffset={4}>
           <DropdownMenu.RadioGroup
             onValueChange={(category) => router.push(`/${category}`)}
-            value={current}
+            value={currentCategory}
           >
             {CATEGORIES.map((category) => (
               <DropdownMenu.RadioItem

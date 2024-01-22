@@ -19,7 +19,8 @@ const POST_LIMIT = 6;
 
 export default function Home() {
   const works = allWorks
-    .sort((a, b) => (!!a.featured > !!b.featured ? -1 : 1))
+    .toSorted((a, b) => -a.date.localeCompare(b.date))
+    .toSorted((a, b) => (!!a.featured > !!b.featured ? -1 : 1))
     .slice(0, WORK_LIMIT);
   const posts = listPosts({ limit: POST_LIMIT });
 

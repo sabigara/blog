@@ -1,7 +1,7 @@
 ---
 title: "Camome UI"
 subtitle: "React UI framework"
-date: "2023年1月"
+date: "2023-01"
 role: "デザイン/開発"
 achievement: "⭐️ 230"
 coverImg: "/images/projects/camomeui.png"

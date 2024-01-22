@@ -1,7 +1,7 @@
 ---
 title: "Flat"
 subtitle: "Web client for Bluesky"
-date: "2023年3月"
+date: "2023-03"
 role: "デザイン/開発"
 achievement: "⭐️ 40"
 coverImg: "/images/projects/flat.png"

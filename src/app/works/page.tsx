@@ -4,7 +4,9 @@ import { WorkCard } from "@/components/work/card";
 import { generateMetadataFactory } from "@/lib/metadata/create-metadata";
 
 export default function WorkListPage() {
-  const works = allWorks.sort((a, b) => (!!a.featured > !!b.featured ? -1 : 1));
+  const works = allWorks
+    .toSorted((a, b) => -a.date.localeCompare(b.date))
+    .toSorted((a, b) => (!!a.featured > !!b.featured ? -1 : 1));
 
   return (
     <div className="pt-8 pb-12">
