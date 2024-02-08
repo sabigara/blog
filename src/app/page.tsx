@@ -106,6 +106,17 @@ export default function Home() {
           View all posts <ArrowRightIcon aria-hidden className="inline" />
         </Link>
       </section>
+
+      <section>
+        <h2 className={twMerge(twHeading, "mt-12")}>Music</h2>
+        <iframe
+          height="350"
+          src="https://vvave-git-embed-rubik.vercel.app/embed/albums/clpyuha3y000163wwv7m2v3zr"
+          style={{ border: "none", borderRadius: "14px", maxWidth: "700px" }}
+          title="Embed"
+          width="100%"
+        />
+      </section>
     </div>
   );
 }
