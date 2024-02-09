@@ -111,9 +111,29 @@ export default function Home() {
         <h2 className={twMerge(twHeading, "mt-12")}>Music</h2>
         <iframe
           height="350"
-          src="https://vvave-git-embed-rubik.vercel.app/embed/albums/clpyuha3y000163wwv7m2v3zr"
-          style={{ border: "none", borderRadius: "14px", maxWidth: "700px" }}
-          title="Embed"
+          loading="lazy"
+          sandbox="allow-popups allow-same-origin allow-scripts"
+          src="https://vvave-git-develop-rubik.vercel.app/embed/albums/clpyuha3y000163wwv7m2v3zr"
+          style={{
+            backgroundColor: "#f7fafc",
+            border: "1px solid #e2e8f0",
+            borderRadius: "14px",
+            maxWidth: "100%",
+          }}
+          width="100%"
+        />
+        <iframe
+          height="140"
+          loading="lazy"
+          sandbox="allow-popups allow-same-origin allow-scripts"
+          src="https://vvave-git-develop-rubik.vercel.app/embed/tracks/clscxyxrx000d178xqy1l9mt5"
+          style={{
+            backgroundColor: "#f7fafc",
+            border: "1px solid #e2e8f0",
+            borderRadius: "14px",
+            maxWidth: "100%",
+            marginBlockStart: "1.5rem",
+          }}
           width="100%"
         />
       </section>
