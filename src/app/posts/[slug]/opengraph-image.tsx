@@ -3,6 +3,8 @@ import { ImageResponse } from "next/og";
 
 import { createOgCardImageResponse } from "@/lib/image-response/og-card";
 
+export const runtime = "edge";
+
 export const alt = "";
 export const size = {
   height: 630,

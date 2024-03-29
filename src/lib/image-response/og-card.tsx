@@ -1,6 +1,7 @@
-import fs from "node:fs/promises";
-import path from "node:path";
+import { siteConfig } from "@/content/site-config";
 import { ImageResponse } from "next/og";
+
+export const runtime = "edge";
 
 type Params = {
   size: {
@@ -11,13 +12,17 @@ type Params = {
 };
 
 export async function createOgCardImageResponse({ size, title }: Params) {
-  const [notoSansJpBold, avatarData] = await Promise.all([
-    fs.readFile(path.resolve("public/fonts/NotoSansJP-Bold.ttf")),
-    fs.readFile(path.resolve("public/images/avatar.jpg")),
-  ]);
-
   const containerPad = 48;
   const cardPad = 48;
+
+  const [fontData, avatarData] = await Promise.all([
+    fetch(`${siteConfig.url}/fonts/NotoSansJP-Bold.ttf`).then((res) =>
+      res.arrayBuffer(),
+    ),
+    fetch(`${siteConfig.url}/images/avatar.jpg`).then((res) =>
+      res.arrayBuffer(),
+    ),
+  ]);
 
   return new ImageResponse(
     <div
@@ -74,7 +79,9 @@ export async function createOgCardImageResponse({ size, title }: Params) {
           <img
             alt=""
             height={70}
-            src={`data:image/jpeg;base64,${avatarData.toString("base64")}`}
+            src={`data:image/jpeg;base64,${Buffer.from(
+              await avatarData,
+            ).toString("base64")}`}
             style={{
               borderRadius: "9999px",
             }}
@@ -88,7 +95,7 @@ export async function createOgCardImageResponse({ size, title }: Params) {
       ...size,
       fonts: [
         {
-          data: notoSansJpBold,
+          data: fontData,
           name: "Noto Sans JP",
           style: "normal",
           weight: 400,
