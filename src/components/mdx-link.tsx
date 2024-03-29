@@ -10,7 +10,7 @@ export function MdxLink(props: Props) {
     return props.children;
   }
   return props.children === props.href ? (
-    <span className="not-prose h-24 block rounded-lg border overflow-clip hover:border-gray-400">
+    <span className="not-prose h-24 my-10 block rounded-lg border overflow-clip hover:border-gray-400">
       {/* OgLink専用のErrorBoundaryが欲しいが試してみたところ上手く動かなかった */}
       <Suspense fallback={<div className="h-full bg-slate-100" />}>
         <OgLink href={props.href} />

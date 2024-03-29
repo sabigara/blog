@@ -33,7 +33,7 @@ export default function BlogPostPage({ params }: Props) {
 
   return (
     <>
-      <header className="py-8">
+      <header className="pt-8 py-12">
         <h1 className="text-3xl font-bold">{post.title}</h1>
         <div className="flex items-center gap-3 mt-3 text-sm text-gray-500 ">
           <time className="flex items-center gap-x-1">

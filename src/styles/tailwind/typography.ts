@@ -82,7 +82,7 @@ export const tailwindTypographyConfig = (theme: (token: string) => string) => ({
         quotes: "none",
       },
       img: {
-        margin: "0 auto",
+        margin: "3rem auto",
         border: `1px solid ${theme("colors.gray.200")}`,
       },
       video: {

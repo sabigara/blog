@@ -82,3 +82,38 @@ body {
     opacity: 0;
   }
 }
+
+.prose .react-tweet-theme {
+  --tweet-container-margin: 3rem auto;
+  --tweet-body-font-size: inherit;
+  --tweet-info-font-size: 0.8em;
+  --tweet-color-red-primary: currentColor;
+  --tweet-color-blue-primary: currentColor;
+  --tweet-bg-color-hover: none;
+
+  & [class*="tweet-container_article"] {
+    padding: 1.5rem;
+  }
+
+  & [class*="tweet-actions_actions"] {
+    justify-content: center;
+    border-top: none;
+  }
+
+  & [class*="tweet-info-created-at"] {
+    @apply text-gray-400;
+  }
+
+  & [class*="tweet-actions_copy"] {
+    display: none;
+  }
+
+  & [class*="replies_replies"] {
+    display: none;
+  }
+}
+
+iframe[src*="https://vvave.app/embed"]
+{
+  margin: 2rem auto;
+}
