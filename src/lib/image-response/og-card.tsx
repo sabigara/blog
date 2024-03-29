@@ -12,7 +12,7 @@ type Params = {
 
 export async function createOgCardImageResponse({ size, title }: Params) {
   const [notoSansJpBold, avatarData] = await Promise.all([
-    fs.readFile(path.resolve("src/fonts/NotoSansJP-Bold.ttf")),
+    fs.readFile(path.resolve("public/fonts/NotoSansJP-Bold.ttf")),
     fs.readFile(path.resolve("public/images/avatar.jpg")),
   ]);
 
