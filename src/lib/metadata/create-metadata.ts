@@ -4,7 +4,7 @@ import { siteConfig } from "@/content/site-config";
 
 type GenerateMetadata<P> = (
   props: P,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ) => Promise<Metadata>;
 
 type Options = {
@@ -14,7 +14,7 @@ type Options = {
 
 export function generateMetadataFactory<P>(
   metadata: Metadata | ((props: P) => Promise<Metadata>),
-  options: Options = {}
+  options: Options = {},
 ): GenerateMetadata<P> {
   const { interceptOgImages = false } = options;
 
@@ -26,6 +26,7 @@ export function generateMetadataFactory<P>(
     const parent = await resolvingParent;
 
     if (interceptOgImages) {
+      // biome-ignore lint/performance/noDelete:
       delete parent.openGraph?.images;
     }
 

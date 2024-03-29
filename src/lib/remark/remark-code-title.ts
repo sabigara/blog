@@ -9,7 +9,7 @@ export default function remarkCodeTitles() {
       (
         node: Parent & { lang?: string; meta: string | null },
         index,
-        parent: Parent
+        parent: Parent,
       ) => {
         if (!index) {
           return;
@@ -38,6 +38,6 @@ export default function remarkCodeTitles() {
 
         parent.children.splice(index, 0, titleNode);
         node.meta = null; // これがないと無限ループする
-      }
+      },
     );
 }

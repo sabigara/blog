@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { imageSize } from "image-size";
 import type { Literal, Node, Parent } from "unist";
 import { visit } from "unist-util-visit";
@@ -22,7 +22,7 @@ export default function remarkImgToJsx() {
         node.children.some((n) => n.type === "image"),
       (node: Parent) => {
         const imageNode = node.children.find(
-          (n) => n.type === "image"
+          (n) => n.type === "image",
         ) as ImageNode;
         const url = imageNode.url;
 
@@ -32,7 +32,7 @@ export default function remarkImgToJsx() {
         // （念のためドメインもチェック）
         // `https://static.sabigara.com/uploads/WGvpEaAz_512x512.webp`
         const dimensionUrlMatch = url.match(
-          /https:\/\/static\.sabigara\.com\/uploads\/.*_(\d+)x(\d+)\./
+          /https:\/\/static\.sabigara\.com\/uploads\/.*_(\d+)x(\d+)\./,
         );
 
         // ローカルファイルはここでサイズを計測する。
@@ -68,7 +68,7 @@ export default function remarkImgToJsx() {
           });
         }
         node.children = [imageNode];
-      }
+      },
     );
   };
 }

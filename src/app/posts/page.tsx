@@ -81,17 +81,11 @@ type Item =
 
 function dateToSeason(date: Date) {
   const month = date.getMonth() + 1;
-  if (month === 12 || (1 <= month && month <= 2)) {
-    return "❄️";
-  } else if (3 <= month && month <= 5) {
-    return "🌸";
-  } else if (6 <= month && month <= 8) {
-    return "🌻";
-  } else if (9 <= month && month <= 11) {
-    return "🍁";
-  } else {
-    throw new Error("Should not reach here.");
-  }
+  if (month === 12 || (1 <= month && month <= 2)) return "❄️";
+  if (3 <= month && month <= 5) return "🌸";
+  if (6 <= month && month <= 8) return "🌻";
+  if (9 <= month && month <= 11) return "🍁";
+  throw new Error("Should not reach here.");
 }
 
 export const generateMetadata = generateMetadataFactory({ title: "Posts" });

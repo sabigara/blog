@@ -26,9 +26,9 @@ export const mdxOptions: MDXOptions = {
       {
         behavior: "append",
         properties: {
-          ["aria-hidden"]: false,
-          ["tab-index"]: false,
-          ["class"]: "hash-link",
+          "aria-hidden": false,
+          "tab-index": false,
+          class: "hash-link",
         },
       },
     ],

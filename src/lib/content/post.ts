@@ -4,11 +4,11 @@ import { allPosts } from "contentlayer/generated";
 export function listPosts({ limit }: { limit?: number } = {}) {
   const sortedPosts = [...allPosts]
     .filter((p) =>
-      process.env.NODE_ENV === "development" ? true : p.status === "published"
+      process.env.NODE_ENV === "development" ? true : p.status === "published",
     )
     .sort(
       (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
     );
   return sortedPosts.slice(0, limit);
 }

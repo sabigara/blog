@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
+import { notFound } from "next/navigation";
 import { TbCalendarEvent as CalendarIcon } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 
@@ -99,5 +99,5 @@ export const generateMetadata = generateMetadataFactory<Props>(
   },
   {
     interceptOgImages: true,
-  }
+  },
 );

@@ -16,7 +16,7 @@ export function Tag({ children, className, colorScheme = "neutral" }: Props) {
       className={twMerge(
         "text-sm font-medium rounded-full leading-relaxed inline-flex px-2",
         colorScheme === "blue" ? twBlue : twNeutral,
-        className
+        className,
       )}
     >
       {children}

@@ -25,18 +25,17 @@ export async function MdxImg({ width, height, alt, src, ...props }: Props) {
         alt={alt ?? ""}
       />
     );
-  } else {
-    return (
-      <img
-        {...props}
-        {...imageProps}
-        alt={alt ?? ""}
-        style={{
-          objectFit: "cover",
-        }}
-      />
-    );
   }
+  return (
+    <img
+      {...props}
+      {...imageProps}
+      alt={alt ?? ""}
+      style={{
+        objectFit: "cover",
+      }}
+    />
+  );
 }
 
 type UnknownSize = {

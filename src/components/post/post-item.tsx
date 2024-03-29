@@ -16,7 +16,7 @@ export function BlogPostItem({ className, post }: Props) {
     <article
       className={twMerge(
         "flex flex-col space-y-[2px] hover:bg-slate-100 -m-2 p-2 rounded-md relative",
-        className
+        className,
       )}
     >
       <Link className="clickable-overlay" href={post.path}>

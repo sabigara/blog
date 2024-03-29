@@ -22,7 +22,7 @@ export const Link = forwardRef<HTMLAnchorElement, Props<string>>(
       externalIcon = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const externalProps = {
       target: "_blank",
@@ -40,7 +40,7 @@ export const Link = forwardRef<HTMLAnchorElement, Props<string>>(
           <FiArrowUpRight
             className={twMerge(
               "text-gray-400 inline mx-[0.1em]",
-              externalClassName
+              externalClassName,
             )}
             size="1.3em"
             strokeWidth={1.75}
@@ -48,7 +48,7 @@ export const Link = forwardRef<HTMLAnchorElement, Props<string>>(
         )}
       </NextLink>
     );
-  }
+  },
 ) as (<T extends string>(props: Props<T>) => JSX.Element) & {
   displayName: string;
 };

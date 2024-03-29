@@ -28,7 +28,7 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
     throw new Error(
       `Failed to fetch ${url}. Status: ${
         resp.status
-      }. Body: ${await resp.text()}`
+      }. Body: ${await resp.text()}`,
     );
   }
 
@@ -47,7 +47,7 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
     .filter(
       (element) =>
         element.hasAttribute("property") &&
-        element.getAttribute("property")?.startsWith("og:")
+        element.getAttribute("property")?.startsWith("og:"),
     )
     .reduce((acc, ogp) => {
       const property = ogp.getAttribute("property")?.trim().replace("og:", "");
@@ -56,6 +56,7 @@ export async function fetchSiteMetadata(url: string): Promise<SiteMetadata> {
         return acc;
       }
       return {
+        // biome-ignore lint/performance/noAccumulatingSpread: <explanation>
         ...acc,
         [property]: content,
       };

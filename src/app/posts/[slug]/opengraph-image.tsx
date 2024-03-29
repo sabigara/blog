@@ -19,10 +19,11 @@ type Props = {
 
 export default async function Image({ params: { slug } }: Props) {
   const post = allPosts.find(
-    (post) => post._raw.flattenedPath === post._raw.sourceFileDir + "/" + slug
+    (post) => post._raw.flattenedPath === `${post._raw.sourceFileDir}/${slug}`,
   );
 
   if (!post) {
+    // biome-ignore lint/complexity/noUselessFragments: <explanation>
     return new ImageResponse(<></>, { ...size });
   }
 

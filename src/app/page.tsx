@@ -110,6 +110,7 @@ export default function Home() {
       <section>
         <h2 className={twMerge(twHeading, "mt-12")}>Music</h2>
         <iframe
+          title="my playlist"
           height="450"
           loading="lazy"
           sandbox="allow-popups allow-same-origin allow-scripts"

@@ -1,8 +1,6 @@
-/* eslint-disable sort-keys */
-
-import fs from "fs/promises";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
-import path from "path";
 
 type Params = {
   size: {
@@ -22,72 +20,70 @@ export async function createOgCardImageResponse({ size, title }: Params) {
   const cardPad = 48;
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        display: "flex",
+        background: "hsl(220 40% 90%)",
+        height: "100%",
+        width: "100%",
+        padding: containerPad,
+      }}
+    >
       <div
         style={{
+          position: "relative",
           display: "flex",
-          background: "hsl(220 40% 90%)",
+          flexDirection: "column",
+          background: "white",
+          padding: cardPad,
+          borderRadius: 20,
+          gap: 40,
           height: "100%",
           width: "100%",
-          padding: containerPad,
         }}
       >
         <div
           style={{
-            position: "relative",
             display: "flex",
-            flexDirection: "column",
-            background: "white",
-            padding: cardPad,
-            borderRadius: 20,
-            gap: 40,
-            height: "100%",
-            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
           }}
         >
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flex: 1,
+              fontSize: 70,
+              display: "-webkit-box",
+              textOverflow: "ellipsis",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              overflow: "hidden",
             }}
           >
-            <div
-              style={{
-                fontSize: 70,
-                display: "-webkit-box",
-                textOverflow: "ellipsis",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 3,
-                overflow: "hidden",
-              }}
-            >
-              {title}
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              gap: 18,
-            }}
-          >
-            <img
-              alt=""
-              height={70}
-              src={`data:image/jpeg;base64,${avatarData.toString("base64")}`}
-              style={{
-                borderRadius: "9999px",
-              }}
-              width={70}
-            />
-            <div style={{ fontSize: 44 }}>Sabigara</div>
+            {title}
           </div>
         </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: 18,
+          }}
+        >
+          <img
+            alt=""
+            height={70}
+            src={`data:image/jpeg;base64,${avatarData.toString("base64")}`}
+            style={{
+              borderRadius: "9999px",
+            }}
+            width={70}
+          />
+          <div style={{ fontSize: 44 }}>Sabigara</div>
+        </div>
       </div>
-    ),
+    </div>,
     {
       ...size,
       fonts: [
@@ -98,6 +94,6 @@ export async function createOgCardImageResponse({ size, title }: Params) {
           weight: 400,
         },
       ],
-    }
+    },
   );
 }

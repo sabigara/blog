@@ -16,7 +16,7 @@ export function Message({ children, className, status = "info" }: Props) {
     <div
       className={twMerge(
         "p-4 border text-[0.92em] rounded-md bg-slate-50",
-        className
+        className,
       )}
     >
       <div className="flex items-center gap-2 mb-3 ">

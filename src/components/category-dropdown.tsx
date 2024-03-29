@@ -8,9 +8,7 @@ import { CATEGORIES } from "@/constants/categories";
 import { upperCaseFirst } from "@/lib/string/upper-case-first";
 import type { Category } from "@/types/category";
 
-type Props = {};
-
-export function CategoryDropdown({}: Props) {
+export function CategoryDropdown() {
   const pathname = usePathname();
   const currentCategory = pathname.split("/")[1];
   const router = useRouter();

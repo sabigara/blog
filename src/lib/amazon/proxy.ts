@@ -24,12 +24,12 @@ export async function fetchAmazonItem({
     asin,
   }).toString();
 
-  const res = await fetch(env.PAAPI_PROXY_URL + "/api/items" + "?" + search);
+  const res = await fetch(`${env.PAAPI_PROXY_URL}/api/items?${search}`);
   if (!res.ok) {
     throw new Error(
       `Failed to fetch ${env.PAAPI_PROXY_URL}. Status: ${
         res.status
-      }. Body: ${await res.text()}`
+      }. Body: ${await res.text()}`,
     );
   }
   return res.json();

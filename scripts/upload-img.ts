@@ -1,7 +1,7 @@
+import { promises as fs } from "node:fs";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import clipboardy from "clipboardy";
 import dotenv from "dotenv";
-import { promises as fs } from "fs";
 import sizeOf from "image-size";
 import { nanoid } from "nanoid";
 import yargs from "yargs";

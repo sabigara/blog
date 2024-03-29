@@ -28,6 +28,7 @@ export function PageSharer({ className, title }: Props) {
       {Object.entries(ShareChannel).map(([key, { Icon, label }]) => (
         <li className="relative" key={key}>
           <button
+            type="button"
             aria-label={`${label}でシェア`}
             className="grid place-items-center p-2 rounded-md text-gray-300 hover:text-gray-900"
             onClick={createClickHandler(key as ShareChannelName)}

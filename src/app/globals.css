@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+}
+
 @layer utilities {
   .clickable-overlay::after {
     content: "";

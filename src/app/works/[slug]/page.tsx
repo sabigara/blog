@@ -1,6 +1,6 @@
 import { allWorks } from "contentlayer/generated";
-import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
+import { notFound } from "next/navigation";
 
 import { DataList } from "@/components/data-list";
 import { ArrowLeftIcon } from "@/components/icons";
@@ -102,7 +102,7 @@ export const generateMetadata = generateMetadataFactory<Props>(
         images: [work.coverImg],
       },
     };
-  }
+  },
 );
 
 function getWork(slug: string) {
