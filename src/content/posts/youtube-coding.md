@@ -6,7 +6,7 @@ status: "published"
 
 Camome UIというプロジェクトを最近公開した。
 
-https://camome.net
+https://camome.sabigara.com
 
 [Zennで記事を書いた](https://zenn.dev/sabigara/articles/bed4af4543f59d)らそれなりの反応はもらえたが、一時的な流入は増えても継続的なアクセスには至っていない。
 

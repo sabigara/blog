@@ -5,7 +5,7 @@ date: "2023-01"
 role: "デザイン/開発"
 achievement: "⭐️ 230"
 coverImg: "/images/projects/camomeui.png"
-url: "https://camome.net"
+url: "https://camome.sabigara.com"
 featured: true
 publishedAt: "2023-10-30"
 modifiedAt: "2023-12-01"
@@ -15,9 +15,7 @@ modifiedAt: "2023-12-01"
 
 ## デモサイト
 
-https://saazy.camome.net
-
-https://bloggy.camome.net
+https://saazy.sabigara.com
 
 ## メディア掲載
 

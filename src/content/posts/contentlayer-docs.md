@@ -781,33 +781,3 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 It works just like expected!
 
 ![Alt text](/images/posts/contentlayer-6.webp)
-
-## Still much more to do…
-
-We could build a simple docs generator but there are so many missing things:
-
-- Image optimization by next/image
-- Table of contents
-- Next/previous navigation
-- File name for code blocks
-- Anchor link for each heading
-- Using React components inside .mdx files
-- On mobile devices, the sidebar should be hidden and expanded as a modal menu
-
-## Saazy Template supports all the missing features!
-
-![Alt text](/images/posts/saazy.png)
-
-![Alt text](/images/posts/saazy-docs.webp)
-
-I built Saazy Template, a Next.js starter for marketing that includes:
-
-- Landing page
-- Pricing page
-- Sign in page
-- And other 10+ pages
-- Docs/blog
-- Integrated forms
-- 16+ reusable components
-
-[Visit the live preview](https://camome.net/saazy) or [get it now](https://rubiq.gumroad.com/l/saazy)

@@ -107,6 +107,4 @@ Reaktrのアイデア自体は悪くないと今でも思っていますし、�
 
 ![Image of Saazy](/images/posts/saazy.png)
 
-つい先日、[マーケティング用のNext.jsテンプレート](https://camome.net/)をリリースしました。これも[Product Huntに投稿](https://www.producthunt.com/posts/saazy-template)しましたが、47位に終わりました。このプロジェクトが上位を獲れるとは思っていなかったので気にしていませんが。
-
-興味のある方は[デモサイト](https://camome.net/preview)を試してみてください。
+つい先日、[マーケティング用のNext.jsテンプレート](https://camome.sabigara.com)をリリースしました。これも[Product Huntに投稿](https://www.producthunt.com/posts/saazy-template)しましたが、47位に終わりました。このプロジェクトが上位を獲れるとは思っていなかったので気にしていませんが。
