@@ -106,24 +106,6 @@ export default function Home() {
           View all posts <ArrowRightIcon aria-hidden className="inline" />
         </Link>
       </section>
-
-      <section>
-        <h2 className={twMerge(twHeading, "mt-12")}>Music</h2>
-        <iframe
-          title="my playlist"
-          height="450"
-          loading="lazy"
-          sandbox="allow-popups allow-same-origin allow-scripts"
-          src="https://vvave.app/embed/albums/clr8w8rsm000160tor6ab89sg"
-          style={{
-            backgroundColor: "#f7fafc",
-            border: "1px solid #e2e8f0",
-            borderRadius: "14px",
-            maxWidth: "320px",
-            width: "100%",
-          }}
-        />
-      </section>
     </div>
   );
 }
