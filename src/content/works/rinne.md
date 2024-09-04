@@ -1,6 +1,6 @@
 ---
 title: "Rinne"
-subtitle: "Furniture store website [concept]"
+subtitle: "Furniture EC [concept]"
 date: "2024-09"
 role: "デザイン"
 coverImg: "/images/projects/rinne.png"
