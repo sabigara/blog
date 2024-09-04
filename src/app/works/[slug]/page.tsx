@@ -26,9 +26,9 @@ export default function WorkPage({ params }: Props) {
   const hostname = works.url ? new URL(works.url).hostname : null;
   const link = works.url ? (
     <Link
-      className="hover:underline"
+      className="hover:underline text-blue-600"
       external
-      externalClassName="translate-y-[-1px] mr-0"
+      externalClassName="translate-y-[-1px] mr-0 text-blue-600"
       href={works.url}
       key="url"
     >
