@@ -4,7 +4,6 @@ subtitle: "Cafe website [concept]"
 date: "2024-09"
 role: "デザイン"
 coverImg: "/images/projects/orange-coffee.png"
-featured: true
 publishedAt: "2024-09-02"
 ---
 

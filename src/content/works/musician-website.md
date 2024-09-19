@@ -5,7 +5,6 @@ date: "2024-09"
 role: "デザイン/開発"
 coverImg: "/images/projects/musician-website.png"
 url: "https://musician-website.pages.dev"
-featured: true
 publishedAt: "2024-09-04"
 ---
 
